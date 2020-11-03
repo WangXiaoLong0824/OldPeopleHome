@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.DormMapper">
+
+    <select id="findDormPage" resultType="Dorm" >
+        select * from t_dorm
+    </select>
+
+    <insert id="addDorm" parameterType="Dorm">
+        insert into t_dorm(dorm_name,person_id,storey_id) values(#{dormName},#{personId},#{storeyId})
+    </insert>
+
+    <delete id="deleteDormById" parameterType="int">
+        delete from t_dorm where dorm_id = #{dormId}
+    </delete>
+
+    <select id="findDormById" parameterType="int" resultType="Dorm">
+        select * from t_dorm where dorm_id = #{dormId}
+    </select>
+
+    <update id="updateDorm" parameterType="Dorm">
+        update t_dorm set dorm_name = #{dormName},person_id=#{personId} where dorm_id=#{dormId}
+    </update>
+</mapper>

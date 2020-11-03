@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.OrderMapper">
+
+    <select id="findOrderList" parameterType="com.jk.entity.OrderBean" resultType="java.lang.Long">
+        select count(*) from t_order  o
+        LEFT JOIN t_orderthing oo on o.orderthing_id=oo.orderthing_id
+
+    </select>
+
+    <select id="findOrderListPage" resultType="com.jk.entity.OrderBean">
+        <bind name="key_off" value="(currPage - 1)*pageSize"/>
+        SELECT o.*,oo.order_money,oo.order_name from t_order o
+        LEFT JOIN t_orderthing oo on o.orderthing_id=oo.orderthing_id limit ${key_off},${pageSize}
+    </select>
+
+    <delete id="deleteOrder" parameterType="int">
+    delete  from t_order where id=#{order_id}
+    </delete>
+
+    <insert id="addOrder" parameterType="com.jk.entity.OrderBean">
+        insert into t_order values(#{order_id},#{order_name},#{order_time},#{old_id},#{orderthing_id},#{order_money})
+    </insert>
+
+    <update id="updateOrder" parameterType="com.jk.entity.OrderBean">
+        update t_order set  order_name=#{order_name},order_time=#{order_time},old_id=#{old_id},orderthing_id=#{orderthing_id},order_money=#{order_money}
+        where id=#{order_id}
+    </update>
+    <select id="selectOrderById" resultType="com.jk.entity.OrderBean" parameterType="int">
+        select * from t_order where id=#{order_id}
+    </select>
+</mapper>

@@ -2,5 +2,7 @@ server:
   port: 8080
 spring:
   application:
-    name: user-web
+    name: oldpeople-web
+  main:
+    allow-bean-definition-overriding: true
 

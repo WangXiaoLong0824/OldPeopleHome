@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.UnderMapper">
+    <select id="findPageUnderCount" resultType="java.lang.Long">
+          select count(*) from t_under a,t_oldpeople b,t_room c
+ where a.old_id = b.old_id and
+       a.room_id = c.room_id
+       </select>
+    <select id="findPageUnder" resultType="Under">
+        <bind name="key_off" value="(currPage - 1)*pageSize"/>
+        select a.*,b.old_name oldName,c.room_name roomName from t_under a,t_oldpeople b,t_room c
+        where a.old_id = b.old_id and
+        a.room_id = c.room_id
+        limit ${key_off},${pageSize}
+    </select>
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.ShiroMapper">
+   <select id="selectTreeList" resultType="Tree">
+           select tp.power_id id,tp.power_name text,tp.power_url href,tp.power_pid pid from
+                         user_role ur,
+                        role_power rp,
+                        t_power tp
+                        where
+                        ur.user_id = #{userId} and
+                        ur.role_id = rp.role_id and
+                        rp.power_id = tp.power_id and
+                        tp.power_pid = #{pid} and
+                        tp.type = 'menu'
+
+
+   </select>
+   <!-- <select id="selectPowerKeyList" resultType="String">
+        select  sp.percode  from
+        sys_user_role sur,
+        sys_role_permission srp,
+        sys_permission sp
+        where sur.sysuserid=#{id} AND
+        sur.sysroleid = srp.sysroleid AND
+        srp.syspermissionid = sp.id AND
+        srp.syspermissionid=sp.id and (sp.percode &lt;&gt; '' or sp.percode is not NULL)
+    </select>-->
+</mapper>

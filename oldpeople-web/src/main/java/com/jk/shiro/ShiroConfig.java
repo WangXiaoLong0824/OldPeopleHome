@@ -38,12 +38,8 @@ public class ShiroConfig {
         //放开静态资源
         map.put("/js/**","anon");
         map.put("/css/**","anon");
-        map.put("/images/**","anon");
         map.put("/img/**","anon");
-        map.put("/web/js/**","anon");
-        map.put("/web/css/**","anon");
-        map.put("/web/image/**","anon");
-        map.put("/web/font/**","anon");
+
         //其他的都拦截
         map.put("/**","authc"); //authc
         // 将自定义的过滤器设置到shiro过滤器链中

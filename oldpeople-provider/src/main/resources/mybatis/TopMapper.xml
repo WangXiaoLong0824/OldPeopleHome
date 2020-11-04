@@ -139,4 +139,15 @@
       emp_id = #{empId,jdbcType=INTEGER}
     where top_id = #{topId,jdbcType=INTEGER}
   </update>
+
+  <!--统计总条数-->
+  <select id="count" resultType="java.lang.Long">
+      select count(*) from t_top
+    </select>
+
+  <!--查询所有数据-->
+  <select id="findTop" resultMap="BaseResultMap">
+    <bind name="key_info" value="(currPage-1)*pageSize"/>
+    select * from t_top limit #{key_info},#{pageSize}
+  </select>
 </mapper>

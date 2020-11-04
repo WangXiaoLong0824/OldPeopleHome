@@ -75,7 +75,7 @@
     </select>
 
     <!--查询所有数据-->
-    <select id="findPeople" resultType="BaseResultMap">
+    <select id="findPeople" resultMap="BaseResultMap">
       <bind name="key_info" value="(currPage-1)*pageSize"/>
       select * from t_people limit #{key_info},#{pageSize}
     </select>

@@ -24,21 +24,21 @@ public class PeopleController {
     *  老人会员新增数据
     * */
     @RequestMapping("/addPeople")
-    public void addPeople(People people){
+    public void addPeople(@RequestBody People people){
         peopleService.addPeople(people);
     }
     /*
     *   老人会员回显数据
     * */
     @RequestMapping("/onePeople")
-    public People onePeople(Integer ids){
+    public People onePeople(@RequestParam Integer ids){
         return peopleService.onePeople(ids);
     }
     /*
     *   老人会员单删
     * */
     @RequestMapping("/delOne")
-    public void delOne(Integer ids){
+    public void delOne(@RequestParam Integer ids){
         peopleService.delOne(ids);
     }
 }

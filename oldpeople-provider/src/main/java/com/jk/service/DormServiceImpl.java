@@ -1,7 +1,9 @@
 package com.jk.service;
 
 import com.jk.dao.DormMapper;
+import com.jk.entity.Careful;
 import com.jk.entity.Dorm;
+import com.jk.entity.PageResult;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -14,8 +16,11 @@ public class DormServiceImpl implements DormService{
     private DormMapper dormMapper;
 
     @Override
-    public List<Dorm> findDormPage() {
-        return dormMapper.findDormPage();
+    public PageResult findDormPage(Integer currPage, Integer pageSize, Dorm dorm) {
+        Long total = dormMapper.findDormCount(dorm);
+        List<Dorm> dormList = dormMapper.findDormPage(currPage,pageSize,dorm);
+        Long totalPage = total%pageSize == 0 ? total/pageSize : (total/pageSize + 1);
+        return new PageResult(total,dormList,currPage,pageSize,totalPage);
     }
 
     @Override

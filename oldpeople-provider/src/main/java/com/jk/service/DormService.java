@@ -1,11 +1,12 @@
 package com.jk.service;
 
 import com.jk.entity.Dorm;
+import com.jk.entity.PageResult;
 
 import java.util.List;
 
 public interface DormService {
-    List<Dorm> findDormPage();
+    PageResult findDormPage(Integer currPage, Integer pageSize, Dorm dorm);
 
     void addDorm(Dorm dorm);
 

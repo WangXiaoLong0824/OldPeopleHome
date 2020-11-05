@@ -11,4 +11,7 @@ public class Dorm implements Serializable {
     private String dormName;
     private Integer personId;
     private Integer storeyId;
+
+    private String personName;
+    private String storeyName;
 }

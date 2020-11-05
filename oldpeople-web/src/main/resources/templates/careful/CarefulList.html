@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7/dist/css/bootstrap.css}">
+    <script th:src="@{/webjars/jquery/3.5.1/dist/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/3.3.7/dist/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" src="../js/vue/vue.min.js"></script>
+    <script type="text/javascript" src="../bootstrap/bootstrap-paginator.js"></script>
+</head>
+<body>
+<div id="app" class="container">
+    <button type="button" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal" onclick="update(0);"><i class="fa fa-file-o"></i> 新建</button>
+    <h1>老人费用明细</h1>
+    <table class="table table-bordered">
+        <tr>
+            <th>Id</th>
+            <th>费用总计</th>
+            <th>护理费</th>
+            <th>住宿费</th>
+            <th>剩余费用</th>
+            <th>是否缴费</th>
+            <th>老人姓名</th>
+            <th>操作</th>
+        </tr>
+        <tr v-for="careful in carefulList">
+            <td>{{careful.carefulId}}</td>
+            <td>{{careful.carefulSum}}</td>
+            <td>{{careful.carefulCare}}</td>
+            <td>{{careful.carefulRoom}}</td>
+            <td>{{careful.carefulLeft}}</td>
+            <td>{{careful.carefulType}}</td>
+            <td>{{careful.oldManName}}</td>
+            <td><button type="button" class="RoleOfdelete btn btn-primary  btn-sm" style="margin-right:15px;" v-on:click="del(careful.carefulId)">删除</button>
+                <button type="button" class="RoleOfdelete btn btn-primary  btn-sm" style="margin-right:15px;" data-toggle="modal" data-target="#editModal" v-on:click="update(careful.carefulId)">修改</button></td>
+        </tr>
+    </table>
+    <div id="example" style="text-align:center"><ul id="pageLimit"></ul></div>
+</div>
+
+
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" id="ppa">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">老人费用信息</h3>
+            </div>
+            <form id="forms" method="post">
+                <div class="modal-body">
+                    <table class="table table-bordered table-striped"  width="800px">
+                        <input class="form-control" name="carefulId" style="display:none" readonly="readonly" v-model="careful.carefulId">
+                        <tr>
+                            <td>费用总计</td>
+                            <td><input class="form-control" type="text" name="carefulSum" placeholder="费用总计" v-model="careful.carefulSum"></td>
+                        </tr>
+                        <tr>
+                            <td>护理费</td>
+                            <td><input class="form-control" type="text" name="carefulCare" placeholder="护理费" v-model="careful.carefulCare"></td>
+                        </tr>
+                        <tr>
+                            <td>住宿费</td>
+                            <td><input class="form-control" type="text" name="carefulRoom" placeholder="住宿费" v-model="careful.carefulRoom"></td>
+                        </tr>
+                        <tr>
+                            <td>剩余费用</td>
+                            <td><input class="form-control" type="text" name="carefulLeft" placeholder="剩余费用" v-model="careful.carefulLeft"></td>
+                        </tr>
+                        <tr>
+                            <td>是否缴费</td>
+                            <td><input class="form-control" type="text" name="carefulType" placeholder="是否缴费" v-model="careful.carefulType"></td>
+                        </tr>
+                        <tr>
+                            <td>老人id</td>
+                            <td><input class="form-control" type="text" name="oldId" placeholder="老人id" v-model="careful.oldId"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" onclick="insert()">保存</button>
+                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            carefulList: "",
+            totalPage:"",
+            total:"",
+            currPage:"",
+            pageSize:""
+        }
+    })
+
+    $(function() {
+        searchCarefulList();
+    })
+
+    function searchCarefulList(){
+        $.ajax({
+            type:"get",
+            url:"../careful/findCarefulPage",
+            data:{"currPage":vm.currPage,"pageSize":vm.pageSize},
+            dataType:"json",
+            success: function(result) {
+                console.log(result.rows)
+                vm.carefulList = result.rows;
+                vm.totalPage = result.totalPage;
+                vm.total = result.total;
+                vm.currPage = result.currPage;
+                vm.pageSize = result.pageSize;
+                setPage(result.currPage,result.totalPage,result.pageSize,searchCarefulList);
+            },
+            error : function() {
+                alert("系统错误，请联系管理员！");
+            }
+        })
+    }
+
+    function setPage(pageCurrent,pageSum,pageSize,callback){
+        $('#pageLimit').bootstrapPaginator({
+            currentPage:pageCurrent,
+            totalPages:pageSum,
+            size:"normal",
+            bootstrapMajorVersion:3,
+            alignment:"right",
+            numberOfPages:pageSize,
+            itemTexts:function(type,page,current){
+                switch(type){
+                    case "first" : return "首页";
+                    case "prev" : return "上一页";
+                    case "next" : return "下一页";
+                    case "last" : return "末页";
+                    case "page" : return page;
+                }
+            },
+            onPageClicked: function(event,originalEvent,type,page){
+                vm.currPage = page;
+                callback && callback()
+            }
+        });
+    }
+
+    function del(carefulId){
+        $.ajax({
+            url:'../careful/deleteCarefulById',
+            type:'post',
+            data:{"carefulId":carefulId},
+            dataType:"json",
+            success:function(){
+
+            }
+        })
+        alert("删除成功");
+        searchCarefulList();
+    }
+
+    var vs = new Vue({
+        el: '#ppa',
+        data: {
+            careful:''
+        }
+    })
+
+    function insert(){
+        $.ajax({
+            url:'../careful/addCareful',
+            type:'post',
+            data:$('#forms').serialize(),
+            success:function(){
+                searchCarefulList();
+            }
+        })
+    }
+
+    function update(carefulId){
+        $.ajax({
+            url:"../careful/findCarefulById",
+            type:"post",
+            data:{"carefulId":carefulId},
+            success:function(data){
+                vs.careful=data;
+            },
+        });
+    }
+</script>
+</body>
+</html>

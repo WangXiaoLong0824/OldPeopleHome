@@ -14,4 +14,6 @@ public class Careful implements Serializable {
     private Integer carefulLeft;
     private Integer carefulType;
     private Integer oldId;
+
+    private String oldManName;
 }

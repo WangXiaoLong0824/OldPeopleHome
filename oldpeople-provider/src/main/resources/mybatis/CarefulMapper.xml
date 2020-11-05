@@ -12,11 +12,11 @@
     </select>
 
     <insert id="addCareful" parameterType="Careful">
-        insert into t_careful(careful_sum,creaful_care,creaful_room,creaful_left,creaful_type,old_id) values(#{carefulSum},#{carefulCare},#{carefulRoom},#{carefulLeft},#{carefulType},#{oldId})
+        insert into t_careful(careful_sum,careful_care,careful_room,careful_left,careful_type,old_id) values(#{carefulSum},#{carefulCare},#{carefulRoom},#{carefulLeft},#{carefulType},#{oldId})
     </insert>
 
     <update id="updateCareful" parameterType="Careful">
-        update t_careful set careful_sum=#{carefulSum},creaful_care=#{carefulCare},creaful_room=#{carefulRoom},creaful_left=#{carefulLeft},creaful_type=#{carefulType},old_id=#{oldId} where careful_id=#{carefulId}
+        update t_careful set careful_sum=#{carefulSum},careful_care=#{carefulCare},careful_room=#{carefulRoom},careful_left=#{carefulLeft},careful_type=#{carefulType},old_id=#{oldId} where careful_id=#{carefulId}
     </update>
 
     <delete id="deleteCarefulById" parameterType="int">

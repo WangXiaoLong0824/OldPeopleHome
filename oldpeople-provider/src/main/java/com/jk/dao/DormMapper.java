@@ -7,7 +7,6 @@ import java.util.List;
 
 @Mapper
 public interface DormMapper {
-    List<Dorm> findDormPage();
 
     void addDorm(Dorm dorm);
 
@@ -16,4 +15,8 @@ public interface DormMapper {
     void deleteDormById(Integer dormId);
 
     Dorm findDormById(Integer dormId);
+
+    Long findDormCount(Dorm dorm);
+
+    List<Dorm> findDormPage(Integer currPage, Integer pageSize, Dorm dorm);
 }

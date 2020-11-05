@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @FeignClient(value = "oldpeople-provider")
 public interface OldPeopleService {
     //老人基本信息  WXL
@@ -47,4 +49,26 @@ public interface OldPeopleService {
     public void deleteUnder(@RequestParam Integer underId);
     @RequestMapping("findUnderById")
     public Under findUnderById(@RequestParam Integer underId);
+
+
+    //住宿楼 ww
+    @RequestMapping("findDormPage")
+    public PageResult findDormPage(@RequestParam(value="currPage",defaultValue = "1") Integer currPage,@RequestParam(value="pageSize",defaultValue = "10") Integer pageSize,@RequestBody Dorm dorm);
+    @RequestMapping("addDorm")
+    public String addDorm(@RequestBody Dorm dorm);
+    @RequestMapping("deleteDormById")
+    public String deleteDormById(@RequestParam Integer dormId);
+    @RequestMapping("findDormById")
+    public Dorm findDormById(@RequestParam Integer dormId);
+
+
+    //老人缴费信息 ww
+    @RequestMapping("findCarefulPage")
+    public PageResult findCarefulPage(@RequestParam(value="currPage",defaultValue = "1") Integer currPage,@RequestParam(value="pageSize",defaultValue = "10") Integer pageSize,@RequestBody Careful careFul);
+    @RequestMapping("addCareful")
+    public String addCareful(@RequestBody Careful careful);
+    @RequestMapping("deleteCarefulById")
+    public String deleteCarefulById(@RequestParam Integer carefulId);
+    @RequestMapping("findCarefulById")
+    public Careful findCarefulById(@RequestParam Integer carefulId);
 }

@@ -2,8 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jk.dao.DormMapper">
 
+    <select id="findDormCount" parameterType="Dorm" resultType="java.lang.Long">
+        select count(*) from t_dorm
+    </select>
+
     <select id="findDormPage" resultType="Dorm" >
-        select * from t_dorm
+        <bind name="key_off" value="(currPage - 1)*pageSize"/>
+        select d.*,s.storey_name storeyName,p.person_name personName from t_dorm d
+            LEFT JOIN t_storey s on d.storey_id=s.storey_id
+            LEFT JOIN t_person p on d.person_id=p.person_id
+            order by d.dorm_id
+            limit ${key_off},${pageSize}
     </select>
 
     <insert id="addDorm" parameterType="Dorm">

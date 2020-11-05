@@ -9,7 +9,6 @@ public class TurnHome {
     private String createTime;
     private String because;
     private Integer oldId;
-    private Integer empId;
     private Integer homeId;
-
+    private Integer personId;
 }

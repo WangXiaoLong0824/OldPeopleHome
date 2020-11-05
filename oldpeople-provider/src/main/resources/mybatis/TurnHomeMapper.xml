@@ -11,19 +11,19 @@
         select * from t_turnhome limit ${key_off},${pageSize}
     </select>
 
-   <!-- <insert id="addArticle" parameterType="Article">
-        insert into t_article(article_name,article_author,article_time,article_status,article_content) values(#{articleName},#{articleAuthor},#{articleTime},#{articleStatus},#{articleContent})
+   <insert id="addOutHome" >
+        insert into t_turnhome(createtime,because,old_id,home_id,person_id) values(#{createTime},#{because},#{oldId},#{homeId},#{personId})
     </insert>
 
-    <delete id="deleteArticleById" parameterType="int">
-        delete from t_article where article_id = #{articleId}
+    <delete id="deleteOutHomeById" parameterType="int">
+        delete from t_turnhome where o_id = #{oId}
     </delete>
 
-    <select id="findArticleById" parameterType="int" resultType="Article">
-        select * from t_article where article_id = #{articleId}
+    <select id="findOutHomeById" parameterType="int" resultType="com.jk.entity.TurnHome">
+        select * from t_turnhome where o_id = #{oId}
     </select>
 
-    <update id="updateArticle" parameterType="Article">
-        update t_article set article_name=#{articleName},article_author=#{articleAuthor},article_time=#{articleTime},article_status=#{articleStatus},article_content=#{articleContent} where article_id = #{articleId}
-    </update>-->
+    <update id="updateOutHome" parameterType="com.jk.entity.TurnHome">
+        update t_turnhome set createtime=#{createTime},because=#{because},old_id=#{oldId},home_id=#{homeId},person_id=#{personId} where o_id = #{oId}
+    </update>
 </mapper>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.mapper.BebMapper">
+
+
+    <select id="findBedCount" parameterType="com.jk.entity.Bed" resultType="java.lang.Long">
+        select count(*) from t_bed
+    </select>
+
+    <select id="findBed" resultType="com.jk.entity.Bed">
+        <bind name="key_off" value="(currPage - 1)*pageSize"/>
+        select * from t_bed limit ${key_off},${pageSize}
+    </select>
+
+    <insert id="addBed" parameterType="com.jk.entity.Bed">
+        insert into t_bed(old_id,bed_status,storey_id,room_id,person_id) values(#{oldId},#{bedStatus},#{storeyId},#{roomId},#{personId})
+    </insert>
+
+    <delete id="deleteBedById" parameterType="int">
+        delete from t_bed where bed_id = #{bedId}
+    </delete>
+
+    <select id="findBedById" parameterType="int" resultType="com.jk.entity.Bed">
+        select * from t_bed where bed_id = #{bedId}
+    </select>
+
+    <update id="updateBed" parameterType="com.jk.entity.Bed">
+        update t_bed set old_id=#{oldId},bed_status=#{bedStatus},storey_id=#{storeyId},room_id=#{roomId},person_id=#{personId} where bed_id = #{bedId}
+    </update>
+</mapper>

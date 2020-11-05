@@ -21,4 +21,25 @@ public class TurnHomeServiceImpl implements TurnHomeService{
         Long totalPage = total%pageSize == 0 ? total/pageSize : (total/pageSize + 1);
         return new PageResult(total,list,currPage,pageSize,totalPage);
     }
+
+    @Override
+    public void addOutHome(TurnHome turnHome) {
+        if (turnHome.getOId()==null){
+            turnHomeMapper.addOutHome(turnHome);
+        }else {
+            turnHomeMapper.updateOutHome(turnHome);
+        }
+
+    }
+
+    @Override
+    public void deleteOutHomeById(Integer oId) {
+        turnHomeMapper.deleteOutHomeById(oId);
+    }
+
+    @Override
+    public TurnHome findOutHomeById(Integer oId) {
+        return turnHomeMapper.findOutHomeById(oId);
+    }
+
 }

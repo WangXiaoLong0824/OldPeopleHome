@@ -38,7 +38,8 @@ public class ShiroConfig {
         //放开静态资源
         map.put("/js/**","anon");
         map.put("/css/**","anon");
-        map.put("/img/**","anon");
+        map.put("/images/**","anon");
+        map.put("/fonts/**","anon");
 
         //其他的都拦截
         map.put("/**","authc"); //authc

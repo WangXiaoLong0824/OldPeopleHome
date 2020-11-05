@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 public class OrderController {
     @Resource
     private OrderService orderService;
-    //查询 t_home
+    //查询 t_order
     @RequestMapping("findOrderList")
     public PageResult findOrderList(@RequestParam(value = "currPage",defaultValue = "1")Integer currPage, @RequestParam(value="pageSize",defaultValue="10") Integer pageSize, @RequestBody OrderBean order){
         return orderService.findOrderList(currPage,pageSize,order);

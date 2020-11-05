@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.PerformanceMapper">
+    <select id="findPagePerformanceCount" resultType="java.lang.Long">
+          select count(*) from t_performance a,t_emp b
+ where a.performance_empid = b.emp_id
+       </select>
+    <select id="findPagePerformance" resultType="Performance">
+        <bind name="key_off" value="(currPage - 1)*pageSize"/>
+        select a.*,b.emp_name empName from t_performance a,t_emp b
+        where a.performance_empid = b.emp_id
+        limit ${key_off},${pageSize}
+    </select>
+</mapper>

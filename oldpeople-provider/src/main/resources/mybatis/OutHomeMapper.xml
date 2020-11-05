@@ -7,7 +7,9 @@
 
     <select id="findOutHomeListPage" resultType="com.jk.entity.OutHomeBean">
         <bind name="key_off" value="(currPage - 1)*pageSize"/>
-        select * from t_outhome limit ${key_off},${pageSize}
+        select * from t_outhome
+         <include refid="mysql"></include>
+         limit ${key_off},${pageSize}
     </select>
     <delete id="deleteOutHome" parameterType="int">
     delete  from t_outhome where exit_id=#{id}
@@ -23,4 +25,11 @@
     <select id="selectOutHomeById" resultType="com.jk.entity.OutHomeBean" parameterType="int">
         select * from t_outhome where exit_id=#{id}
     </select>
+    <sql id="mysql">
+        <where>
+            <if test="outHomeBean.exitTime!=null and outHomeBean.exitTime!=''">
+                and exit_time = '${outHomeBean.exitTime}'
+            </if>
+        </where>
+    </sql>
 </mapper>

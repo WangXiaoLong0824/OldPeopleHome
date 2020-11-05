@@ -13,6 +13,20 @@
 <div id="app" class="container">
     <button type="button" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal" onclick="update(0);"><i class="fa fa-file-o"></i> 新建</button>
     <h1>老人退房信息</h1>
+
+
+
+    <div class="form-group">
+        <label for="exitTime" class="col-sm-1 control-label">退房时间：</label>
+        <div class="col-sm-2">
+            <input class="form-control" type="date" id="exitTime"  v-model="exitTime" >
+        </div>
+    </div>
+    <button type="button" v-on:click="searchArticleList()">搜索</button></td>
+
+
+
+
     <table class="table table-bordered">
         <tr>
             <th>退房id</th>
@@ -75,7 +89,8 @@
             totalPage:"",
             total:"",
             currPage:"",
-            pageSize:""
+            pageSize:"",
+            exitTime:""
         }
     })
 
@@ -87,7 +102,7 @@
         $.ajax({
             type:"get",
             url:"../outHome/findOutHomeList",
-            data:{"currPage":vm.currPage,"pageSize":vm.pageSize},
+            data:{"currPage":vm.currPage,"pageSize":vm.pageSize,"exitTime":vm.exitTime},
             dataType:"json",
             success: function(result) {
                 vm.outHomeList = result.rows;

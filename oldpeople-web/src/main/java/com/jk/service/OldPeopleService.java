@@ -96,16 +96,4 @@ public interface OldPeopleService {
     @RequestMapping("selectOutHomeById")
     public OutHomeBean selectOutHomeById(@RequestParam Integer id);
 
-    //房间表 t_room wkp
-    @RequestMapping("findRoomList")
-    public PageResult findRoomList(@RequestParam(value = "currPage",defaultValue = "1")Integer currPage, @RequestParam(value="pageSize",defaultValue="10") Integer pageSize, @RequestBody RoomBean room);
-    @RequestMapping("deleteRoom")
-    public void  deleteRoom(@RequestParam Integer id);
-    @RequestMapping("addRoom")
-    public void addRoom(@RequestBody RoomBean room);
-    @RequestMapping("updateRoom")
-    public void updateRoom(@RequestBody RoomBean room);
-    @RequestMapping("selectRoomById")
-    public RoomBean selectRoomById(@RequestParam Integer id);
-
     }

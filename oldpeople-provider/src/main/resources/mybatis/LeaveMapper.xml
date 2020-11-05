@@ -7,7 +7,9 @@
 
     <select id="findLeaveListPage" resultType="com.jk.entity.LeaveBean">
         <bind name="key_off" value="(currPage - 1)*pageSize"/>
-        select * from t_leave limit ${key_off},${pageSize}
+        select * from t_leave 
+        <include refid="mysql"></include>
+        limit ${key_off},${pageSize}
     </select>
 
 
@@ -24,5 +26,12 @@
     <select id="selectLeaveById" resultType="com.jk.entity.LeaveBean" parameterType="int">
         select * from t_leave where leave_id=#{id}
     </select>
+    <sql id="mysql">
+    <where>
+        <if test="leave.leaveEmpname!=null and leave.leaveEmpname!='' ">
+            and leave_empname like '%${leave.leaveEmpname}%'
+        </if>
+    </where>
 
+    </sql>
 </mapper>

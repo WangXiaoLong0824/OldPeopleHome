@@ -1,8 +1,8 @@
 package com.jk.service;
 
-import com.jk.config.PageResult;
 import com.jk.dao.OutMapper;
 import com.jk.entity.Out;
+import com.jk.entity.PageResult;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

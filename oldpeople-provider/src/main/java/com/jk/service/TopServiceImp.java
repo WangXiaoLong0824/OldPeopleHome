@@ -1,7 +1,7 @@
 package com.jk.service;
 
-import com.jk.config.PageResult;
 import com.jk.dao.TopMapper;
+import com.jk.entity.PageResult;
 import com.jk.entity.Top;
 import org.springframework.stereotype.Service;
 

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.RoomMapper">
+    <select id="findRoomList" parameterType="com.jk.entity.RoomBean" resultType="java.lang.Long">
+        select count(*) from t_room r
+        LEFT JOIN t_roomtype t on r.type_id=t.roomtype_id
+        LEFT JOIN t_clean c on r.cleaner_id=c.clean_id
+    </select>
+
+    <select id="findRoomListPage" resultType="com.jk.entity.RoomBean">
+        <bind name="key_off" value="(currPage - 1)*pageSize"/>
+        SELECT r.*,t.roomtype_name,c.clean_name from t_room r
+        LEFT JOIN t_roomtype t on r.type_id=t.roomtype_id
+        LEFT JOIN t_clean c on r.cleaner_id=c.clean_id limit ${key_off},${pageSize}
+    </select>
+    <delete id="deleteRoom" parameterType="int">
+    delete  from t_room where id=#{room_id}
+    </delete>
+    <insert id="addRoom" parameterType="com.jk.entity.RoomBean">
+        insert into t_room values(#{room_id},#{room_name},#{cleaner_id},#{type_id})
+    </insert>
+
+    <update id="updateRoom" parameterType="com.jk.entity.RoomBean">
+        update t_room set room_name=#{room_name},cleaner_id=#{cleaner_id},type_id=#{type_id}  where id=#{room_id}
+    </update>
+    <select id="selectRoomById" resultType="com.jk.entity.RoomBean" parameterType="int">
+        select * from t_room where id=#{room_id}
+    </select>
+
+
+</mapper>

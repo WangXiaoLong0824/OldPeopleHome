@@ -1,7 +1,7 @@
 package com.jk.service;
 
-import com.jk.config.PageResult;
 import com.jk.entity.Out;
+import com.jk.entity.PageResult;
 
 public interface OutService {
     /*

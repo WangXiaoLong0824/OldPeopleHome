@@ -5,8 +5,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class IndexController {
-    @RequestMapping("/find")
-    public String find(){
-        return "People";
+    //老人会员页面跳转
+    @RequestMapping("/people")
+    public String find() {
+        return "People/vip";
     }
+    //t_home
+    @RequestMapping("toHome")
+    public String tohome() {
+        return "home/hoomList";
+    }
+
+    //t_outhomt
+    @RequestMapping("toOuthome")
+    public String toOuthome() {
+        return "outHome/outHomeLIst";
+    }
+
+    //t_leave
+    @RequestMapping("toLeave")
+    public String toLeave() {
+        return "leave/leaveList";
+    }
+    //t_order
+    @RequestMapping("toOrder")
+    public String toOrder() {
+        return "order/orderList";
+    }
+
 }

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.OutHomeMapper">
+    <select id="findOutHomeList" parameterType="com.jk.entity.OutHomeBean" resultType="java.lang.Long">
+        select count(*) from t_outhome
+    </select>
+
+    <select id="findOutHomeListPage" resultType="com.jk.entity.OutHomeBean">
+        <bind name="key_off" value="(currPage - 1)*pageSize"/>
+        select * from t_outhome limit ${key_off},${pageSize}
+    </select>
+    <delete id="deleteOutHome" parameterType="int">
+    delete  from t_outhome where exit_id=#{id}
+    </delete>
+    <insert id="addOutHome" parameterType="com.jk.entity.OutHomeBean">
+        insert into t_outhome values(#{exitId},#{exitTime},#{exitBecause},1,1)
+    </insert>
+
+    <update id="updateOutHome" parameterType="com.jk.entity.OutHomeBean">
+        update t_outhome set exit_time=#{exitTime},exit_because=#{exitBecause}where exit_id=#{exitId}
+    </update>
+
+    <select id="selectOutHomeById" resultType="com.jk.entity.OutHomeBean" parameterType="int">
+        select * from t_outhome where exit_id=#{id}
+    </select>
+</mapper>

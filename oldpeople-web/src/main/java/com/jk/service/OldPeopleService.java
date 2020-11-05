@@ -48,6 +48,7 @@ public interface OldPeopleService {
     @RequestMapping("findUnderById")
     public Under findUnderById(@RequestParam Integer underId);
 
+
     //老人会员信息表 Changk
     @RequestMapping("/findPeople")
     public PageResult findPeople(@RequestParam Integer currPage, @RequestParam Integer pageSize, @RequestBody People people);
@@ -80,7 +81,69 @@ public interface OldPeopleService {
 
     //预约线上信息表 Changk
     @RequestMapping("/findTop")
-    public com.jk.config.PageResult findTop(@RequestParam Integer currPage, @RequestParam Integer pageSize, @RequestBody Top top);
+    public PageResult findTop(@RequestParam Integer currPage, @RequestParam Integer pageSize, @RequestBody Top top);
     @RequestMapping("/addTop")
     public void addTop(@RequestBody Top top);
-}
+
+    //老人入住信息表 t_hoom wkp
+    @RequestMapping("findHomeList")
+    public PageResult findHomeList(@RequestParam(value = "currPage",defaultValue = "1")Integer currPage, @RequestParam(value="pageSize",defaultValue="10") Integer pageSize, @RequestBody HomeBean homeBean);
+    @RequestMapping("deleteHome")
+    public void  deleteHome(@RequestParam Integer id);
+    @RequestMapping("addHome")
+    public void addHome(@RequestBody HomeBean homeBean);
+    @RequestMapping("updateHome")
+    public void updateHome(@RequestBody HomeBean homeBean);
+    @RequestMapping("selectHomeById")
+    public HomeBean selectHomeById(@RequestParam Integer id);
+
+    //员工离职表 t_leave wkp
+    @RequestMapping("findLeaveList")
+    public PageResult findLeaveList(@RequestParam(value = "currPage",defaultValue = "1")Integer currPage, @RequestParam(value="pageSize",defaultValue="10") Integer pageSize, @RequestBody LeaveBean leave);
+    @RequestMapping("deleteLeave")
+    public void  deleteLeave(@RequestParam Integer id);
+    @RequestMapping("addLeave")
+    public void addLeave(@RequestBody LeaveBean leave);
+    @RequestMapping("updateLeave")
+    public void updateLeave(@RequestBody LeaveBean leave);
+    @RequestMapping("selectLeaveById")
+    public LeaveBean selectLeaveById(@RequestParam Integer id);
+
+    //订单表 t_order wkp
+    @RequestMapping("findOrderList")
+    public PageResult findOrderList(@RequestParam(value = "currPage",defaultValue = "1")Integer currPage, @RequestParam(value="pageSize",defaultValue="10") Integer pageSize, @RequestBody OrderBean order);
+    @RequestMapping("deleteOrder")
+    public void  deleteOrder(@RequestParam Integer id);
+    @RequestMapping("addOrder")
+    public void addOrder(@RequestBody OrderBean order);
+    @RequestMapping("updateOrder")
+    public void updateOrder(@RequestBody OrderBean order);
+    @RequestMapping("selectOrderById")
+    public OrderBean selectOrderById(@RequestParam Integer id);
+
+    //老人退房登记表 t_outhome wkp
+    @RequestMapping("findOutHomeList")
+    public PageResult findOutHomeList(@RequestParam(value = "currPage",defaultValue = "1")Integer currPage, @RequestParam(value="pageSize",defaultValue="10") Integer pageSize, @RequestBody OutHomeBean outHomeBean);
+    @RequestMapping("deleteOutHome")
+    public void  deleteOutHome(@RequestParam Integer id);
+    @RequestMapping("addOutHome")
+    public void addOutHome(@RequestBody OutHomeBean outHomeBean);
+    @RequestMapping("updateOutHome")
+    public void updateOutHome(@RequestBody OutHomeBean outHomeBean);
+    @RequestMapping("selectOutHomeById")
+    public OutHomeBean selectOutHomeById(@RequestParam Integer id);
+
+    //房间表 t_room wkp
+    @RequestMapping("findRoomList")
+    public PageResult findRoomList(@RequestParam(value = "currPage",defaultValue = "1")Integer currPage, @RequestParam(value="pageSize",defaultValue="10") Integer pageSize, @RequestBody RoomBean room);
+    @RequestMapping("deleteRoom")
+    public void  deleteRoom(@RequestParam Integer id);
+    @RequestMapping("addRoom")
+    public void addRoom(@RequestBody RoomBean room);
+    @RequestMapping("updateRoom")
+    public void updateRoom(@RequestBody RoomBean room);
+    @RequestMapping("selectRoomById")
+    public RoomBean selectRoomById(@RequestParam Integer id);
+
+    }
+

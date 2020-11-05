@@ -1,6 +1,6 @@
 package com.jk.service;
 
-import com.jk.config.PageResult;
+import com.jk.entity.PageResult;
 import com.jk.entity.People;
 
 public interface PeopleService {

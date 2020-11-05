@@ -1,6 +1,6 @@
 package com.jk.controller;
 
-import com.jk.config.PageResult;
+import com.jk.entity.PageResult;
 import com.jk.entity.Thing;
 import com.jk.service.ThingService;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,7 +19,7 @@ public class ThingController {
     *   员工请假表信息
     * */
     @RequestMapping("/findThing")
-    public PageResult findThing(@RequestParam Integer currPage,@RequestParam Integer pageSize,@RequestBody Thing thing){
+    public PageResult findThing(@RequestParam Integer currPage, @RequestParam Integer pageSize, @RequestBody Thing thing){
         return thingService.findThing(currPage,pageSize,thing);
     }
     /*

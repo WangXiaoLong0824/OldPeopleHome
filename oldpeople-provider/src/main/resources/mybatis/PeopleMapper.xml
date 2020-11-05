@@ -72,12 +72,22 @@
     <!--统计总条数-->
     <select id="count" resultType="java.lang.Long">
       select count(*) from t_people
+      <!--<include refid="souPeople"></include>-->
     </select>
 
     <!--查询所有数据-->
     <select id="findPeople" resultMap="BaseResultMap">
       <bind name="key_info" value="(currPage-1)*pageSize"/>
-      select a.*,b.old_name oldname from t_people a left join t_oldpeople b on a.old_id=b.old_id
+      select * from t_people
+      <include refid="souPeople"></include>
       limit #{key_info},#{pageSize}
     </select>
+
+  <sql id="souPeople">
+    <where>
+         <if test="people.peopleName!=null and people.peopleName!=''">
+            and people_name like '%${people.peopleName}%'
+         </if>
+    </where>
+  </sql>
 </mapper>

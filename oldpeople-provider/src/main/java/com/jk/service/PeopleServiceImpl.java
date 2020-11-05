@@ -1,7 +1,7 @@
 package com.jk.service;
 
-import com.jk.config.PageResult;
 import com.jk.dao.PeopleMapper;
+import com.jk.entity.PageResult;
 import com.jk.entity.People;
 import org.springframework.stereotype.Service;
 

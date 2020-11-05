@@ -1,7 +1,7 @@
 package com.jk.controller;
 
-import com.jk.config.PageResult;
 import com.jk.entity.Out;
+import com.jk.entity.PageResult;
 import com.jk.service.OutService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +19,7 @@ public class OutController {
     *  老人外出登记详细信息分页展示
     * */
     @RequestMapping("/findOut")
-    public PageResult findOut(@RequestParam Integer currPage, @RequestParam Integer pageSize,@RequestBody Out out){
+    public PageResult findOut(@RequestParam Integer currPage, @RequestParam Integer pageSize, @RequestBody Out out){
         return outService.findOut(currPage,pageSize,out);
     }
     /*

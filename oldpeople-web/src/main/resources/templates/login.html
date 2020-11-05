@@ -1,56 +1,51 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en"  xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <script src="../js/jquery-1.9.1.min.js"></script>
-    <link rel="stylesheet" href="../css/bootstrap.css" />
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bootstrap后台登录界面模板 - 源码之家</title>
+
+    <link rel="stylesheet" href="../css/signin.css">
+	<script src="../js/jquery-1.9.1.min.js"></script>
+	<link rel="stylesheet" href="../css/bootstrap.css">
 </head>
-<body style="background: url(../img/bg1.jpg) no-repeat center center fixed; background-size: 100%;">
-<div class="modal-dialog" style="margin-top: 10%;">
-    <div class="modal-content">
-        <div class="modal-header">
 
-            <h4 class="modal-title text-center" id="myModalLabel">登录</h4>
-        </div>
-        <form id="loginFormId">
-        <div class="modal-body" id = "model-body">
-            <div class="form-group">
+<body>
 
-                <input type="text" name="usercode" class="form-control"placeholder="用户名" autocomplete="off">
-            </div>
-            <div class="form-group">
+<div class="signin">
+	<div class="signin-head"><img src="../images/test/head_120.gif" height="120px" alt="" class="img-circle"></div>
+	<form id="loginFormId" class="form-signin" role="form">
+		<input type="text" name="usercode" class="form-control" placeholder="用户名" required autofocus />
+		<input type="password" name="userpassword" class="form-control" placeholder="密码" required />
+		<button class="btn btn-lg btn-warning btn-block" onclick="login()">登录</button>
+		<label class="checkbox">
+			<input type="checkbox" value="remember-me"> 记住我
+		</label>
+	</form>
+</div>
 
-                <input type="password" name="userpassword" class="form-control" placeholder="密码" autocomplete="off">
-            </div>
-        </div>
-        <div class="modal-footer">
-            <div class="form-group">
-                <button type="button" id="loginBtn" class="btn btn-primary form-control">登录</button>
-            </div>
-            <div class="form-group">
-                <button type="button" class="btn btn-default form-control">注册</button>
-            </div>
-        </div>
-        </form>
-    </div><!-- /.modal-content -->
-</div><!-- /.modal -->
-<script>
-    $("#loginBtn").click(function(){
-        $.ajax({
-            url: "../shiro/login",
-            type: "post",
-            data: $("#loginFormId").serialize(),
-            dataType: "text",
-            success:function(data){
-                alert(data);
-                if(data=="登录成功"){
-                    location.href="../shiro/toMain";
-                }
-
-            }
-        })
-    })
-</script>
+<div style="text-align:center;">
+<p>来源:<a href="http://www.mycodes.net/" target="_blank">哇塞的炮兵连</a></p>
+</div>
 </body>
+<script>
+	function login(){
+		$.ajax({
+			url: "../shiro/login",
+			type: "post",
+			data: $("#loginFormId").serialize(),
+			dataType: "text",
+			success:function(data){
+				alert(data);
+				console.log(data);
+				if(data=="登录成功"){
+					location.href="../shiro/toMain";
+				}
+
+			}
+		})
+	}
+
+</script>
 </html>

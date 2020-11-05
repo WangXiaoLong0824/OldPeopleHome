@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.OldPeopleMapper">
+   <!-- <sql id="mySql">
+         <if test="oldPeople.oldName != null and user.userName != ''">and a.user_name like "%${user.userName}%"</if>
+    </sql>-->
+       <select id="findPageOldPeopleCount" resultType="java.lang.Long">
+           select count(*) from t_oldpeople told,t_proence tp, t_city tc, t_area ta ,t_user tu
+    where told.sheng_id = tp.provinceid and
+           told.shi_id = tc.cityid and
+           told.xian_id = ta.areaid and
+            told.children_id = tu.user_id
+       </select>
+    <select id="findPageOldPeople" resultType="OldPeople">
+        <bind name="key_off" value="(currPage - 1)*pageSize"/>
+        select told.*,tp.province sheng,tc.city shi,ta.area xian,tu.user_name childrenName from t_oldpeople told,t_proence tp, t_city tc, t_area ta ,t_user tu
+        where told.sheng_id = tp.provinceid and
+        told.shi_id = tc.cityid and
+        told.xian_id = ta.areaid and
+        told.children_id = tu.user_id
+        limit ${key_off},${pageSize}
+    </select>
+</mapper>

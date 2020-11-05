@@ -28,7 +28,12 @@ public class OrderServiceImpl implements  OrderService{
 
     @Override
     public void addOrder(OrderBean order) {
-        orderMapper.addOrder(order);
+        if(order.getOrderId()==null){
+            orderMapper.addOrder(order);
+        }else {
+            orderMapper.updateOrder(order);
+        }
+
     }
 
     @Override

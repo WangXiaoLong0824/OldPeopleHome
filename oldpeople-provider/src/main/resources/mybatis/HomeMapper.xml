@@ -10,15 +10,22 @@
         select * from t_home limit ${key_off},${pageSize}
     </select>
     <delete id="deleteHome" parameterType="int">
-    delete  from t_home where id=#{home_id}
+    delete  from t_home where home_id=#{id}
     </delete>
     <insert id="addHome" parameterType="com.jk.entity.HomeBean">
-        insert into t_home values(#{home_id},#{old_name},now(),#{home_address},#{old_id},#{emp_id},#{home_out},#{power_id})
+        insert into t_home values(#{homeId},#{oldName},#{createtime},#{homeAddress},1,1,#{homeOut},2)
     </insert>
     <update id="updateHome" parameterType="com.jk.entity.HomeBean">
-        update t_home set old_name=#{old_name},createtime=#{createtime},home_address=#{home_address},old_id=#{old_id},emp_id=#{emp_id},home_out=#{home_out},power_id=#{power_id} where id=#{home_id}
+        update t_home set old_name=#{oldName},createtime=#{createtime},home_address=#{homeAddress},home_out=#{homeOut} where home_id=#{homeId}
     </update>
     <select id="selectHomeById" resultType="com.jk.entity.HomeBean" parameterType="int">
-        select * from t_home where id=#{home_id}
+        select * from t_home where home_id=#{id}
     </select>
+    <sql id="mysql">
+        <where>
+        <if test="homeBean.oldName!=null and homeBean.oldName!=''' ">
+            and old_name like '%{homeBean.oldName}%'
+        </if>
+        </where>
+    </sql>
 </mapper>

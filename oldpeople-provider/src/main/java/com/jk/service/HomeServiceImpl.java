@@ -28,7 +28,12 @@ public class HomeServiceImpl implements HomeService {
 
     @Override
     public void addHome(HomeBean homeBean) {
-        homeMapper.addHome(homeBean);
+        if(homeBean.getHomeId()==null){
+            homeMapper.addHome(homeBean);
+        }else{
+            homeMapper.updateHome(homeBean);
+        }
+
     }
 
     @Override

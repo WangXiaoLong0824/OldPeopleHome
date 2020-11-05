@@ -4,7 +4,6 @@ import com.jk.entity.HomeBean;
 import com.jk.entity.OutHomeBean;
 import com.jk.entity.PageResult;
 import com.jk.service.OldPeopleService;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,7 +38,7 @@ public class OutHomeController {
     }
     //回显
     @RequestMapping("selectOutHomeById")
-    public HomeBean selectOutHomeById(Integer id){
+    public OutHomeBean selectOutHomeById(Integer id){
         return   oldPeopleService.selectOutHomeById(id);
     }
 }

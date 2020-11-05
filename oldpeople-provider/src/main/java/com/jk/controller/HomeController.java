@@ -21,22 +21,22 @@ public class HomeController {
     }
     //删除
     @RequestMapping("deleteHome")
-    public void  deleteHome(Integer id){
+    public void  deleteHome(@RequestParam Integer id){
         homeService.deleteHome(id);
     }
     //新增
     @RequestMapping("addHome")
-    public void addHome(HomeBean homeBean){
+    public void addHome(@RequestBody HomeBean homeBean){
         homeService.addHome(homeBean);
     }
     //修改
     @RequestMapping("updateHome")
-    public void updateHome(HomeBean homeBean){
+    public void updateHome(@RequestBody HomeBean homeBean){
         homeService.updateHome(homeBean);
     }
     //回显
     @RequestMapping("selectHomeById")
-    public HomeBean selectHomeById(Integer id){
+    public HomeBean selectHomeById(@RequestParam Integer id){
      return   homeService.selectHomeById(id);
     }
 

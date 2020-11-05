@@ -4,9 +4,9 @@ import lombok.Data;
 
 @Data
 public class RoomBean {
-    private Integer room_id;
-    private String room_name;
-    private Integer cleaner_id;
-    private Integer type_id;
+    private Integer roomId;
+    private String roomName;
+    private Integer cleanerId;
+    private Integer typeId;
 
 }

@@ -19,7 +19,12 @@ public class OutHomeServiceImpl implements  OutHomeService {
 
     @Override
     public void addOutHome(OutHomeBean outHomeBean) {
-        outHomeMapper.addOutHome(outHomeBean);
+        if(outHomeBean.getExitId()==null){
+            outHomeMapper.addOutHome(outHomeBean);
+        }else {
+            outHomeMapper.updateOutHome(outHomeBean);
+        }
+
     }
 
     @Override
@@ -28,7 +33,7 @@ public class OutHomeServiceImpl implements  OutHomeService {
     }
 
     @Override
-    public HomeBean selectOutHomeById(Integer id) {
+    public OutHomeBean selectOutHomeById(Integer id) {
         return outHomeMapper.selectOutHomeById(id);
     }
 

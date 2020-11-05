@@ -4,10 +4,10 @@ import lombok.Data;
 
 @Data
 public class OutHomeBean {
-    private Integer exit_id;
-    private String exit_time;
-    private String exit_because;
-    private Integer old_id;
-    private Integer power_id;
+    private Integer exitId;
+    private String exitTime;
+    private String exitBecause;
+    private Integer oldId;
+    private Integer powerId;
 
 }

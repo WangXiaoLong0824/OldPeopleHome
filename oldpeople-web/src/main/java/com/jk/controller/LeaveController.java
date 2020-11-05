@@ -39,7 +39,7 @@ public class LeaveController {
     }
     //回显
     @RequestMapping("selectLeaveById")
-    public HomeBean selectLeaveById(Integer id){
+    public LeaveBean selectLeaveById(Integer id){
         return   oldPeopleService.selectLeaveById(id);
     }
 

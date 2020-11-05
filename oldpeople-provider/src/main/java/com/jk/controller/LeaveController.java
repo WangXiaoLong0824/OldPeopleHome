@@ -23,22 +23,22 @@ public class LeaveController {
     }
     //删除
     @RequestMapping("deleteLeave")
-    public void  deleteLeave(Integer id){
+    public void  deleteLeave(@RequestParam Integer id){
         leaveService.deleteLeave(id);
     }
     //新增
     @RequestMapping("addLeave")
-    public void addLeave(LeaveBean leave){
+    public void addLeave(@RequestBody LeaveBean leave){
         leaveService.addLeave(leave);
     }
     //修改
     @RequestMapping("updateLeave")
-    public void updateLeave(LeaveBean leave){
+    public void updateLeave(@RequestBody LeaveBean leave){
         leaveService.updateLeave(leave);
     }
     //回显
     @RequestMapping("selectLeaveById")
-    public HomeBean selectLeaveById(Integer id){
+    public LeaveBean selectLeaveById(@RequestParam Integer id){
         return   leaveService.selectLeaveById(id);
     }
 

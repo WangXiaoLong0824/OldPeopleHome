@@ -24,22 +24,22 @@ public class OutHomeController {
     }
     //删除
     @RequestMapping("deleteOutHome")
-    public void  deleteOutHome(Integer id){
+    public void  deleteOutHome(@RequestParam Integer id){
         outHomeService.deleteOutHome(id);
     }
     //新增
     @RequestMapping("addOutHome")
-    public void addOutHome(OutHomeBean outHomeBean){
+    public void addOutHome(@RequestBody OutHomeBean outHomeBean){
         outHomeService.addOutHome(outHomeBean);
     }
     //修改
     @RequestMapping("updateOutHome")
-    public void updateOutHome(OutHomeBean outHomeBean){
+    public void updateOutHome(@RequestBody OutHomeBean outHomeBean){
         outHomeService.updateOutHome(outHomeBean);
     }
     //回显
     @RequestMapping("selectOutHomeById")
-    public HomeBean selectOutHomeById(Integer id){
+    public OutHomeBean selectOutHomeById(@RequestParam Integer id){
         return   outHomeService.selectOutHomeById(id);
     }
 }

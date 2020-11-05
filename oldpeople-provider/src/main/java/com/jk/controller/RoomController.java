@@ -24,22 +24,22 @@ public class RoomController {
     }
     //删除
     @RequestMapping("deleteRoom")
-    public void  deleteRoom(Integer id){
+    public void  deleteRoom(@RequestParam Integer id){
         roomService.deleteRoom(id);
     }
     //新增
     @RequestMapping("addRoom")
-    public void addRoom(RoomBean room){
+    public void addRoom(@RequestBody RoomBean room){
         roomService.addRoom(room);
     }
     //修改
     @RequestMapping("updateRoom")
-    public void updateRoom(RoomBean room){
+    public void updateRoom(@RequestBody RoomBean room){
         roomService.updateRoom(room);
     }
     //回显
     @RequestMapping("selectRoomById")
-    public RoomBean selectRoomById(Integer id){
+    public RoomBean selectRoomById(@RequestParam Integer id){
         return   roomService.selectRoomById(id);
     }
 

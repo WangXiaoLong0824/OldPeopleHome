@@ -15,7 +15,7 @@ public interface OutHomeMapper {
 
     void updateOutHome(OutHomeBean outHomeBean);
 
-    HomeBean selectOutHomeById(Integer id);
+    OutHomeBean selectOutHomeById(Integer id);
 
     Long findOutHomeList(@Param("outHomeBean") OutHomeBean outHomeBean);
 

@@ -4,11 +4,11 @@ import lombok.Data;
 
 @Data
 public class LeaveBean {
-    private Integer leave_id;
-    private String leave_time;
-    private String leave_because;
-    private String leave_empname;
-    private Integer leave_empsex;
-    private Integer leave_empage;
-    private Integer leave_status;
+    private Integer leaveId;
+    private String leaveTime;
+    private String leaveBecause;
+    private String leaveEmpname;
+    private Integer leaveEmpsex;
+    private Integer leaveEmpage;
+    private Integer leaveStatus;
 }

@@ -12,17 +12,17 @@
 
 
     <delete id="deleteLeave" parameterType="int">
-    delete  from t_leave where id=#{leave_id}
+    delete  from t_leave where leave_id=#{id}
     </delete>
     <insert id="addLeave" parameterType="com.jk.entity.LeaveBean">
-    insert  into t_leave values(#{leave_id},#{leave_time},#{leave_because},#{leave_empname},#{leave_empsex},#{leave_empage},#{leave_status})
+    insert  into t_leave values(#{leaveId},#{leaveTime},#{leaveBecause},#{leaveEmpname},#{leaveEmpsex},#{leaveEmpage},#{leaveStatus})
     </insert>
     <update id="updateLeave" parameterType="com.jk.entity.LeaveBean">
-        update t_leave set leave_time=#{leave_time},leave_because=#{leave_because},leave_empname=#{leave_empname},leave_empsex=#{leave_empsex},leave_empage=#{leave_empage},leave_status=#{leave_status}
-        where id=#{leave_id}
+        update t_leave set leave_Time=#{leaveTime},leave_Because=#{leaveBecause},leave_Empname=#{leaveEmpname},leave_Empsex=#{leaveEmpsex},leave_Empage=#{leaveEmpage},leave_Status=#{leaveStatus}
+        where leave_id=#{leaveId}
     </update>
     <select id="selectLeaveById" resultType="com.jk.entity.LeaveBean" parameterType="int">
-        select * from t_leave where id=#{leave_id}
+        select * from t_leave where leave_id=#{id}
     </select>
 
 </mapper>

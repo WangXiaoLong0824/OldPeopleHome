@@ -11,7 +11,7 @@ public interface OutHomeService {
 
     void updateOutHome(OutHomeBean outHomeBean);
 
-    HomeBean selectOutHomeById(Integer id);
+    OutHomeBean selectOutHomeById(Integer id);
 
     PageResult findOutHomeList(Integer currPage, Integer pageSize, OutHomeBean outHomeBean);
 }

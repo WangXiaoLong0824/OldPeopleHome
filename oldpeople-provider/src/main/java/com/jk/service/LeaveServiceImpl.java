@@ -29,7 +29,12 @@ public class LeaveServiceImpl implements  LeaveService{
 
     @Override
     public void addLeave(LeaveBean leave) {
-        leaveMapper.addLeave(leave);
+        if(leave.getLeaveId()==null){
+            leaveMapper.addLeave(leave);
+        }else {
+            leaveMapper.updateLeave(leave);
+        }
+
     }
 
     @Override
@@ -38,7 +43,7 @@ public class LeaveServiceImpl implements  LeaveService{
     }
 
     @Override
-    public HomeBean selectLeaveById(Integer id) {
+    public LeaveBean selectLeaveById(Integer id) {
         return leaveMapper.selectLeaveById(id);
     }
 }

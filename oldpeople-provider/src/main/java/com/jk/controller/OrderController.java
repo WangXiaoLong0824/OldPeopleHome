@@ -22,22 +22,22 @@ public class OrderController {
     }
     //删除
     @RequestMapping("deleteOrder")
-    public void  deleteOrder(Integer id){
+    public void  deleteOrder(@RequestParam Integer id){
         orderService.deleteOrder(id);
     }
     //新增
     @RequestMapping("addOrder")
-    public void addOrder(OrderBean order){
+    public void addOrder(@RequestBody OrderBean order){
         orderService.addOrder(order);
     }
     //修改
     @RequestMapping("updateOrder")
-    public void updateOrder(OrderBean order){
+    public void updateOrder(@RequestBody OrderBean order){
         orderService.updateOrder(order);
     }
     //回显
     @RequestMapping("selectOrderById")
-    public OrderBean selectOrderById(Integer id){
+    public OrderBean selectOrderById(@RequestParam Integer id){
         return   orderService.selectOrderById(id);
     }
 }

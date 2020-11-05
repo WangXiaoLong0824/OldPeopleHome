@@ -13,5 +13,5 @@ public interface LeaveService {
 
     void updateLeave(LeaveBean leave);
 
-    HomeBean selectLeaveById(Integer id);
+    LeaveBean selectLeaveById(Integer id);
 }

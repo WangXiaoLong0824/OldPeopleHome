@@ -4,10 +4,13 @@ import lombok.Data;
 
 @Data
 public class OrderBean {
-    private Integer order_id;
-    private String order_name;
-    private  String  order_time;
-    private  Integer   old_id;
-    private  Integer   orderthing_id;
-    private   Integer   order_money;
+    private Integer orderId;
+    private String orderName;
+    private  String  orderTime;
+    private  Integer   oldId;
+    private  Integer   orderthingId;
+    private   Integer   orderMoney;
+    private   Integer orderqian;
+    private   String orderthingname;
+
 }

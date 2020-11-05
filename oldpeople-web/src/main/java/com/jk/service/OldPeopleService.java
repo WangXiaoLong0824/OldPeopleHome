@@ -52,60 +52,60 @@ public interface OldPeopleService {
     @RequestMapping("findHomeList")
     public PageResult findHomeList(@RequestParam(value = "currPage",defaultValue = "1")Integer currPage, @RequestParam(value="pageSize",defaultValue="10") Integer pageSize, @RequestBody HomeBean homeBean);
     @RequestMapping("deleteHome")
-    public void  deleteHome(Integer id);
+    public void  deleteHome(@RequestParam Integer id);
     @RequestMapping("addHome")
-    public void addHome(HomeBean homeBean);
+    public void addHome(@RequestBody HomeBean homeBean);
     @RequestMapping("updateHome")
-    public void updateHome(HomeBean homeBean);
+    public void updateHome(@RequestBody HomeBean homeBean);
     @RequestMapping("selectHomeById")
-    public HomeBean selectHomeById(Integer id);
+    public HomeBean selectHomeById(@RequestParam Integer id);
 
     //员工离职表 t_leave wkp
     @RequestMapping("findLeaveList")
     public PageResult findLeaveList(@RequestParam(value = "currPage",defaultValue = "1")Integer currPage, @RequestParam(value="pageSize",defaultValue="10") Integer pageSize, @RequestBody LeaveBean leave);
     @RequestMapping("deleteLeave")
-    public void  deleteLeave(Integer id);
+    public void  deleteLeave(@RequestParam Integer id);
     @RequestMapping("addLeave")
-    public void addLeave(LeaveBean leave);
+    public void addLeave(@RequestBody LeaveBean leave);
     @RequestMapping("updateLeave")
-    public void updateLeave(LeaveBean leave);
+    public void updateLeave(@RequestBody LeaveBean leave);
     @RequestMapping("selectLeaveById")
-    public HomeBean selectLeaveById(Integer id);
+    public LeaveBean selectLeaveById(@RequestParam Integer id);
 
     //订单表 t_order wkp
     @RequestMapping("findOrderList")
     public PageResult findOrderList(@RequestParam(value = "currPage",defaultValue = "1")Integer currPage, @RequestParam(value="pageSize",defaultValue="10") Integer pageSize, @RequestBody OrderBean order);
     @RequestMapping("deleteOrder")
-    public void  deleteOrder(Integer id);
+    public void  deleteOrder(@RequestParam Integer id);
     @RequestMapping("addOrder")
-    public void addOrder(OrderBean order);
+    public void addOrder(@RequestBody OrderBean order);
     @RequestMapping("updateOrder")
-    public void updateOrder(OrderBean order);
+    public void updateOrder(@RequestBody OrderBean order);
     @RequestMapping("selectOrderById")
-    public OrderBean selectOrderById(Integer id);
+    public OrderBean selectOrderById(@RequestParam Integer id);
 
     //老人退房登记表 t_outhome wkp
     @RequestMapping("findOutHomeList")
     public PageResult findOutHomeList(@RequestParam(value = "currPage",defaultValue = "1")Integer currPage, @RequestParam(value="pageSize",defaultValue="10") Integer pageSize, @RequestBody OutHomeBean outHomeBean);
     @RequestMapping("deleteOutHome")
-    public void  deleteOutHome(Integer id);
+    public void  deleteOutHome(@RequestParam Integer id);
     @RequestMapping("addOutHome")
-    public void addOutHome(OutHomeBean outHomeBean);
+    public void addOutHome(@RequestBody OutHomeBean outHomeBean);
     @RequestMapping("updateOutHome")
-    public void updateOutHome(OutHomeBean outHomeBean);
+    public void updateOutHome(@RequestBody OutHomeBean outHomeBean);
     @RequestMapping("selectOutHomeById")
-    public HomeBean selectOutHomeById(Integer id);
+    public OutHomeBean selectOutHomeById(@RequestParam Integer id);
 
     //房间表 t_room wkp
     @RequestMapping("findRoomList")
     public PageResult findRoomList(@RequestParam(value = "currPage",defaultValue = "1")Integer currPage, @RequestParam(value="pageSize",defaultValue="10") Integer pageSize, @RequestBody RoomBean room);
     @RequestMapping("deleteRoom")
-    public void  deleteRoom(Integer id);
+    public void  deleteRoom(@RequestParam Integer id);
     @RequestMapping("addRoom")
-    public void addRoom(RoomBean room);
+    public void addRoom(@RequestBody RoomBean room);
     @RequestMapping("updateRoom")
-    public void updateRoom(RoomBean room);
+    public void updateRoom(@RequestBody RoomBean room);
     @RequestMapping("selectRoomById")
-    public RoomBean selectRoomById(Integer id);
+    public RoomBean selectRoomById(@RequestParam Integer id);
 
     }

@@ -11,4 +11,6 @@ public class People {
 
     private Integer oldId;
 
+    //业务字段
+    private String oldname;
 }

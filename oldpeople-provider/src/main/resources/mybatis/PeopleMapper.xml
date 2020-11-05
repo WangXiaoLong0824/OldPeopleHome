@@ -77,6 +77,7 @@
     <!--查询所有数据-->
     <select id="findPeople" resultMap="BaseResultMap">
       <bind name="key_info" value="(currPage-1)*pageSize"/>
-      select * from t_people limit #{key_info},#{pageSize}
+      select a.*,b.old_name oldname from t_people a left join t_oldpeople b on a.old_id=b.old_id
+      limit #{key_info},#{pageSize}
     </select>
 </mapper>

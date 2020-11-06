@@ -71,4 +71,14 @@ public interface OldPeopleService {
     public String deleteCarefulById(@RequestParam Integer carefulId);
     @RequestMapping("findCarefulById")
     public Careful findCarefulById(@RequestParam Integer carefulId);
+
+    //房间 ww
+    @RequestMapping("findRoomPage")
+    public PageResult findRoomPage(@RequestParam(value="currPage",defaultValue = "1") Integer currPage, @RequestParam(value="pageSize",defaultValue = "10") Integer pageSize,@RequestBody Room room);
+    @RequestMapping("addRoom")
+    public String addRoom(@RequestBody Room room);
+    @RequestMapping("deleteByRoomId")
+    public String deleteByRoomId(@RequestParam Integer roomId);
+    @RequestMapping("findRoomById")
+    public Room findRoomById(@RequestParam Integer roomId);
 }

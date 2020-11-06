@@ -9,10 +9,18 @@
     <script type="text/javascript" src="../js/vue/vue.min.js"></script>
     <script type="text/javascript" src="../bootstrap/bootstrap-paginator.js"></script>
 </head>
-<body>
+<body style=" background:url(images/login_bg_0.jpg)">
+
+<div class="form-group">
+    <label for="oldManName1" class="col-sm-1 control-label"></label>
+    <div class="col-sm-2">
+        <input type="text" class="form-control" id="oldManName1" v-model="oldManName1" placeholder="请输入老人姓名">
+    </div>
+</div>
+<button type="button"  class="btn btn-default" onclick="searchCarefulList()">搜索</button>
+
 <div id="app" class="container">
-    <button type="button" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal" onclick="update(0);"><i class="fa fa-file-o"></i> 新建</button>
-    <h1>老人费用明细</h1>
+    <h1>老人费用明细</h1><button type="button" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal" onclick="update(0);"><i class="fa fa-file-o"></i> 新建</button>
     <table class="table table-bordered">
         <tr>
             <th>Id</th>
@@ -95,7 +103,8 @@
             totalPage:"",
             total:"",
             currPage:"",
-            pageSize:""
+            pageSize:"",
+            oldManName1:""
         }
     })
 
@@ -107,7 +116,7 @@
         $.ajax({
             type:"get",
             url:"../careful/findCarefulPage",
-            data:{"currPage":vm.currPage,"pageSize":vm.pageSize},
+            data:{"currPage":vm.currPage,"pageSize":vm.pageSize,"oldManName":$("#oldManName1").val()},
             dataType:"json",
             success: function(result) {
                 console.log(result.rows)

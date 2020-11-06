@@ -3,14 +3,25 @@
 <mapper namespace="com.jk.dao.CarefulMapper">
 
     <select id="findCarefulCount" parameterType="Careful" resultType="java.lang.Long">
-        select count(*) from t_careful
+        select count(*) from t_careful c
+        LEFT JOIN t_oldpeople o on c.old_id=o.old_id where 1=1
+        <include refid="mysql"></include>
     </select>
 
     <select id="findCarefulPage" resultType="Careful">
         <bind name="key_off" value="(currPage - 1)*pageSize"/>
-        select * from t_careful limit ${key_off},${pageSize}
+        select c.*,o.old_name oldManName from t_careful c
+        LEFT JOIN t_oldpeople o on c.old_id=o.old_id where 1=1
+        <include refid="mysql"></include>
+        limit ${key_off},${pageSize}
     </select>
 
+    <sql id="mysql">
+        <if test="careFul.oldManName != null and careFul.oldManName != ''">
+            and o.old_name like '%${careFul.oldManName}%'
+        </if>
+    </sql>
+    
     <insert id="addCareful" parameterType="Careful">
         insert into t_careful(careful_sum,careful_care,careful_room,careful_left,careful_type,old_id) values(#{carefulSum},#{carefulCare},#{carefulRoom},#{carefulLeft},#{carefulType},#{oldId})
     </insert>

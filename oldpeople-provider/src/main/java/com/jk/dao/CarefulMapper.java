@@ -2,14 +2,15 @@ package com.jk.dao;
 
 import com.jk.entity.Careful;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 @Mapper
 public interface CarefulMapper {
-    Long findCarefulCount(Careful careFul);
+    Long findCarefulCount(@Param("careFul") Careful careFul);
 
-    List<Careful> findCarefulPage(Integer currPage, Integer pageSize, Careful careFul);
+    List<Careful> findCarefulPage(@Param("currPage") Integer currPage,@Param("pageSize") Integer pageSize,@Param("careFul") Careful careFul);
 
     void addCareful(Careful careful);
 

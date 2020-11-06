@@ -15,4 +15,7 @@ public class IndexController {
     public String toCarefulList(){
         return "careful/CarefulList";
     }
+
+    @RequestMapping("toRoomList")
+    public String toRoomList(){ return "room/RoomList"; }
 }

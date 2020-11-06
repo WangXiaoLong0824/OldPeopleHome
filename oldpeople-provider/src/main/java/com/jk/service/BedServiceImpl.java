@@ -17,9 +17,9 @@ public class BedServiceImpl implements BedService{
 
 
     @Override
-    public PageResult findBed(Integer currPage, Integer pageSize) {
-        Long total = bedMapper.findBedCount();
-        List<Bed> list = bedMapper.findBed(currPage,pageSize);
+    public PageResult findBed(Integer currPage, Integer pageSize,Bed bed) {
+        Long total = bedMapper.findBedCount(bed);
+        List<Bed> list = bedMapper.findBed(currPage,pageSize,bed);
         Long totalPage = total%pageSize == 0 ? total/pageSize : (total/pageSize + 1);
         return new PageResult(total,list,currPage,pageSize,totalPage);
     }

@@ -2,14 +2,15 @@ package com.jk.mapper;
 
 import com.jk.entity.Bed;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 @Mapper
 public interface BebMapper {
-    Long findBedCount();
+    Long findBedCount(@Param("bed")Bed bed);
 
-    List<Bed> findBed(Integer currPage, Integer pageSize);
+    List<Bed> findBed(@Param("currPage") Integer currPage, @Param("pageSize")Integer pageSize,@Param("bed") Bed bed);
 
     void addBed(Bed bed);
 

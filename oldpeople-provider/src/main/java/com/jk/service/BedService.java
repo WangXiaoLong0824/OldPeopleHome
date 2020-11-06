@@ -7,7 +7,7 @@ import com.jk.entity.TurnHome;
 public interface BedService {
 
 
-    PageResult findBed(Integer currPage, Integer pageSize);
+    PageResult findBed(Integer currPage, Integer pageSize,Bed bed);
 
     void addBed(Bed bed);
 

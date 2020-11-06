@@ -3,12 +3,18 @@
 <mapper namespace="com.jk.mapper.TurnHomeMapper">
 
     <select id="findTurnHomeCount" parameterType="com.jk.entity.TurnHome" resultType="java.lang.Long">
-        select count(*) from t_turnhome
+        select count(*) from t_turnhome a, t_oldpeople b,t_home c,t_person d
+          where a.old_id = b.old_id and
+          a.home_id = c.home_id and
+          a.person_id = d.person_id
     </select>
 
     <select id="findTurnHome" resultType="com.jk.entity.TurnHome">
         <bind name="key_off" value="(currPage - 1)*pageSize"/>
-        select * from t_turnhome limit ${key_off},${pageSize}
+        select a.*,b.old_name oldName,c.home_address homeAddress,d.person_name personName from t_turnhome a, t_oldpeople b,t_home c,t_person d
+        where a.old_id = b.old_id and
+        a.home_id = c.home_id and
+        a.person_id = d.person_id limit ${key_off},${pageSize}
     </select>
 
    <insert id="addOutHome" >

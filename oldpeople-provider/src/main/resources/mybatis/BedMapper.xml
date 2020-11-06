@@ -4,13 +4,29 @@
 
 
     <select id="findBedCount" parameterType="com.jk.entity.Bed" resultType="java.lang.Long">
-        select count(*) from t_bed
+        select count(*) from t_bed b ,t_oldpeople o,t_storey s,t_room r,t_person p
+        where b.old_id=o.old_id and b.storey_id=s.storey_id and
+        b.room_id=r.room_id and b.person_id=p.person_id
+        <!--<include refid="sqlId"></include>-->
     </select>
 
     <select id="findBed" resultType="com.jk.entity.Bed">
         <bind name="key_off" value="(currPage - 1)*pageSize"/>
-        select * from t_bed limit ${key_off},${pageSize}
+        select b.*,o.old_name oldName,s.storey_name storeyName,
+        r.room_name roomName ,p.person_name personName
+        from t_bed b,t_oldpeople o,t_storey s,t_room r,t_person p
+        where b.old_id=o.old_id and b.storey_id=s.storey_id and
+        b.room_id=r.room_id and b.person_id=p.person_id 
+       <!-- <include refid="sqlId"></include>-->
+        limit ${key_off},${pageSize}
     </select>
+
+   <!-- <sql id="sqlId">
+        <if test="bed.bedStatus !=null ">
+            and bed_status =#{bed.bedStatus}
+        </if>
+
+    </sql>-->
 
     <insert id="addBed" parameterType="com.jk.entity.Bed">
         insert into t_bed(old_id,bed_status,storey_id,room_id,person_id) values(#{oldId},#{bedStatus},#{storeyId},#{roomId},#{personId})

@@ -11,4 +11,9 @@ public class TurnHome {
     private Integer oldId;
     private Integer homeId;
     private Integer personId;
+    private String oldName;
+    private String homeName;
+    private String personName;
+    private String startTime;
+    private String endTime;
 }

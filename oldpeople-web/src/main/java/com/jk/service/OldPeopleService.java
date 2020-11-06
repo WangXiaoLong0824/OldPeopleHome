@@ -47,4 +47,26 @@ public interface OldPeopleService {
     public void deleteUnder(@RequestParam Integer underId);
     @RequestMapping("findUnderById")
     public Under findUnderById(@RequestParam Integer underId);
+
+
+    //床位信息 lmq
+
+    @RequestMapping("findBed")
+    public PageResult findBed(@RequestParam(value="currPage",defaultValue="1") Integer currPage, @RequestParam(value="pageSize",defaultValue="10") Integer pageSize,@RequestBody Bed bed);
+    @RequestMapping("addBed")
+    public String addBed(@RequestBody  Bed bed);
+    @RequestMapping("deleteBedById")
+    public String deleteBedById(@RequestParam Integer bedId);
+    @RequestMapping("findBedById")
+    public Bed findBedById(@RequestParam Integer bedId);
+
+    //转房记录 lmq
+    @RequestMapping("findOutHome")
+    public PageResult findTurnHome(@RequestParam(value="currPage",defaultValue="1") Integer currPage, @RequestParam(value="pageSize",defaultValue="10") Integer pageSize);
+    @RequestMapping("addOutHome")
+    public String addOutHome(@RequestBody TurnHome turnHome);
+    @RequestMapping("deleteOutHomeById")
+    public String deleteOutHomeById(@RequestParam Integer oId);
+    @RequestMapping("findOutHomeById")
+    public TurnHome findOutHomeById(@RequestParam Integer oId);
 }

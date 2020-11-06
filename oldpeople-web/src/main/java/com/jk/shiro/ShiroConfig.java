@@ -35,6 +35,11 @@ public class ShiroConfig {
         map.put("/logout","logout");//注销, 路径和value中的logout一定要一致，这是shiro提供的路径地址和value值
         map.put("/shiro/toLogin","anon");
         map.put("/shiro/login","anon");
+        map.put("/oldPeople/getSheng","anon");
+        map.put("/oldPeople/findShi","anon");
+        map.put("/oldPeople/findXian","anon");
+        map.put("/emp/getEmple","anon");
+        map.put("/emp/getPosition","anon");
         //放开静态资源
         map.put("/js/**","anon");
         map.put("/css/**","anon");
@@ -42,7 +47,7 @@ public class ShiroConfig {
         map.put("/fonts/**","anon");
 
         //其他的都拦截
-        map.put("/**","authc"); //authc
+        map.put("/**","anon"); //authc
         // 将自定义的过滤器设置到shiro过滤器链中
         sfb.setFilterChainDefinitionMap(map);
         return sfb;

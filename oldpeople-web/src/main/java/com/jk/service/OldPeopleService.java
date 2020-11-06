@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @FeignClient(value = "oldpeople-provider")
 public interface OldPeopleService {
     //老人基本信息  WXL
@@ -36,7 +38,13 @@ public interface OldPeopleService {
     @RequestMapping("deletePerformance")
     public void deletePerformance(@RequestParam Integer performanceId);
     @RequestMapping("findPerformanceById")
-    public Emp findPerformanceById(@RequestParam Integer performanceId);
+    public Performance findPerformanceById(@RequestParam Integer performanceId);
+    //员工部门 WXL
+    @RequestMapping("getEmple")
+    public List<Emple> getEmple();
+    //员工职位 WXL
+    @RequestMapping("getPosition")
+    public List<Position> getPosition(@RequestParam Integer empleId);
 
     //线下访客登记 WXL
     @RequestMapping("findPageUnder")
@@ -47,4 +55,14 @@ public interface OldPeopleService {
     public void deleteUnder(@RequestParam Integer underId);
     @RequestMapping("findUnderById")
     public Under findUnderById(@RequestParam Integer underId);
+   //地区 WXl
+    @RequestMapping("getSheng")
+    public List<TbProvinces> getSheng();
+    @RequestMapping("findShi")
+    public List<TbCities> findShi(@RequestParam String provinceid);
+    @RequestMapping("findXian")
+    public List<TbAreas> findXian(@RequestParam String cityid);
+
+
+
 }

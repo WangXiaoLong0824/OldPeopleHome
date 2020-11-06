@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="../js/bootStrap-addTabs/bootstrap.addtabs.css">
     <script src="../js/bootStrap-addTabs/bootstrap.addtabs.min.js"></script>
 </head>
-<body>
+<body style="background: url(../images/123.png) no-repeat center center fixed; background-size: 100%;">
 <div class="container-fluid" style="margin-top: 59px;">
     <shiro:principal property="username" />
     <a class="btn btn-info" href="../logout">注销</a>
@@ -21,7 +21,7 @@
             <div id="myTree"></div>
         </div>
         <div class="col-xs-10">
-            <div id="myTabs">
+            <div id="myTabs" >
                 <!-- 新选项卡 -->
                 <ul class="nav nav-tabs" id="tablist">
                     <li role="presentation" class="active">
@@ -54,7 +54,7 @@
                 $('#myTree').treeview({
                     data:data,
                     onNodeSelected:function(event, node) {
-                        $.addtabs({iframeHeight: 550});
+                        $.addtabs({iframeHeight: 1000});
                         $.addtabs.add({
                             id:node.id,
                             title:node.text,

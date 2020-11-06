@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:v-on="http://www.w3.org/1999/xhtml" >
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>老人信息列表 - Powered By SHOP++</title>
+    <meta name="author" content="SHOP++ Team">
+    <meta name="copyright" content="SHOP++">
+    <link rel="stylesheet" href="../js/bootstrap3/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../js/bootstrap-treeview/bootstrap-treeview.min.css">
+    <link rel="stylesheet" href="../js/bootStrap-addTabs/bootstrap.addtabs.css">
+    <script src="../js/jquery-1.9.1.min.js"></script>
+    <script src="../js/bootstrap3/js/bootstrap.js"></script>
+
+    <script src="../js/bootstrap-treeview/bootstrap-treeview.min.js"></script>
+
+    <script src="../js/bootStrap-addTabs/bootstrap.addtabs.min.js"></script>
+    <script src="../js/vue/vue.min.js"></script>
+    <script type="text/javascript">
+        $().ready(function() {
+
+
+        });
+    </script>
+    <script src="../bootstrap/bootstrap-paginator.js"></script>
+
+
+</head>
+<body>
+<div class="breadcrumb">
+    <a href="http://localhost:8080/shopxxb2b2c/admin/common/index">首页</a> » 会员等级
+</div>
+<form id="listForm" action="http://localhost:8080/shopxxb2b2c/admin/store_rank/list" method="get">
+    <div class="pull-left">
+        <div class="form-group form-inline">
+            <div class="btn-group">
+                <button type="button"  class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal" v-on:click="storeCategory = {}"><i class="fa fa-file-o"></i> 新建</button>
+                <!--<button type="button" class="btn btn-default" title="删除" onclick="deleteStoreCategory()"><i class="fa fa-trash-o"></i> 删除</button>-->
+                <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
+            </div>
+        </div>
+    </div>
+    <div id="app" class="container">
+        <h1>会员等级</h1>
+        <form action="" id="list_form">
+            <div class="form-group">
+                <label for="name" class="col-sm-1 control-label">名称：</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" id="name" v-model="userName1" placeholder="请输入名字">
+                </div>
+            </div>
+            <button type="button" class="btn btn-default" onclick="searchStoreCategoryList()">搜索</button>
+        </form>
+        <br>
+        <table class="table table-bordered">
+            <tr>
+                <th class="" style="padding-right:0px">
+                    <input id="selall" type="checkbox" class="icheckbox_square-blue">
+                </th>
+                <th>ID</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>年龄</th>
+                <th>电话</th>
+                <th>入职时间</th>
+                <th>部门</th>
+                <th>请假</th>
+                <th>离职</th>
+                <th>职位</th>
+                <th>省</th>
+                <th>市</th>
+                <th>县</th>
+                <th>操作</th>
+            </tr>
+            <tr v-for="storeCategory in storeCategoryList">
+                <td>
+                    <input  type="checkbox" v-on:click="updateSelection($event, storeCategory.userId)">
+                </td>
+                <td>{{storeCategory.empId}}</td>
+                <td>{{storeCategory.empName}}</td>
+                <td>{{storeCategory.empSex==1?"男":"女"}}</td>
+                <td>{{storeCategory.empAge}}</td>
+                <td>{{storeCategory.empTell}}</td>
+                <td>{{storeCategory.empTime}}</td>
+                <td>{{storeCategory.empleName}}</td>
+                <td>{{storeCategory.empThing==1?"是":"否"}}</td>
+                <td>{{storeCategory.empLeave==1?"是":"否"}}</td>
+                <td>{{storeCategory.empPositionName}}</td>
+                <td>{{storeCategory.shengName}}</td>
+                <td>{{storeCategory.shiName}}</td>
+                <td>{{storeCategory.xianName}}</td>
+
+                <td>
+                    <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal" v-on:click="findOne(storeCategory.empId)" >修改</button>
+                    <button type="button" class="btn bg-olive btn-xs"  v-on:click="deleteStoreCategory(storeCategory.empId)" >删除</button>
+                </td>
+            </tr>
+        </table>
+        <div id="example" style="text-align: right"> <ul id="pageLimit"></ul> </div>
+
+        <!-- 编辑窗口 -->
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" id="ppa" style="margin-right: 2000px">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h3 id="myModalLabel">留言信息</h3>
+                    </div>
+                    <form id="userForm" method="post">
+                        <div class="modal-body">
+                            <table class="table table-bordered table-striped"  width="300px">
+                                <tr>
+                                    <td>编号</td>
+                                    <td><input id="oldId" name="empId" class="form-control"  placeholder="编号" v-model="storeCategory.empId">  </td>
+                                </tr>
+                                <tr>
+                                    <td>名称</td>
+                                    <td><input id="oldName" name="empName" class="form-control" placeholder="名称" v-model="storeCategory.empName">  </td>
+                                </tr>
+                                <tr>
+                                    <td>性别</td>
+                                    <td><input type="radio" name="empSex" v-model="storeCategory.empSex" value="1">男
+                                        <input type="radio" name="empSex" v-model="storeCategory.empSex" value="2">女</td>
+                                </tr>
+                                <tr>
+                                    <td>年龄</td>
+                                    <td><input id="oldAge" name="empAge" class="form-control" placeholder="年龄" v-model="storeCategory.empAge">  </td>
+                                </tr>
+                                <tr>
+                                    <td>电话</td>
+                                    <td><input id="oldPhone" name="empTell" class="form-control" placeholder="电话" v-model="storeCategory.empTell">  </td>
+                                </tr>
+                                <tr>
+                                    <td>入职时间</td>
+                                    <td><input type="radio" name="empThing" v-model="storeCategory.empThing" value="1">是
+                                        <input type="radio" name="empThing" v-model="storeCategory.empThing" value="2">否</td>
+                                </tr>
+                                <tr>
+                                    <td>请假</td>
+                                    <td><input type="radio" name="empThing" v-model="storeCategory.empThing" value="1">是
+                                        <input type="radio" name="empThing" v-model="storeCategory.empThing" value="2">否</td>
+                                </tr>
+                                <tr>
+                                    <td>离职</td>
+                                    <td><input type="radio" name="empLeave" v-model="storeCategory.empLeave" value="1">是
+                                        <input type="radio" name="empLeave" v-model="storeCategory.empLeave" value="2">否  </td>
+                                </tr>
+                                <tr>
+                                    <td>部门</td>
+                                    <td>
+                                    <select class="form-control con1" name="empleId" v-model="empleId"  ><!--@change="changeProduct"-->
+                                        <option value="" disabled selected>请选择</option>
+                                        <option  v-for="emple in emplelist" :value="emple.empleId">{{emple.empleName}}</option>
+                                    </select>
+                                     </td>
+                                </tr>
+                                <tr>
+                                    <td>职位</td>
+                                    <td>
+                                        <select class="form-control con1" name="empPosition" v-model="empPosition"  ><!--@change="changeProduct"-->
+                                            <option value="" disabled selected>请选择</option>
+                                            <option  v-for="position in positionlist" :value="position.positionId">{{position.positionName}}</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr >
+                                    <td>省</td>
+                                    <td>
+                                        <select class="form-control con1" name="shengId" v-model="shengId"  ><!--@change="changeProduct"-->
+                                            <option value="" disabled selected>请选择</option>
+                                            <option  v-for="diqu in diqulist" :value="diqu.provinceid">{{diqu.province}}</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>市</td>
+                                    <td>
+                                        <select class="form-control con1" name="shiId" v-model="shiId"  ><!--@change="changeProduct"-->
+                                            <option value="" disabled selected>请选择</option>
+                                            <option  v-for="shi in shilist" :value="shi.cityid">{{shi.city}}</option>
+                                        </select>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>县</td>
+                                    <td>
+                                        <select class="form-control con1" name="xianId" v-model="xianId"  ><!--@change="changeProduct"-->
+                                            <option value="" disabled selected>请选择</option>
+                                            <option  v-for="xian in xianlist" :value="xian.areaid">{{xian.area}}</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-success" data-dismiss="modal" aria-hidden="true" onclick="saveStoreCategory()">保存</button>
+                            <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <input type="hidden" id="pageSize" name="pageSize" value="20">
+    <input type="hidden" id="searchProperty" name="searchProperty" value="name">
+    <input type="hidden" id="orderProperty" name="orderProperty" value="">
+    <input type="hidden" id="orderDirection" name="orderDirection" value="">
+</form>
+
+
+
+</body>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            storeCategoryList: "",
+            totalPage:"",
+            total:"",
+            currPage:"",
+            pageSize:"",
+            userName1:"",
+            shengId:"",
+            shiId:"",
+            xianId:"",
+            diqulist:"",
+            diquname:"",
+            diquid:"",
+            storeCategory:"",
+            shilist:"",
+            xianlist:"",
+            emplelist:"",
+            empleId:"",
+            empPosition:"",
+            positionlist:""
+        },
+        methods: {
+
+
+        },
+        computed :{
+        },
+        watch : {
+            shengId:function(val){
+                $.ajax({
+                    type:"post",
+                    url:"../oldPeople/findShi",
+                    data:{"provinceid":val},
+                    dataType:"json",
+                    success: function(data) {
+
+                        vm.shilist=data
+                    },
+
+                })
+            },
+            shiId:function(val){
+                $.ajax({
+                    type:"post",
+                    url:"../oldPeople/findXian",
+                    data:{"cityid":val},
+                    dataType:"json",
+                    success: function(data) {
+
+                        vm.xianlist=data
+                    },
+
+                })
+            },
+            empleId:function(val){
+                $.ajax({
+                    type:"post",
+                    url:"../emp/getPosition",
+                    data:{"empleId":val},
+                    dataType:"json",
+                    success: function(data) {
+
+                        vm.positionlist=data
+                    },
+
+                })
+            }
+        }
+
+    })
+    $(function() {
+        searchStoreCategoryList();
+        getSheng();
+        getEmple();
+    })
+    function getEmple() {
+        $.ajax({
+            type:"post",
+            url:"../emp/getEmple",
+            data:"",
+            dataType:"json",
+            success: function(data) {
+
+                vm.emplelist=data
+            },
+        })
+    }
+    function getSheng () {
+        $.ajax({
+                    type:"post",
+                    url:"../oldPeople/getSheng",
+                    data:"",
+                    dataType:"json",
+                    success: function(data) {
+                vm.diqulist=data
+            },
+            error : function() {
+                alert("系统错误，请联系管理员！");
+            }
+        })
+    }
+    function searchStoreCategoryList() {
+        $.ajax({
+            type:"post",
+            url:"../emp/findPageEmp",
+            data:{"currPage":vm.currPage,"pageSize":vm.pageSize,"userName":vm.userName1},
+            dataType:"json",
+            success: function(result) {
+                vm.storeCategoryList = result.rows;
+                vm.totalPage = result.totalPage;
+                vm.total = result.total;
+                vm.currPage = result.currPage;
+                vm.pageSize = result.pageSize;
+                setPage(result.currPage,result.totalPage,result.pageSize);
+            },
+            error : function() {
+                alert("系统错误，请联系管理员！");
+            }
+        })
+    }
+    /**
+     *
+     * @param pageCurrent 当前所在页
+     * @param pageSum 总页数
+     * @param callback 调用ajax
+     */
+    function setPage(pageCurrent, pageSum, pageSize) {
+        $('#pageLimit').bootstrapPaginator({
+            currentPage: pageCurrent,//当前的请求页面。
+            totalPages: pageSum,//一共多少页。
+            size:"normal",//应该是页眉的大小。
+            bootstrapMajorVersion: 3,//bootstrap的版本要求。
+            alignment:"right",
+            numberOfPages:pageSize,//一页列出多少数据。
+            itemTexts: function (type, page, current) {//如下的代码是将页眉显示的中文显示我们自定义的中文。
+                switch (type) {
+                    case "first": return "首页";
+                    case "prev": return "上一页";
+                    case "next": return "下一页";
+                    case "last": return "末页";
+                    case "page": return page;
+                }
+            },
+            //当单击操作按钮的时候, 执行该函数, 调用ajax渲染页面
+            onPageClicked: function (event,originalEvent,type,page) {
+                // 把当前点击的页码赋值给currentPage, 调用ajax,渲染页面
+                vm.currPage = page;
+                searchStoreCategoryList();
+            }
+        });
+    }
+    vm.selectIds = [];
+    //复选框选中
+    function updateSelection($event, id) {
+        if ($event.target.checked) {
+            vm.selectIds.push(id);
+        } else {
+            var idx = vm.selectIds.indexOf(id);
+            vm.selectIds.splice(idx, 1);//删除
+        }
+
+        console.info(vm.selectIds.toString());
+    }
+
+    //删除
+    function deleteStoreCategory(userId) {
+        $.ajax({
+            type:'post',
+            url:'../emp/deleteEmp',
+            data:{empId: userId},
+            dataType:'json',
+            success:function (result) {
+                alert("成功");
+                searchStoreCategoryList();
+                $("input[type='checkbox']").prop("checked", false);
+
+            },
+            error: function (result) {
+                searchStoreCategoryList();
+            }
+        })
+    }
+    //保存
+    function saveStoreCategory() {
+        $.ajax({
+            type:'post',
+            url:'../emp/addEmp',
+            data:$("#userForm").serialize(),
+            dataType:'json',
+            success: function (result) {
+                searchStoreCategoryList();
+            },
+            error: function () {
+                searchStoreCategoryList();
+            }
+        })
+    }
+    /*function update(ideaId){
+        $.ajax({
+            url:"../idea/findOne",
+            type:"post",
+            data:{"ideaId":ideaId},
+            success:function(data){
+                vs.idea=data;
+            },
+        });
+    }*/
+    //修改回显
+    function findOne(id) {
+        $.ajax({
+            type:'post',
+            url:'../emp/findEmpById',
+            data:{empId: id},
+            dataType: 'json',
+            success: function (result) {
+                vm.storeCategory=result
+
+            },
+            error: function () {
+                alert("系统错误，请联系管理员！");
+            }
+        })
+    }
+</script>
+</html>

@@ -1,0 +1,25 @@
+package com.jk.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("index")
+public class IndexController {
+    @RequestMapping("toLaoRenXinXi")
+    public String toLaoRenXinXi(){
+        return "laorenguanli/laorenxinxi";
+    }
+    @RequestMapping("toEmp")
+    public String toEmp(){
+        return "laorenguanli/emp";
+    }
+    @RequestMapping("toPerformance")
+    public String toPerformance(){
+        return "laorenguanli/performance";
+    }
+    @RequestMapping("toUnder")
+    public String toUnder(){
+        return "laorenguanli/under";
+    }
+}

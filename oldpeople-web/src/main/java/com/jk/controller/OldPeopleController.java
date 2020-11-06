@@ -1,13 +1,13 @@
 package com.jk.controller;
 
-import com.jk.entity.OldPeople;
-import com.jk.entity.PageResult;
+import com.jk.entity.*;
 import com.jk.service.OldPeopleService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 @RequestMapping("oldPeople")
@@ -26,8 +26,20 @@ public class OldPeopleController {
     public void deleteOldPeople(Integer oldId){
          oldPeopleService.deleteOldPeople(oldId);
     }
-    @RequestMapping("findOlePeopleById")
+    @RequestMapping("findOldPeopleById")
     public OldPeople findOlePeopleById(Integer oldId){
         return oldPeopleService.findOlePeopleById(oldId);
+    }
+    @RequestMapping("getSheng")
+    public List<TbProvinces> getSheng(){
+        return oldPeopleService.getSheng();
+    }
+    @RequestMapping("findShi")
+    public List<TbCities> findShi(String provinceid){
+        return oldPeopleService.findShi(provinceid);
+    }
+    @RequestMapping("findXian")
+    public List<TbAreas> findXian(String cityid){
+        return oldPeopleService.findXian(cityid);
     }
 }

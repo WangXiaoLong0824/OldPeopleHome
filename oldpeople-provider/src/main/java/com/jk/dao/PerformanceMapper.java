@@ -16,7 +16,7 @@ public interface PerformanceMapper {
     void updatePerformance(Performance performance);
     @Delete("delete from t_performance where performance_id=#{performanceId}")
     void deletePerformance(Integer performanceId);
-    @Select(" select a.*,b.emp_name empName from t_performance a,t_emp b\n" +
-            "        where a.performance_empid = b.emp_id and performance_id=#{performanceId}")
+    @Select(" select a.*,b.emp_name empName from t_performance a,t_emp b" +
+            "        where a.performance_empid = b.emp_id and a.performance_id=#{performanceId}")
     Performance findPerformanceById(Integer performanceId);
 }

@@ -1,8 +1,7 @@
 package com.jk.service;
 
 import com.jk.dao.OldPeopleMapper;
-import com.jk.entity.OldPeople;
-import com.jk.entity.PageResult;
+import com.jk.entity.*;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -36,5 +35,20 @@ public class OldPeopleServiceImpl implements OldPeopleService{
     @Override
     public OldPeople findOlePeopleById(Integer oldId) {
         return oldPeopleMapper.findOlePeopleById(oldId);
+    }
+
+    @Override
+    public List<TbProvinces> getSheng() {
+        return oldPeopleMapper.getSheng();
+    }
+
+    @Override
+    public List<TbCities> findShi(String provinceid) {
+        return oldPeopleMapper.findShi(provinceid);
+    }
+
+    @Override
+    public List<TbAreas> findXian(String cityid) {
+        return oldPeopleMapper.findXian(cityid);
     }
 }

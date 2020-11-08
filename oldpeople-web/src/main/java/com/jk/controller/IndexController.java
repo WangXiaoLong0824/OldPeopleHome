@@ -22,4 +22,17 @@ public class IndexController {
     public String toUnder(){
         return "laorenguanli/under";
     }
+
+    @RequestMapping("toDormList")
+    public String toDormList(){
+        return "dorm/DormList";
+    }
+
+    @RequestMapping("toCarefulList")
+    public String toCarefulList(){
+        return "careful/CarefulList";
+    }
+
+    @RequestMapping("toRoomList")
+    public String toRoomList(){ return "room/RoomList"; }
 }

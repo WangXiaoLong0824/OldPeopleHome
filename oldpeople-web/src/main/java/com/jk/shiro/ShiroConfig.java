@@ -47,7 +47,7 @@ public class ShiroConfig {
         map.put("/fonts/**","anon");
 
         //其他的都拦截
-        map.put("/**","authc"); //authc
+        map.put("/**","anon"); //authc
         // 将自定义的过滤器设置到shiro过滤器链中
         sfb.setFilterChainDefinitionMap(map);
         return sfb;

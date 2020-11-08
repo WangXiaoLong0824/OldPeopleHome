@@ -18,4 +18,6 @@ public interface OldPeopleService {
     List<TbCities> findShi(String provinceid);
 
     List<TbAreas> findXian(String cityid);
+
+    List<SysUser> findChildren(Integer userid);
 }

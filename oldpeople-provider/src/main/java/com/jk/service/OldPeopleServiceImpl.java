@@ -51,4 +51,9 @@ public class OldPeopleServiceImpl implements OldPeopleService{
     public List<TbAreas> findXian(String cityid) {
         return oldPeopleMapper.findXian(cityid);
     }
+
+    @Override
+    public List<SysUser> findChildren(Integer userid) {
+        return oldPeopleMapper.findChildren(userid);
+    }
 }

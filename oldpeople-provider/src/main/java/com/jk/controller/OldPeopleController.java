@@ -42,4 +42,8 @@ public class OldPeopleController {
     public List<TbAreas> findXian(@RequestParam String cityid){
         return oldPeopleService.findXian(cityid);
     }
+    @RequestMapping("findChildren")
+    public List<SysUser> findChildren(@RequestParam Integer userid){
+        return  oldPeopleService.findChildren(userid);
+    }
 }

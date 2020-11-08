@@ -102,7 +102,7 @@
 
         <!-- 编辑窗口 -->
         <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog" id="ppa" style="margin-right: 2000px">
+            <div class="modal-dialog" id="ppa" >
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -134,8 +134,10 @@
                                 </tr>
                                 <tr>
                                     <td>入职时间</td>
-                                    <td><input type="radio" name="empThing" v-model="storeCategory.empThing" value="1">是
-                                        <input type="radio" name="empThing" v-model="storeCategory.empThing" value="2">否</td>
+                                    <td> <div class="col-sm-10">
+                                        <input type="date" class="form-control" name="createTime"  id="createTime" placeholder="createTime"  v-model="storeCategory.createTime"/>
+                                    </div>
+                                        </td>
                                 </tr>
                                 <tr>
                                     <td>请假</td>
@@ -251,6 +253,7 @@
                     url:"../oldPeople/findShi",
                     data:{"provinceid":val},
                     dataType:"json",
+                    async:false,
                     success: function(data) {
 
                         vm.shilist=data
@@ -264,6 +267,7 @@
                     url:"../oldPeople/findXian",
                     data:{"cityid":val},
                     dataType:"json",
+                    async:false,
                     success: function(data) {
 
                         vm.xianlist=data
@@ -277,6 +281,7 @@
                     url:"../emp/getPosition",
                     data:{"empleId":val},
                     dataType:"json",
+                    async:false,
                     success: function(data) {
 
                         vm.positionlist=data
@@ -433,7 +438,11 @@
             dataType: 'json',
             success: function (result) {
                 vm.storeCategory=result
-
+                vm.shengId=result.shengId;
+                vm.shiId=result.shiId;
+                vm.xianId=result.xianId;
+                vm.empleId=result.empleId;
+                vm.empPosition=result.empPosition;
             },
             error: function () {
                 alert("系统错误，请联系管理员！");

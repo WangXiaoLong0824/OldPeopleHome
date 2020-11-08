@@ -1,9 +1,6 @@
 package com.jk.dao;
 
-import com.jk.entity.OldPeople;
-import com.jk.entity.TbAreas;
-import com.jk.entity.TbCities;
-import com.jk.entity.TbProvinces;
+import com.jk.entity.*;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -31,4 +28,6 @@ public interface OldPeopleMapper {
     List<TbCities> findShi(String provinceid);
     @Select("select * from tb_areas where cityid=#{cityid}")
     List<TbAreas> findXian(String cityid);
+    @Select("select * from t_user")
+    List<SysUser> findChildren(Integer userid);
 }

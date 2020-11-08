@@ -91,7 +91,7 @@
                 <td>{{storeCategory.xianName}}</td>
 
                 <td>
-                    <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal" v-on:click="findOne(storeCategory.oldId)" >修改</button>
+                    <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal" v-on:click="findOne(storeCategory.oldId,storeCategory.childrenId)" >修改</button>
                     <button type="button" class="btn bg-olive btn-xs"  v-on:click="deleteStoreCategory(storeCategory.oldId)" >删除</button>
                 </td>
             </tr>
@@ -144,7 +144,11 @@
                                 </tr>
                                 <tr>
                                     <td>子女</td>
-                                    <td><input id="childrenId" name="childrenId" class="form-control" placeholder="子女" v-model="storeCategory.childrenId">  </td>
+                                    <td>
+                                        <select class="form-control con1" name="childrenId" v-model="childrenId"  ><!--@change="changeProduct"-->
+                                            <option value="" disabled selected>请选择</option>
+                                            <option  v-for="children in childrenlist" :value="children.userid">{{children.username}}</option>
+                                        </select></td>
                                 </tr>
                                 <tr >
                                     <td>省</td>
@@ -212,7 +216,9 @@
             diquid:"",
             storeCategory:"",
             shilist:"",
-            xianlist:""
+            xianlist:"",
+            childrenId:"",
+            childrenlist:""
         },
         methods: {
 
@@ -227,8 +233,8 @@
                     url:"../oldPeople/findShi",
                     data:{"provinceid":val},
                     dataType:"json",
+                    async:false,
                     success: function(data) {
-                        console.log(data)
                         vm.shilist=data
                     },
 
@@ -240,8 +246,8 @@
                     url:"../oldPeople/findXian",
                     data:{"cityid":val},
                     dataType:"json",
+                    async:false,
                     success: function(data) {
-                        console.log(data)
                         vm.xianlist=data
                     },
 
@@ -264,7 +270,6 @@ function  changeProduct(){
             data:"",
             dataType:"json",
             success: function(data) {
-                console.log(data)
                 vm.diqulist=data
             },
             error : function() {
@@ -368,30 +373,35 @@ function  changeProduct(){
             }
         })
     }
-    /*function update(ideaId){
-        $.ajax({
-            url:"../idea/findOne",
-            type:"post",
-            data:{"ideaId":ideaId},
-            success:function(data){
-                vs.idea=data;
-            },
-        });
-    }*/
     //修改回显
-    function findOne(id) {
+    function findOne(id,childrenId) {
+        $.ajax({
+            type:'post',
+            url:'../oldPeople/findChildren',
+            data:{userid: childrenId},
+            dataType: 'json',
+            success: function (result) {
+                console.log(result)
+                vm.childrenlist=result;
+                vm.childrenId=result.userid;
 
+            },
+            error: function () {
+                alert("系统错误，请联系管理员！");
+            }
+        })
         $.ajax({
             type:'post',
             url:'../oldPeople/findOldPeopleById',
             data:{oldId: id},
             dataType: 'json',
             success: function (result) {
-               vm.storeCategory=result;
+                vm.storeCategory=result;
                 vm.shengId=result.shengId;
                 vm.shiId=result.shiId;
                 vm.xianId=result.xianId;
 
+                vm.childrenId=result.childrenId;
             },
             error: function () {
                 alert("系统错误，请联系管理员！");

@@ -29,7 +29,9 @@ public interface OldPeopleService {
     public void deleteEmp(@RequestParam Integer empId);
     @RequestMapping("findEmpById")
     public Emp findEmpById(@RequestParam Integer empId);
-    
+    //子女 WXL
+    @RequestMapping("findChildren")
+    public List<SysUser> findChildren(@RequestParam Integer userid);
     //员工绩效 WXL
     @RequestMapping("findPagePerformance")
     public PageResult findPagePerformance(@RequestParam(value = "currPage", defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize", defaultValue = "2") Integer pageSize, @RequestBody  Performance performance);
@@ -62,7 +64,6 @@ public interface OldPeopleService {
     public List<TbCities> findShi(@RequestParam String provinceid);
     @RequestMapping("findXian")
     public List<TbAreas> findXian(@RequestParam String cityid);
-
 
 
 }

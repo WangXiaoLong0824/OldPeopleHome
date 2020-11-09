@@ -1,9 +1,7 @@
 package com.jk.service;
 
 import com.jk.dao.UnderMapper;
-import com.jk.entity.Emp;
-import com.jk.entity.PageResult;
-import com.jk.entity.Under;
+import com.jk.entity.*;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -40,5 +38,15 @@ public class UnderServiceImpl implements UnderService{
     @Override
     public Under findUnderById(Integer underId) {
         return underMapper.findUnderById(underId);
+    }
+
+    @Override
+    public List<OldPeople> getOld() {
+        return underMapper.getOld();
+    }
+
+    @Override
+    public List<Room> getRoom() {
+        return underMapper.getRoom();
     }
 }

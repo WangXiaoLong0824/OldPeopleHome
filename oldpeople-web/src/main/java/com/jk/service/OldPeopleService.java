@@ -59,6 +59,11 @@ public interface OldPeopleService {
     public void deleteUnder(@RequestParam Integer underId);
     @RequestMapping("findUnderById")
     public Under findUnderById(@RequestParam Integer underId);
+
+    @RequestMapping("getOld")
+    public List<OldPeople> getOld();
+    @RequestMapping("getRoom")
+    public List<Room> getRoom();
    //地区 WXl
     @RequestMapping("getSheng")
     public List<TbProvinces> getSheng();

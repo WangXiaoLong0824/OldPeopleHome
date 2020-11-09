@@ -92,7 +92,7 @@
 
         <!-- 编辑窗口 -->
         <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog" id="ppa" style="margin-right: 2000px">
+            <div class="modal-dialog" id="ppa">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -119,11 +119,19 @@
                                 </tr>
                                 <tr>
                                     <td>老人姓名</td>
-                                    <td><input id="oldHobby" name="oldId" class="form-control" placeholder="老人姓名" v-model="storeCategory.oldId"></td>
+                                    <td>
+                                        <select class="form-control con1" name="oldId" v-model="oldId"  ><!--@change="changeProduct"-->
+                                            <option value="" disabled selected>请选择</option>
+                                            <option  v-for="old in oldlist" :value="old.oldId">{{old.oldName}}</option>
+                                        </select></td>
                                 </tr>
                                 <tr>
                                     <td>房间</td>
-                                    <td><input id="oldCard" name="roomId" class="form-control"  placeholder="房间" v-model="storeCategory.roomId" ></td>
+                                    <td>
+                                        <select class="form-control con1" name="roomId" v-model="roomId"  ><!--@change="changeProduct"-->
+                                            <option value="" disabled selected>请选择</option>
+                                            <option  v-for="room in roomlist" :value="room.roomId">{{room.roomName}}</option>
+                                        </select></td>
                                 </tr>
                                 <tr>
                                     <td>与老人的关系</td>
@@ -172,7 +180,11 @@
             diqulist:"",
             diquname:"",
             diquid:"",
-            storeCategory:""
+            storeCategory:"",
+            oldId:"",
+            oldlist:"",
+            roomId:"",
+            roomlist:""
         },
         methods: {
 
@@ -185,12 +197,47 @@
         }
 
     })
+    function  getOld(){
+        $.ajax({
+            type:"post",
+            url:"../under/getOld",
+            data:"",
+            dataType:"json",
+            success: function(data) {
+                console.log(data)
+
+
+                vm.oldlist=data
+            },
+            error : function() {
+                alert("系统错误，请联系管理员！");
+            }
+        })
+    }
+    function  getRoom(){
+        $.ajax({
+            type:"post",
+            url:"../under/getRoom",
+            data:"",
+            dataType:"json",
+            success: function(data) {
+                console.log(data)
+
+
+                vm.roomlist=data
+            },
+            error : function() {
+                alert("系统错误，请联系管理员！");
+            }
+        })
+    }
     function  changeProduct(){
 
     }
     $(function() {
         searchStoreCategoryList();
-
+        getOld();
+        getRoom();
     })
     function getSheng () {
         $.ajax({

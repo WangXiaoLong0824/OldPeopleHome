@@ -16,7 +16,7 @@ public class PeopleController {
     *   老人会员信息表分页
     * */
     @RequestMapping("/findPeople")
-    public PageResult findPeople(@RequestParam(value = "currPage",defaultValue = "2") Integer currPage, @RequestParam(value = "pageSize",defaultValue = "10") Integer pageSize, @RequestBody People people){
+    public PageResult findPeople(@RequestParam(value = "currPage",defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize",defaultValue = "10") Integer pageSize, @RequestBody People people){
             return peopleService.findPeople(currPage,pageSize,people);
         }
 

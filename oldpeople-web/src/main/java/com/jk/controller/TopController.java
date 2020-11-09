@@ -17,7 +17,7 @@ public class TopController {
 
     //预约线上信息表
     @RequestMapping("/findTop")
-    public PageResult findTop(@RequestParam Integer currPage, @RequestParam Integer pageSize,Top top){
+    public PageResult findTop(@RequestParam(value = "currPage",defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize",defaultValue = "10") Integer pageSize,Top top){
         return oldPeopleService.findTop(currPage,pageSize,top);
     }
     @RequestMapping("/addTop")

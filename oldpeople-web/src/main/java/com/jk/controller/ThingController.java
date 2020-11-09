@@ -16,7 +16,7 @@ public class ThingController {
     private OldPeopleService oldPeopleService;
     //员工请假详细信息表
     @RequestMapping("/findThing")
-    public PageResult findThing(@RequestParam Integer currPage, @RequestParam Integer pageSize, Thing thing){
+    public PageResult findThing(@RequestParam(value = "currPage",defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize",defaultValue = "10") Integer pageSize, Thing thing){
         return oldPeopleService.findThing(currPage,pageSize,thing);
     }
     @RequestMapping("/addThing")

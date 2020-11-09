@@ -10,7 +10,7 @@ public class IndexController {
     @RequestMapping("toBed")
     public  String toBed(){
 
-        return "bed";
+        return "bed/bed";
     }
     @RequestMapping("toLaoRenXinXi")
     public String toLaoRenXinXi(){

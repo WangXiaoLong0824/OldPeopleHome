@@ -27,4 +27,8 @@ public class IndexController {
     public String toOrder() {
         return "order/orderList";
     }
+    @RequestMapping("toHello")
+    public String toHello() {
+        return "hello/hello";
+    }
 }

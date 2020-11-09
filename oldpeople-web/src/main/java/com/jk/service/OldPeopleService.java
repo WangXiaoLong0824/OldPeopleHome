@@ -12,7 +12,7 @@ import java.util.List;
 public interface OldPeopleService {
     //老人基本信息  WXL
     @RequestMapping("findPageOldPeople")
-    public PageResult findPageOldPeople(@RequestParam(value = "currPage", defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize", defaultValue = "2") Integer pageSize, @RequestBody OldPeople oldPeople);
+    public PageResult findPageOldPeople(@RequestParam(value = "currPage", defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize, @RequestBody OldPeople oldPeople);
     @RequestMapping("addOldPeople")
     public void addOldPeople(@RequestBody OldPeople oldPeople);
     @RequestMapping("deleteOldPeople")
@@ -22,7 +22,7 @@ public interface OldPeopleService {
 
     //员工基本信息  WXL
     @RequestMapping("findPageEmp")
-    public PageResult findPageEmp(@RequestParam(value = "currPage", defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize", defaultValue = "2") Integer pageSize, @RequestBody  Emp emp);
+    public PageResult findPageEmp(@RequestParam(value = "currPage", defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize, @RequestBody  Emp emp);
     @RequestMapping("addEmp")
     public void addEmp(@RequestBody Emp emp);
     @RequestMapping("deleteEmp")
@@ -34,7 +34,7 @@ public interface OldPeopleService {
     public List<SysUser> findChildren(@RequestParam Integer userid);
     //员工绩效 WXL
     @RequestMapping("findPagePerformance")
-    public PageResult findPagePerformance(@RequestParam(value = "currPage", defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize", defaultValue = "2") Integer pageSize, @RequestBody  Performance performance);
+    public PageResult findPagePerformance(@RequestParam(value = "currPage", defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize, @RequestBody  Performance performance);
     @RequestMapping("addPerformance")
     public void addPerformance(@RequestBody Performance performance);
     @RequestMapping("deletePerformance")
@@ -50,7 +50,7 @@ public interface OldPeopleService {
 
     //线下访客登记 WXL
     @RequestMapping("findPageUnder")
-    public PageResult findPageUnder(@RequestParam(value = "currPage", defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize", defaultValue = "2") Integer pageSize, @RequestBody  Under under);
+    public PageResult findPageUnder(@RequestParam(value = "currPage", defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize, @RequestBody  Under under);
     @RequestMapping("addUnder")
     public void addUnder(@RequestBody Under under);
     @RequestMapping("deleteUnder")

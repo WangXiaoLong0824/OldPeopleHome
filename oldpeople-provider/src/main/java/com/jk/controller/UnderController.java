@@ -15,7 +15,7 @@ public class UnderController {
     @Resource
     private UnderService underService;
     @RequestMapping("findPageUnder")
-    public PageResult findPageUnder(@RequestParam(value = "currPage", defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize", defaultValue = "2") Integer pageSize, @RequestBody Under under){
+    public PageResult findPageUnder(@RequestParam(value = "currPage", defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize, @RequestBody Under under){
       return underService.findPageUnder(currPage,pageSize,under);
     }
     @RequestMapping("addUnder")

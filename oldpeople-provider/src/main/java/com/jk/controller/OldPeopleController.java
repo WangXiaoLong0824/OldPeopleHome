@@ -15,7 +15,7 @@ public class OldPeopleController {
     @Resource
     private OldPeopleService oldPeopleService;
     @RequestMapping("findPageOldPeople")
-    public PageResult findPageOldPeople(@RequestParam(value = "currPage", defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize", defaultValue = "2") Integer pageSize, @RequestBody OldPeople oldPeople){
+    public PageResult findPageOldPeople(@RequestParam(value = "currPage", defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize, @RequestBody OldPeople oldPeople){
         return oldPeopleService.findPageOldPeople(currPage,pageSize,oldPeople);
     }
     @RequestMapping("addOldPeople")

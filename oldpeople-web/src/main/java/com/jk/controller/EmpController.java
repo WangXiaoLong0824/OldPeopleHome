@@ -18,7 +18,7 @@ public class EmpController {
     @Resource
     private OldPeopleService oldPeopleService;
     @RequestMapping("findPageEmp")
-    public PageResult findPageEmp(@RequestParam(value = "currPage", defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize", defaultValue = "2") Integer pageSize, Emp emp){
+    public PageResult findPageEmp(@RequestParam(value = "currPage", defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize, Emp emp){
         return oldPeopleService.findPageEmp(currPage,pageSize,emp);
     }
     @RequestMapping("addEmp")

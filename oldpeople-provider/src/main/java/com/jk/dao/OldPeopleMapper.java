@@ -1,6 +1,6 @@
 package com.jk.dao;
 
-import com.jk.entity.OldPeople;
+import com.jk.entity.*;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -22,4 +22,12 @@ public interface OldPeopleMapper {
     OldPeople findOlePeopleById(Integer oldId);
     @Update("update t_oldpeople set old_name=#{oldName},old_age=#{oldAge},old_sex=#{oldSex},old_hobby=#{oldHobby},old_card=#{oldCard},old_phone=#{oldPhone},old_ill=#{oldIll},sheng_id=#{shengId},children_id=#{childrenId},shi_id=#{shiId},xian_id=#{xianId} where old_id=#{oldId}")
     void updateOldPeople(OldPeople oldPeople);
+    @Select("select * from tb_provinces")
+    List<TbProvinces> getSheng();
+    @Select("select * from tb_cities where provinceid=#{provinceid}")
+    List<TbCities> findShi(String provinceid);
+    @Select("select * from tb_areas where cityid=#{cityid}")
+    List<TbAreas> findXian(String cityid);
+    @Select("select * from t_user")
+    List<SysUser> findChildren(Integer userid);
 }

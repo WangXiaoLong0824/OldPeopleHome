@@ -20,6 +20,11 @@ public class IndexController {
     public String thing(){
         return "Thing/ThingList";
     }
+    //老人床位详细登记表
+    @RequestMapping("/bed")
+    public String bed(){
+        return "Bed/BedList";
+    }
     //线上预约表跳转
     @RequestMapping("/top")
     public String top(){
@@ -48,4 +53,39 @@ public class IndexController {
         return "order/orderList";
     }
 
+
+    @RequestMapping("toBed")
+    public  String toBed(){
+
+        return "bed/bed";
+    }
+    @RequestMapping("toLaoRenXinXi")
+    public String toLaoRenXinXi(){
+        return "laorenguanli/laorenxinxi";
+    }
+    @RequestMapping("toEmp")
+    public String toEmp(){
+        return "laorenguanli/emp";
+    }
+    @RequestMapping("toPerformance")
+    public String toPerformance(){
+        return "laorenguanli/performance";
+    }
+    @RequestMapping("toUnder")
+    public String toUnder(){
+        return "laorenguanli/under";
+    }
+
+    @RequestMapping("toDormList")
+    public String toDormList(){
+        return "dorm/DormList";
+    }
+
+    @RequestMapping("toCarefulList")
+    public String toCarefulList(){
+        return "careful/CarefulList";
+    }
+
+    @RequestMapping("toRoomList")
+    public String toRoomList(){ return "room/RoomList"; }
 }

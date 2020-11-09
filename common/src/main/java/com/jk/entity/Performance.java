@@ -9,4 +9,5 @@ public class Performance {
     private Integer performanceQuanQin;
     private Integer performanceLateTime;
     private Integer performanceEmpId;
+    private String empName;
 }

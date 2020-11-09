@@ -11,7 +11,7 @@
        </select>
     <select id="findPageEmp" resultType="Emp">
         <bind name="key_off" value="(currPage - 1)*pageSize"/>
-        select a.*,b.emple_name empleName,c.position_name positionName,e.province shengName,f.city shiName,g.area xianName from t_emp a , t_emple b,t_position c ,t_proence e ,t_city f, t_area g
+        select a.*,b.emple_name empleName,c.position_name empPositionName,e.province shengName,f.city shiName,g.area xianName from t_emp a , t_emple b,t_position c ,t_proence e ,t_city f, t_area g
         where a.emple_id = b.emple_id and
         a.emp_position = c.position_id and
         a.sheng_id = e.provinceid and

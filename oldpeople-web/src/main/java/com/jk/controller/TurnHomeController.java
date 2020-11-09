@@ -11,31 +11,30 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-@RequestMapping("turnHome")
 public class TurnHomeController {
 
     @Autowired
     private OldPeopleService turnHomeService;
 
-    @RequestMapping("findOutHome")
+    @RequestMapping("/findOutHome")
     public PageResult findTurnHome(@RequestParam(value="currPage",defaultValue="1") Integer currPage, @RequestParam(value="pageSize",defaultValue="10") Integer pageSize){
         return turnHomeService.findTurnHome(currPage,pageSize);
     }
 
 
-    @RequestMapping("addOutHome")
+    @RequestMapping("/addTurnHome")
     public String addOutHome(TurnHome turnHome){
         turnHomeService.addOutHome(turnHome);
         return "success";
     }
 
-    @RequestMapping("deleteOutHomeById")
+    @RequestMapping("/deleteOutHomeById")
     public String deleteOutHomeById(Integer oId){
         turnHomeService.deleteOutHomeById(oId);
         return "success";
     }
 
-    @RequestMapping("findOutHomeById")
+    @RequestMapping("/findOutHomeById")
     public TurnHome findOutHomeById(Integer oId){
         return turnHomeService.findOutHomeById(oId);
     }

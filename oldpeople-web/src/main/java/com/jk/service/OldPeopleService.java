@@ -59,7 +59,6 @@ public interface OldPeopleService {
     public Under findUnderById(@RequestParam Integer underId);
 
 
-<<<<<<< HEAD
     //床位信息 lmq
 
     @RequestMapping("findBed")
@@ -121,7 +120,7 @@ public interface OldPeopleService {
     public String deleteByRoomId(@RequestParam Integer roomId);
     @RequestMapping("findRoomById")
     public Room findRoomById(@RequestParam Integer roomId);
-=======
+
     //老人会员信息表 Changk
     @RequestMapping("/findPeople")
     public PageResult findPeople(@RequestParam Integer currPage, @RequestParam Integer pageSize, @RequestBody People people);
@@ -220,6 +219,6 @@ public interface OldPeopleService {
     @RequestMapping("selectRoomById")
     public RoomBean selectRoomById(@RequestParam Integer id);
 
->>>>>>> 1665bfe85afa8ab31c0b0d54ec25d351924a0705
+
 }
 

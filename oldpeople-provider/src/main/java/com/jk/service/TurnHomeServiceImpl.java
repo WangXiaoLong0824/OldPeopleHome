@@ -2,7 +2,7 @@ package com.jk.service;
 
 import com.jk.entity.PageResult;
 import com.jk.entity.TurnHome;
-import com.jk.mapper.TurnHomeMapper;
+import com.jk.dao.TurnHomeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

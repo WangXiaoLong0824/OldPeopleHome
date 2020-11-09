@@ -10,6 +10,7 @@ public class Bed {
     private Integer storeyId;
     private Integer roomId;
     private Integer personId;
+
     private String oldName;
     private String storeyName;
     private String roomName;

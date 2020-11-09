@@ -4,45 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-<<<<<<< HEAD
-@RequestMapping("index")
-public class IndexController {
-
-    @RequestMapping("toBed")
-    public  String toBed(){
-
-        return "bed/bed";
-    }
-    @RequestMapping("toLaoRenXinXi")
-    public String toLaoRenXinXi(){
-        return "laorenguanli/laorenxinxi";
-    }
-    @RequestMapping("toEmp")
-    public String toEmp(){
-        return "laorenguanli/emp";
-    }
-    @RequestMapping("toPerformance")
-    public String toPerformance(){
-        return "laorenguanli/performance";
-    }
-    @RequestMapping("toUnder")
-    public String toUnder(){
-        return "laorenguanli/under";
-    }
-
-    @RequestMapping("toDormList")
-    public String toDormList(){
-        return "dorm/DormList";
-    }
-
-    @RequestMapping("toCarefulList")
-    public String toCarefulList(){
-        return "careful/CarefulList";
-    }
-
-    @RequestMapping("toRoomList")
-    public String toRoomList(){ return "room/RoomList"; }
-=======
 public class IndexController {
     //老人会员页面跳转
     @RequestMapping("/people")
@@ -58,6 +19,11 @@ public class IndexController {
     @RequestMapping("/thing")
     public String thing(){
         return "Thing/ThingList";
+    }
+    //老人床位详细登记表
+    @RequestMapping("/bed")
+    public String bed(){
+        return "Bed/BedList";
     }
     //线上预约表跳转
     @RequestMapping("/top")
@@ -87,5 +53,35 @@ public class IndexController {
         return "order/orderList";
     }
 
->>>>>>> 1665bfe85afa8ab31c0b0d54ec25d351924a0705
+
+
+    @RequestMapping("toLaoRenXinXi")
+    public String toLaoRenXinXi(){
+        return "laorenguanli/laorenxinxi";
+    }
+    @RequestMapping("toEmp")
+    public String toEmp(){
+        return "laorenguanli/emp";
+    }
+    @RequestMapping("toPerformance")
+    public String toPerformance(){
+        return "laorenguanli/performance";
+    }
+    @RequestMapping("toUnder")
+    public String toUnder(){
+        return "laorenguanli/under";
+    }
+
+    @RequestMapping("toDormList")
+    public String toDormList(){
+        return "dorm/DormList";
+    }
+
+    @RequestMapping("toCarefulList")
+    public String toCarefulList(){
+        return "careful/CarefulList";
+    }
+
+    @RequestMapping("toRoomList")
+    public String toRoomList(){ return "room/RoomList"; }
 }

@@ -1,4 +1,4 @@
-package com.jk.mapper;
+package com.jk.dao;
 
 import com.jk.entity.TurnHome;
 import org.apache.ibatis.annotations.Mapper;

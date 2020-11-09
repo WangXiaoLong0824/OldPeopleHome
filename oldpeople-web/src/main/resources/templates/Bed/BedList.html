@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>vip</title>
+    <title>Bed</title>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -11,77 +11,72 @@
     <script src="https://cdn.bootcss.com/vuex/3.0.1/vuex.min.js"></script>
     <script src="../../js/bootstrap-paginator.js"></script>
 </head>
-<body style=" background:url(images/login_home_02.jpg)">
+<body>
 <div id="app" class="container">
-<!--
-    <button type="button" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal" onclick="update(0);"><i class="fa fa-file-o"></i> 新建</button>
--->
     <div class="page-header">
-        <h1>vip信息表
-            <small>(老人会员信息表)</small>
+        <h1>床位登记表
+            <small>(床位详细信息)</small>
         </h1>
     </div>
-    <div class="form-group">
-        <label for="peopleName" class="col-sm-1 control-label">名称:</label>
-        <div class="col-sm-2">
-            <input type="text" class="form-control" id="peopleName" v-model="peopleName" placeholder="请输入名字">
-        </div>
-    </div>
-    <button type="button" class="btn-info" v-on:click="searchArticleList()">搜索</button></td>
-
-
     <table class="table table-hover">
         <tr class = 'tab_tit'>
-            <th class="active">
-                <span class="glyphicon glyphicon-chevron-up" style="color: rgb(255, 140, 60);">会员id</span>
-            </th>
-            <th class="active">
-                <span class="glyphicon glyphicon-user" style="color: rgb(255, 140, 60);">会员姓名</span>
-            </th>
+            <th class="active">ID</th>
+            <th class="active">老人姓名</th>
+            <th class="active">是否打扫</th>
+            <th class="active">楼层</th>
+            <th class="active">房间号</th>
+            <th class="active">负责人</th>
             <th class="active">
                 <span class="glyphicon glyphicon-cog" style="color: rgb(255, 140, 60);">操作</span>
             </th>
         </tr>
-        <tr v-for="people in peopleList" id = 'ifrTab1' data-row-style="rowStyle" >
-            <td>{{people.peopleId}}</td>
-            <td>{{people.peopleName}}</td>
-            <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal" style="margin-right:15px;" v-on:click="del(people.peopleId)">删除</button>
-<!--
-                <button type="button" class="RoleOfdelete btn btn-primary  btn-sm" style="margin-right:15px;" data-toggle="modal" data-target="#editModal" v-on:click="update(home.homeId)">修改</button></td>
--->
+        <tr v-for="bed in bedList" id = 'ifrTab1' data-row-style="rowStyle" >
+            <td>{{bed.bedId}}</td>
+            <td>{{bed.oldName}}</td>
+            <td>{{bed.bedStatus==1?"已打扫":"未打扫"}}</td>
+            <td>{{bed.storeyName}}</td>
+            <td>{{bed.roomName}}</td>
+            <td>{{bed.personName}}</td>
+            <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal" style="margin-right:15px;" v-on:click="del(bed.bedId)">删除</button>
+                <button type="button" class="btn btn-info" style="margin-right:15px;" data-toggle="modal" data-target="#editModal" v-on:click="update(bed.bedId)">修改</button>
+                <!--<button type="button" class="btn btn-info" title="新建" data-toggle="modal" data-target="#editModal" onclick="update(0);"><i class="fa fa-file-o"></i> 新建</button>-->
+            </td>
         </tr>
     </table>
     <div id="example" style="text-align:center"><ul id="pageLimit"></ul></div>
 </div>
 
-<!--新增弹出框-->
-<!--<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" id="ppa">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h3 id="myModalLabel">留言信息</h3>
+                <h3 id="myModalLabel">床位登记表</h3>
             </div>
             <form id="forms" method="post">
                 <div class="modal-body">
                     <table class="table table-bordered table-striped"  width="800px">
-                        <input class="form-control" name="homeId" style="display:none" readonly="readonly" v-model="home.homeId">
+                        <input class="form-control" name="thingId" style="display:none" readonly="readonly" v-model="thing.thingId">
                         <tr>
-                            <td>老人姓名</td>
-                            <td><input class="form-control" type="text" name="oldName" placeholder="" v-model="home.oldName"></td>
+                            <td>请假原因</td>
+                            <select class="form-control con1" name="xianId" v-model="oldId"  ><!--@change="changeProduct"-->
+                                <option value="" disabled selected>请选择</option>
+                                <option  v-for="old in oldlist" :value="old.oldId">{{old.oldName}}</option>
+                            </select>
                         </tr>
                         <tr>
-                            <td>入住时间</td>
-                            <td><input class="form-control" type="date" name="createtime" placeholder="" v-model="home.createtime"></td>
+                            <td>请假时间</td>
+                            <td><input class="form-control" type="date" name="thingTime" placeholder="请输入" v-model="thing.thingTime"></td>
                         </tr>
                         <tr>
-                            <td>入住地点</td>
-                            <td><input class="form-control" type="text" name="homeAddress" placeholder="" v-model="home.homeAddress"></td>
+                            <td>回来时间</td>
+                            <td><input class="form-control" type="date" name="thingCometime" placeholder="请输入" v-model="thing.thingCometime"></td>
                         </tr>
                         <tr>
-                            <td>是否外出</td>
-                            <td><input type="radio" name="homeOut" v-model="home.homeOut" value="1">是
-                                <input type="radio" name="homeOut" v-model="home.homeOut" value="2">否</td>
+                            <td>员工姓名</td>
+                            <td>
+                                <input class="form-control" type="text" name="cname" placeholder="请输入" v-model="thing.cname">
+                            </td>
                         </tr>
                     </table>
                 </div>
@@ -92,32 +87,53 @@
             </form>
         </div>
     </div>
-</div>-->
+</div>
 <script type="text/javascript">
     var vm = new Vue({
         el: '#app',
         data: {
-            peopleList: "",
+            bedList: "",
             totalPage:"",
             total:"",
             currPage:"",
             pageSize:"",
-            peopleName:""
+            oldlist:"",
+            oldId:""
+
         }
     })
 
     $(function() {
         searchArticleList();
+        getOld();
     })
+
+    function  getOld(){
+        $.ajax({
+            type:"post",
+            url:"../under/getOld",
+            data:"",
+            dataType:"json",
+            success: function(data) {
+                console.log(data)
+
+
+                vm.oldlist=data
+            },
+            error : function() {
+                alert("系统错误，请联系管理员！");
+            }
+        })
+    }
     //分页查询数据
     function searchArticleList(){
         $.ajax({
             type:"get",
-            url:"/findPeople",
-            data:{"currPage":vm.currPage,"pageSize":vm.pageSize,"peopleName":vm.peopleName},
+            url:"/findBed",
+            data:{"currPage":vm.currPage,"pageSize":vm.pageSize},
             dataType:"json",
             success: function(result) {
-                vm.peopleList = result.rows;
+                vm.bedList = result.rows;
                 vm.totalPage = result.totalPage;
                 vm.total = result.total;
                 vm.currPage = result.currPage;
@@ -154,13 +170,13 @@
         });
     }
     //单删
-    function del(ids){
+    function del(bedId){
         var abc=confirm("您确定删除这条信息吗");
         if (abc){
             $.ajax({
-                url:'/delOne',
+                url:'/deleteBedById',
                 type:'post',
-                data:{"ids":ids},
+                data:{"bedId":bedId},
                 dataType:"json",
                 success:function(result){
 
@@ -174,31 +190,31 @@
     var vs = new Vue({
         el: '#ppa',
         data: {
-            home:''
+            bed:''
         }
     })
 
-    /*function insert(){//新增数据
+    function insert(){//新增数据
         $.ajax({
-            url:'../home/addHome',
+            url:'/addBed',
             type:'post',
             data:$('#forms').serialize(),
             success:function(){
                 searchArticleList();
             }
         })
-    }*/
+    }
 
-   /* function update(ids){//回显数据
+    function update(bedId){//回显数据
         $.ajax({
-            url:"../home/selectHomeById",
+            url:"/findBedById",
             type:"post",
-            data:{"id":id},
+            data:{"bedId":bedId},
             success:function(data){
-                vs.home=data;
+                vs.bed=data;
             },
         });
-    }*/
+    }
 </script>
 <!--底部内容-->
 <div class="jumbotron text-center" style="margin-bottom:0px">

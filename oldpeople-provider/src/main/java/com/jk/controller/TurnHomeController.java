@@ -21,7 +21,7 @@ public class TurnHomeController {
     }
 
 
-    @RequestMapping("addOutHome")
+    @RequestMapping("addTurnHome")
     public String addOutHome(@RequestBody TurnHome turnHome){
         turnHomeService.addOutHome(turnHome);
         return "success";

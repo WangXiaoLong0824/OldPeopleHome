@@ -11,30 +11,28 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("Bed")
 public class BedController {
 
     @Autowired
     private OldPeopleService bedService;
 
-    @RequestMapping("findBed")
-
+    @RequestMapping("/findBed")
     public PageResult findBed(@RequestParam(value="currPage",defaultValue="1") Integer currPage, @RequestParam(value="pageSize",defaultValue="10") Integer pageSize,Bed bed){
         return bedService.findBed(currPage,pageSize,bed);
     }
 
 
-    @RequestMapping("addBed")
+    @RequestMapping("/addBed")
     public void addBed(Bed bed){
         bedService.addBed(bed);
     }
 
-    @RequestMapping("deleteBedById")
+    @RequestMapping("/deleteBedById")
     public void deleteBedById(Integer bedId){
         bedService.deleteBedById(bedId);
     }
 
-    @RequestMapping("findBedById")
+    @RequestMapping("/findBedById")
     public Bed findBedById(Integer bedId){
         return bedService.findBedById(bedId);
     }

@@ -19,7 +19,7 @@ public class TopController {
     *   预约线上表分页 查询
     * */
     @RequestMapping("/findTop")
-    public PageResult findTop(@RequestParam Integer currPage, @RequestParam Integer pageSize, @RequestBody Top top){
+    public PageResult findTop(@RequestParam(value = "currPage",defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize",defaultValue = "10") Integer pageSize, @RequestBody Top top){
         return topService.findTop(currPage,pageSize,top);
     }
     /*
@@ -28,5 +28,12 @@ public class TopController {
     @RequestMapping("/addTop")
     public void addTop(@RequestBody Top top){
         topService.addTop(top);
+    }
+    /*
+    *   删除
+    * */
+    @RequestMapping("/delTop")
+    public void delTop(@RequestParam Integer ids){
+        topService.delTop(ids);
     }
 }

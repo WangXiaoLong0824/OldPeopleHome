@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Leave</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7/dist/css/bootstrap.css}">
+    <script th:src="@{/webjars/jquery/3.5.1/dist/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/3.3.7/dist/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" src="../web/js/vue.min.js"></script>
+    <script type="text/javascript" src="../bootstrap/bootstrap-paginator.js"></script>
+</head>
+<body>
+<div id="app" class="container">
+    <div class="page-header">
+        <h1>请假登记表
+            <small>(员工请假详细信息)</small>
+        </h1>
+    </div>
+    <div class="form-group">
+        <label for="cname" class="col-sm-1 control-label">名称:</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control" id="cname" v-model="cname" placeholder="请输入名字">
+        </div>
+    </div>
+    <button type="button" class="btn-info" v-on:click="searchArticleList()">搜索</button></td>
+
+
+    <table class="table table-hover">
+        <tr class = 'tab_tit'>
+            <th class="active">ID</th>
+            <th class="active">请假原因</th>
+            <th class="active">请假时间</th>
+            <th class="active">回来时间</th>
+            <th class="active">员工姓名</th>
+            <th class="active">
+                <span class="glyphicon glyphicon-cog" style="color: rgb(255, 140, 60);">操作</span>
+            </th>
+        </tr>
+        <tr v-for="thing in thingList" id = 'ifrTab1' data-row-style="rowStyle" >
+            <td>{{thing.thingId}}</td>
+            <td>{{thing.thingBecause}}</td>
+            <td>{{thing.thingTime}}</td>
+            <td>{{thing.thingCometime}}</td>
+            <td>{{thing.cname}}</td>
+            <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal" style="margin-right:15px;" v-on:click="del(thing.thingId)">删除</button>
+                <button type="button" class="btn btn-info" style="margin-right:15px;" data-toggle="modal" data-target="#editModal" v-on:click="update(thing.thingId)">修改</button>
+                <button type="button" class="btn btn-info" title="新建" data-toggle="modal" data-target="#editModal" onclick="update(0);"><i class="fa fa-file-o"></i> 新建</button>
+            </td>
+        </tr>
+    </table>
+    <div id="example" style="text-align:center"><ul id="pageLimit"></ul></div>
+</div>
+
+<!--新增弹出框-->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" id="ppa">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">请假登记表</h3>
+            </div>
+            <form id="forms" method="post">
+                <div class="modal-body">
+                    <table class="table table-bordered table-striped"  width="800px">
+                        <input class="form-control" name="thingId" style="display:none" readonly="readonly" v-model="thing.thingId">
+                        <tr>
+                            <td>请假原因</td>
+                            <td><input class="form-control" type="text" name="thingBecause" placeholder="请输入" v-model="thing.thingBecause"></td>
+                        </tr>
+                        <tr>
+                            <td>请假时间</td>
+                            <td><input class="form-control" type="date" name="thingTime" placeholder="请输入" v-model="thing.thingTime"></td>
+                        </tr>
+                        <tr>
+                            <td>回来时间</td>
+                            <td><input class="form-control" type="date" name="thingCometime" placeholder="请输入" v-model="thing.thingCometime"></td>
+                        </tr>
+                        <tr>
+                            <td>员工姓名</td>
+                            <td>
+                                <input class="form-control" type="text" name="cname" placeholder="请输入" v-model="thing.cname">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" onclick="insert()">保存</button>
+                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            thingList: "",
+            totalPage:"",
+            total:"",
+            currPage:"",
+            pageSize:"",
+            cname:""
+        }
+    })
+
+    $(function() {
+        searchArticleList();
+    })
+    //分页查询数据
+    function searchArticleList(){
+        $.ajax({
+            type:"get",
+            url:"/findThing",
+            data:{"currPage":vm.currPage,"pageSize":vm.pageSize,"cname":vm.cname},
+            dataType:"json",
+            success: function(result) {
+                vm.thingList = result.rows;
+                vm.totalPage = result.totalPage;
+                vm.total = result.total;
+                vm.currPage = result.currPage;
+                vm.pageSize = result.pageSize;
+                setPage(result.currPage,result.totalPage,result.pageSize,searchArticleList);
+            },
+            error : function() {
+                alert("系统错误，请联系管理员！");
+            }
+        })
+    }
+
+    function setPage(pageCurrent,pageSum,pageSize,callback){
+        $('#pageLimit').bootstrapPaginator({
+            currentPage:pageCurrent,
+            totalPages:pageSum,
+            size:"normal",
+            bootstrapMajorVersion:3,
+            alignment:"right",
+            numberOfPages:pageSize,
+            itemTexts:function(type,page,current){
+                switch(type){
+                    case "first" : return "首页";
+                    case "prev" : return "上一页";
+                    case "next" : return "下一页";
+                    case "last" : return "末页";
+                    case "page" : return page;
+                }
+            },
+            onPageClicked: function(event,originalEvent,type,page){
+                vm.currPage = page;
+                callback && callback()
+            }
+        });
+    }
+    //单删
+    function del(ids){
+        var abc=confirm("您确定删除这条信息吗");
+        if (abc){
+            $.ajax({
+                url:'/delThing',
+                type:'post',
+                data:{"ids":ids},
+                dataType:"json",
+                success:function(result){
+
+                }
+            })
+            alert("删除成功");
+            searchArticleList();
+        }
+    }
+
+    var vs = new Vue({
+        el: '#ppa',
+        data: {
+            thing:''
+        }
+    })
+
+    function insert(){//新增数据
+        $.ajax({
+            url:'/addThing',
+            type:'post',
+            data:$('#forms').serialize(),
+            success:function(){
+                searchArticleList();
+            }
+        })
+    }
+
+    function update(ids){//回显数据
+        $.ajax({
+            url:"/oneThing",
+            type:"post",
+            data:{"ids":ids},
+            success:function(data){
+                vs.thing=data;
+            },
+        });
+    }
+</script>
+<!--底部内容-->
+<div class="jumbotron text-center" style="margin-bottom:0px">
+    <p>©2020 Baidu&nbsp;&nbsp;(京)-经营性-2017-0020&nbsp;&nbsp;京公网安备11000002000001号&nbsp;&nbsp;京ICP证030173号</p>
+</div>
+</body>
+</html>

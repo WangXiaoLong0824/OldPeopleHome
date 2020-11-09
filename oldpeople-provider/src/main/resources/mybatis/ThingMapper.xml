@@ -7,16 +7,13 @@
     <result column="thing_time" property="thingTime" jdbcType="VARCHAR" />
     <result column="thing_cometime" property="thingCometime" jdbcType="VARCHAR" />
     <result column="emp_id" property="empId" jdbcType="INTEGER" />
-    <result column="thing_name" property="thingName" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    thing_id, thing_because, thing_time, thing_cometime, emp_id, thing_name
+    thing_id, thing_because, thing_time, thing_cometime, emp_id
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from t_thing
-    where thing_id = #{thingId,jdbcType=INTEGER}
+    select a.*,b.emp_name cname from t_thing a left join t_emp b on a.emp_id=b.emp_id
+    where a.thing_id = #{ids}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_thing
@@ -24,10 +21,10 @@
   </delete>
   <insert id="insert" parameterType="com.jk.entity.Thing" >
     insert into t_thing (thing_id, thing_because, thing_time, 
-      thing_cometime, emp_id, thing_name
+      thing_cometime, emp_id
       )
     values (#{thingId,jdbcType=INTEGER}, #{thingBecause,jdbcType=VARCHAR}, #{thingTime,jdbcType=VARCHAR}, 
-      #{thingCometime,jdbcType=VARCHAR}, #{empId,jdbcType=INTEGER}, #{thingName,jdbcType=VARCHAR}
+      #{thingCometime,jdbcType=VARCHAR}, #{empId,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.jk.entity.Thing" >
@@ -48,9 +45,6 @@
       <if test="empId != null" >
         emp_id,
       </if>
-      <if test="thingName != null" >
-        thing_name,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="thingId != null" >
@@ -67,9 +61,6 @@
       </if>
       <if test="empId != null" >
         #{empId,jdbcType=INTEGER},
-      </if>
-      <if test="thingName != null" >
-        #{thingName,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -88,9 +79,6 @@
       <if test="empId != null" >
         emp_id = #{empId,jdbcType=INTEGER},
       </if>
-      <if test="thingName != null" >
-        thing_name = #{thingName,jdbcType=VARCHAR},
-      </if>
     </set>
     where thing_id = #{thingId,jdbcType=INTEGER}
   </update>
@@ -100,18 +88,29 @@
       thing_time = #{thingTime,jdbcType=VARCHAR},
       thing_cometime = #{thingCometime,jdbcType=VARCHAR},
       emp_id = #{empId,jdbcType=INTEGER},
-      thing_name = #{thingName,jdbcType=VARCHAR}
     where thing_id = #{thingId,jdbcType=INTEGER}
   </update>
 
     <!--统计总条数-->
     <select id="count" resultType="java.lang.Long">
-      select count(*) from t_thing
+      select count(*) from t_thing a left join t_emp b on a.emp_id=b.emp_id
+      <include refid="souThing"></include>
     </select>
 
     <!--查询所有数据-->
     <select id="findThing" resultMap="BaseResultMap">
       <bind name="key_info" value="(currPage-1)*pageSize"/>
-      select * from t_thing limit #{key_info},#{pageSize}
+      select a.*,b.emp_name cname from t_thing a left join t_emp b on a.emp_id=b.emp_id
+      <include refid="souThing"></include>
+      limit #{key_info},#{pageSize}
     </select>
+
+  <!--名字模糊查询-->
+  <sql id="souThing">
+    <where>
+      <if test="thing.cname!=null and thing.cname!=''">
+        and b.emp_name like '%${thing.cname}%'
+      </if>
+    </where>
+  </sql>
 </mapper>

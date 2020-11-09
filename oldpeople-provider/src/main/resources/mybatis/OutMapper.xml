@@ -107,11 +107,23 @@
     <!--统计总条数-->
     <select id="count" resultType="java.lang.Long">
       select count(*) from t_out
+      <include refid="souOut"></include>
     </select>
 
     <!--查询所有数据-->
     <select id="findOut" resultMap="BaseResultMap">
-      <bind name="key_info" value="(currPgae-1)*pageSize"/>
-      select * from t_out limit #{key_info},#{pageSize}
+      <bind name="key_info" value="(currPage-1)*pageSize"/>
+      select * from t_out
+      <include refid="souOut"></include>
+      limit #{key_info},#{pageSize}
     </select>
+
+<!--名字模糊查询-->
+    <sql id="souOut">
+    <where>
+      <if test="out.outName!=null and out.outName!=''">
+        and out_name like '%${out.outName}%'
+      </if>
+    </where>
+  </sql>
 </mapper>

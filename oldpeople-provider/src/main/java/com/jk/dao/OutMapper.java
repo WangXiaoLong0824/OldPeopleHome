@@ -22,9 +22,9 @@ public interface OutMapper {
     /*
     *   统计总条数
     * */
-    long count(@Param("out") Out out);
+    long count(@Param("out")Out out);
     /*
     *   查询老人外出所有信息
     * */
-    List<Out> findOut(@Param("currPage") Integer currPage, @Param("pageSize") Integer pageSize,@Param("out") Out out);
+    List<Out> findOut(@Param("currPage")Integer currPage, @Param("pageSize")Integer pageSize,@Param("out") Out out);
 }

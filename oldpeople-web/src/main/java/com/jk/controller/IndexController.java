@@ -10,6 +10,21 @@ public class IndexController {
     public String find() {
         return "People/vip";
     }
+    //老人外出登记页面跳转
+    @RequestMapping("/out")
+    public String out(){
+        return "Out/OutList";
+    }
+    //员工请假详细信息表
+    @RequestMapping("/thing")
+    public String thing(){
+        return "Thing/ThingList";
+    }
+    //线上预约表跳转
+    @RequestMapping("/top")
+    public String top(){
+        return "Top/TopList";
+    }
     //t_home
     @RequestMapping("toHome")
     public String tohome() {

@@ -19,7 +19,7 @@ public class ThingController {
     *   员工请假表信息
     * */
     @RequestMapping("/findThing")
-    public PageResult findThing(@RequestParam Integer currPage, @RequestParam Integer pageSize, @RequestBody Thing thing){
+    public PageResult findThing(@RequestParam(value = "currPage",defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize",defaultValue = "10") Integer pageSize, @RequestBody Thing thing){
         return thingService.findThing(currPage,pageSize,thing);
     }
     /*

@@ -19,7 +19,7 @@ public class OutController {
     *  老人外出登记详细信息分页展示
     * */
     @RequestMapping("/findOut")
-    public PageResult findOut(@RequestParam Integer currPage, @RequestParam Integer pageSize, @RequestBody Out out){
+    public PageResult findOut(@RequestParam(value = "currPage",defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize",defaultValue = "10") Integer pageSize, @RequestBody Out out){
         return outService.findOut(currPage,pageSize,out);
     }
     /*

@@ -61,7 +61,7 @@ public interface OldPeopleService {
 
     //老人外出登记表 Changk
     @RequestMapping("/findOut")
-    public PageResult findOut(@RequestParam Integer currPage, @RequestParam Integer pageSize, @RequestBody Out out);
+    public PageResult findOut(@RequestParam(value = "currPage",defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize",defaultValue = "10") Integer pageSize, @RequestBody Out out);
     @RequestMapping("/addOut")
     public void addOut(@RequestBody Out out);
     @RequestMapping("/oneOut")
@@ -71,7 +71,7 @@ public interface OldPeopleService {
 
     //员工请假详细信息表 Changk
     @RequestMapping("/findThing")
-    public PageResult findThing(@RequestParam Integer currPage, @RequestParam Integer pageSize, @RequestBody Thing thing);
+    public PageResult findThing(@RequestParam(value = "currPage",defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize",defaultValue = "10") Integer pageSize, @RequestBody Thing thing);
     @RequestMapping("/addThing")
     public void addThing(@RequestBody Thing thing);
     @RequestMapping("/delThing")
@@ -84,6 +84,8 @@ public interface OldPeopleService {
     public PageResult findTop(@RequestParam Integer currPage, @RequestParam Integer pageSize, @RequestBody Top top);
     @RequestMapping("/addTop")
     public void addTop(@RequestBody Top top);
+    @RequestMapping("/delTop")
+    public void delTop(@RequestParam Integer ids);
 
     //老人入住信息表 t_hoom wkp
     @RequestMapping("findHomeList")
@@ -145,5 +147,5 @@ public interface OldPeopleService {
     @RequestMapping("selectRoomById")
     public RoomBean selectRoomById(@RequestParam Integer id);
 
-    }
+}
 

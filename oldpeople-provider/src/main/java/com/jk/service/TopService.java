@@ -12,4 +12,8 @@ public interface TopService {
      *   预约线上表新增
      * */
     void addTop(Top top);
+    /*
+    *   删除
+    * */
+    void delTop(Integer ids);
 }

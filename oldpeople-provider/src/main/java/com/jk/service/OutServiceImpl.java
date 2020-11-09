@@ -20,7 +20,7 @@ public class OutServiceImpl implements OutService{
     public PageResult findOut(Integer currPage, Integer pageSize, Out out) {
         long total=outMapper.count(out);
         List<Out>list=outMapper.findOut(currPage,pageSize,out);
-        Long totalPage=total%pageSize==1?total/pageSize:(total/pageSize+1);
+        Long totalPage=total%pageSize==1? total/pageSize : (total/pageSize+1);
         return new PageResult(total,list,currPage,pageSize,totalPage);
     }
     /*

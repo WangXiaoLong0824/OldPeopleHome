@@ -29,4 +29,11 @@ public class TopServiceImp implements TopService{
     public void addTop(Top top) {
         topMapper.insert(top);
     }
+    /*
+    *   删除
+    * */
+    @Override
+    public void delTop(Integer ids) {
+        topMapper.deleteByPrimaryKey(ids);
+    }
 }

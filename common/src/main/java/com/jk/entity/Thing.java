@@ -14,5 +14,6 @@ public class Thing {
 
     private Integer empId;
 
-    private String thingName;
+    //员工姓名
+    private String cname;
 }

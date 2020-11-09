@@ -16,7 +16,7 @@ public class PeopleController {
     private OldPeopleService oldPeopleService;
 
     @RequestMapping("/findPeople")
-    public PageResult findPeople(@RequestParam Integer currPage, @RequestParam Integer pageSize,People people){
+    public PageResult findPeople(@RequestParam(value = "currPage",defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize",defaultValue = "10") Integer pageSize,People people){
         return oldPeopleService.findPeople(currPage,pageSize,people);
     }
     @RequestMapping("/addPeople")

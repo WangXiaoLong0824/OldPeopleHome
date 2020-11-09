@@ -12,4 +12,33 @@ public class IndexController {
 
         return "bed";
     }
+    @RequestMapping("toLaoRenXinXi")
+    public String toLaoRenXinXi(){
+        return "laorenguanli/laorenxinxi";
+    }
+    @RequestMapping("toEmp")
+    public String toEmp(){
+        return "laorenguanli/emp";
+    }
+    @RequestMapping("toPerformance")
+    public String toPerformance(){
+        return "laorenguanli/performance";
+    }
+    @RequestMapping("toUnder")
+    public String toUnder(){
+        return "laorenguanli/under";
+    }
+
+    @RequestMapping("toDormList")
+    public String toDormList(){
+        return "dorm/DormList";
+    }
+
+    @RequestMapping("toCarefulList")
+    public String toCarefulList(){
+        return "careful/CarefulList";
+    }
+
+    @RequestMapping("toRoomList")
+    public String toRoomList(){ return "room/RoomList"; }
 }

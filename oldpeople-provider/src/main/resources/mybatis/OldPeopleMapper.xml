@@ -13,7 +13,7 @@
        </select>
     <select id="findPageOldPeople" resultType="OldPeople">
         <bind name="key_off" value="(currPage - 1)*pageSize"/>
-        select told.*,tp.province sheng,tc.city shi,ta.area xian,tu.user_name childrenName from t_oldpeople told,t_proence tp, t_city tc, t_area ta ,t_user tu
+        select told.*,tp.province shengName,tc.city shiName,ta.area xianName,tu.user_name childrenName from t_oldpeople told,t_proence tp, t_city tc, t_area ta ,t_user tu
         where told.sheng_id = tp.provinceid and
         told.shi_id = tc.cityid and
         told.xian_id = ta.areaid and

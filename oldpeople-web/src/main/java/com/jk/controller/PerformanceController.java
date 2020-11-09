@@ -28,7 +28,7 @@ public class PerformanceController {
         oldPeopleService.deletePerformance(performanceId);
     }
     @RequestMapping("findPerformanceById")
-    public Emp findPerformanceById(Integer performanceId){
+    public Performance findPerformanceById(Integer performanceId){
         return oldPeopleService.findPerformanceById(performanceId);
     }
 }

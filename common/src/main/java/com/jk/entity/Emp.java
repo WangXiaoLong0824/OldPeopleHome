@@ -21,6 +21,6 @@ public class Emp {
     private String empPositionName;
     private String empleName;
     private String shengName;
-    private String shiNanme;
+    private String shiName;
     private String xianName;
 }

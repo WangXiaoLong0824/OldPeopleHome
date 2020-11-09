@@ -31,6 +31,10 @@ public class ShiroController {
     public String toMain() {
         return "main";
     }
+    @RequestMapping("toEcharts")
+    public String toEcharts() {
+        return "echarts";
+    }
     @RequestMapping("login")
     @ResponseBody
     public String login(SysUser user) {

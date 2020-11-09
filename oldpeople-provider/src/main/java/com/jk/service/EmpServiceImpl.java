@@ -2,7 +2,9 @@ package com.jk.service;
 
 import com.jk.dao.EmpMapper;
 import com.jk.entity.Emp;
+import com.jk.entity.Emple;
 import com.jk.entity.PageResult;
+import com.jk.entity.Position;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -37,5 +39,15 @@ public class EmpServiceImpl implements EmpService {
     @Override
     public Emp findEmpById(Integer empId) {
         return empMapper.findEmpById(empId);
+    }
+
+    @Override
+    public List<Emple> getEmple() {
+        return empMapper.getEmple();
+    }
+
+    @Override
+    public List<Position> getPosition(Integer empleId) {
+        return empMapper.getPosition(empleId);
     }
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.CarefulMapper">
+
+    <select id="findCarefulCount" parameterType="Careful" resultType="java.lang.Long">
+        select count(*) from t_careful c
+        LEFT JOIN t_oldpeople o on c.old_id=o.old_id where 1=1
+        <include refid="mysql"></include>
+    </select>
+
+    <select id="findCarefulPage" resultType="Careful">
+        <bind name="key_off" value="(currPage - 1)*pageSize"/>
+        select c.*,o.old_name oldManName from t_careful c
+        LEFT JOIN t_oldpeople o on c.old_id=o.old_id where 1=1
+        <include refid="mysql"></include>
+        limit ${key_off},${pageSize}
+    </select>
+
+    <sql id="mysql">
+        <if test="careFul.oldManName != null and careFul.oldManName != ''">
+            and o.old_name like '%${careFul.oldManName}%'
+        </if>
+    </sql>
+    
+    <insert id="addCareful" parameterType="Careful">
+        insert into t_careful(careful_sum,careful_care,careful_room,careful_left,careful_type,old_id) values(#{carefulSum},#{carefulCare},#{carefulRoom},#{carefulLeft},#{carefulType},#{oldId})
+    </insert>
+
+    <update id="updateCareful" parameterType="Careful">
+        update t_careful set careful_sum=#{carefulSum},careful_care=#{carefulCare},careful_room=#{carefulRoom},careful_left=#{carefulLeft},careful_type=#{carefulType},old_id=#{oldId} where careful_id=#{carefulId}
+    </update>
+
+    <delete id="deleteCarefulById" parameterType="int">
+        delete from t_careful where careful_id=#{carefulId}
+    </delete>
+
+    <select id="findCarefulById" parameterType="int" resultType="Careful">
+        select * from t_careful where careful_id=#{carefulId}
+    </select>
+</mapper>

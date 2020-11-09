@@ -1,7 +1,9 @@
 package com.jk.controller;
 
 import com.jk.entity.Emp;
+import com.jk.entity.Emple;
 import com.jk.entity.PageResult;
+import com.jk.entity.Position;
 import com.jk.service.EmpService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 public class EmpController {
@@ -29,5 +32,13 @@ public class EmpController {
     @RequestMapping("findEmpById")
     public Emp findEmpById(@RequestParam Integer empId){
         return empService.findEmpById(empId);
+    }
+    @RequestMapping("getEmple")
+    public List<Emple> getEmple(){
+        return empService.getEmple();
+    }
+    @RequestMapping("getPosition")
+    public List<Position> getPosition(@RequestParam Integer empleId){
+        return  empService.getPosition(empleId);
     }
 }

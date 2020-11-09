@@ -30,6 +30,11 @@ public class IndexController {
     public String top(){
         return "Top/TopList";
     }
+    //转房详细登记表
+    @RequestMapping("/turn")
+    public String turn(){
+        return "TurnHome/TurnHomeList";
+    }
     //t_home
     @RequestMapping("toHome")
     public String tohome() {

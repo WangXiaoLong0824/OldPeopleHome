@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+<<<<<<< HEAD
 @RequestMapping("index")
 public class IndexController {
 
@@ -41,4 +42,50 @@ public class IndexController {
 
     @RequestMapping("toRoomList")
     public String toRoomList(){ return "room/RoomList"; }
+=======
+public class IndexController {
+    //老人会员页面跳转
+    @RequestMapping("/people")
+    public String find() {
+        return "People/vip";
+    }
+    //老人外出登记页面跳转
+    @RequestMapping("/out")
+    public String out(){
+        return "Out/OutList";
+    }
+    //员工请假详细信息表
+    @RequestMapping("/thing")
+    public String thing(){
+        return "Thing/ThingList";
+    }
+    //线上预约表跳转
+    @RequestMapping("/top")
+    public String top(){
+        return "Top/TopList";
+    }
+    //t_home
+    @RequestMapping("toHome")
+    public String tohome() {
+        return "home/hoomList";
+    }
+
+    //t_outhomt
+    @RequestMapping("toOuthome")
+    public String toOuthome() {
+        return "outHome/outHomeLIst";
+    }
+
+    //t_leave
+    @RequestMapping("toLeave")
+    public String toLeave() {
+        return "leave/leaveList";
+    }
+    //t_order
+    @RequestMapping("toOrder")
+    public String toOrder() {
+        return "order/orderList";
+    }
+
+>>>>>>> 1665bfe85afa8ab31c0b0d54ec25d351924a0705
 }

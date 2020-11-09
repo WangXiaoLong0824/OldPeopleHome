@@ -15,7 +15,6 @@ public interface TurnHomeMapper {
 
     Long findTurnHomeCount();
 
-
     void addOutHome(TurnHome turnHome);
 
     void updateOutHome(TurnHome turnHome);
@@ -23,4 +22,5 @@ public interface TurnHomeMapper {
     void deleteOutHomeById(Integer oId);
 
     TurnHome findOutHomeById(Integer oId);
+
 }

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.TopMapper" >
+  <resultMap id="BaseResultMap" type="com.jk.entity.Top" >
+    <id column="top_id" property="topId" jdbcType="INTEGER" />
+    <result column="top_name" property="topName" jdbcType="VARCHAR" />
+    <result column="top_tell" property="topTell" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="storey_time" property="storeyTime" jdbcType="VARCHAR" />
+    <result column="storey_id" property="storeyId" jdbcType="INTEGER" />
+    <result column="room_id" property="roomId" jdbcType="INTEGER" />
+    <result column="top_status" property="topStatus" jdbcType="INTEGER" />
+    <result column="emp_id" property="empId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    top_id, top_name, top_tell, create_time, storey_time, storey_id, room_id, top_status, 
+    emp_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_top
+    where top_id = #{topId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_top
+    where top_id = #{topId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jk.entity.Top" >
+    insert into t_top (top_id, top_name, top_tell, 
+      create_time, storey_time, storey_id, 
+      room_id, top_status, emp_id
+      )
+    values (#{topId,jdbcType=INTEGER}, #{topName,jdbcType=VARCHAR}, #{topTell,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=VARCHAR}, #{storeyTime,jdbcType=VARCHAR}, #{storeyId,jdbcType=INTEGER}, 
+      #{roomId,jdbcType=INTEGER}, #{topStatus,jdbcType=INTEGER}, #{empId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jk.entity.Top" >
+    insert into t_top
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="topId != null" >
+        top_id,
+      </if>
+      <if test="topName != null" >
+        top_name,
+      </if>
+      <if test="topTell != null" >
+        top_tell,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="storeyTime != null" >
+        storey_time,
+      </if>
+      <if test="storeyId != null" >
+        storey_id,
+      </if>
+      <if test="roomId != null" >
+        room_id,
+      </if>
+      <if test="topStatus != null" >
+        top_status,
+      </if>
+      <if test="empId != null" >
+        emp_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="topId != null" >
+        #{topId,jdbcType=INTEGER},
+      </if>
+      <if test="topName != null" >
+        #{topName,jdbcType=VARCHAR},
+      </if>
+      <if test="topTell != null" >
+        #{topTell,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="storeyTime != null" >
+        #{storeyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="storeyId != null" >
+        #{storeyId,jdbcType=INTEGER},
+      </if>
+      <if test="roomId != null" >
+        #{roomId,jdbcType=INTEGER},
+      </if>
+      <if test="topStatus != null" >
+        #{topStatus,jdbcType=INTEGER},
+      </if>
+      <if test="empId != null" >
+        #{empId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jk.entity.Top" >
+    update t_top
+    <set >
+      <if test="topName != null" >
+        top_name = #{topName,jdbcType=VARCHAR},
+      </if>
+      <if test="topTell != null" >
+        top_tell = #{topTell,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="storeyTime != null" >
+        storey_time = #{storeyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="storeyId != null" >
+        storey_id = #{storeyId,jdbcType=INTEGER},
+      </if>
+      <if test="roomId != null" >
+        room_id = #{roomId,jdbcType=INTEGER},
+      </if>
+      <if test="topStatus != null" >
+        top_status = #{topStatus,jdbcType=INTEGER},
+      </if>
+      <if test="empId != null" >
+        emp_id = #{empId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where top_id = #{topId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jk.entity.Top" >
+    update t_top
+    set top_name = #{topName,jdbcType=VARCHAR},
+      top_tell = #{topTell,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      storey_time = #{storeyTime,jdbcType=VARCHAR},
+      storey_id = #{storeyId,jdbcType=INTEGER},
+      room_id = #{roomId,jdbcType=INTEGER},
+      top_status = #{topStatus,jdbcType=INTEGER},
+      emp_id = #{empId,jdbcType=INTEGER}
+    where top_id = #{topId,jdbcType=INTEGER}
+  </update>
+
+  <!--统计总条数-->
+  <select id="count" resultType="java.lang.Long">
+      select count(*) from t_top
+    <include refid="souTop"></include>
+    </select>
+
+  <!--查询所有数据-->
+  <select id="findTop" resultMap="BaseResultMap">
+    <bind name="key_info" value="(currPage-1)*pageSize"/>
+    select * from t_top
+    <include refid="souTop"></include>
+     limit #{key_info},#{pageSize}
+  </select>
+
+  <!--名字模糊查询-->
+  <sql id="souTop">
+    <where>
+      <if test="top.topName!=null and top.topName!=''">
+        and top_name like '%${top.topName}%'
+      </if>
+    </where>
+  </sql>
+</mapper>

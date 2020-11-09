@@ -57,6 +57,7 @@ public interface OldPeopleService {
     public void deleteUnder(@RequestParam Integer underId);
     @RequestMapping("findUnderById")
     public Under findUnderById(@RequestParam Integer underId);
+<<<<<<< HEAD
    //地区 WXl
     @RequestMapping("getSheng")
     public List<TbProvinces> getSheng();
@@ -99,3 +100,55 @@ public interface OldPeopleService {
     @RequestMapping("findRoomById")
     public Room findRoomById(@RequestParam Integer roomId);
 }
+=======
+
+    //老人入住信息表 t_hoom wkp
+    @RequestMapping("findHomeList")
+    public PageResult findHomeList(@RequestParam(value = "currPage",defaultValue = "1")Integer currPage, @RequestParam(value="pageSize",defaultValue="10") Integer pageSize, @RequestBody HomeBean homeBean);
+    @RequestMapping("deleteHome")
+    public void  deleteHome(@RequestParam Integer id);
+    @RequestMapping("addHome")
+    public void addHome(@RequestBody HomeBean homeBean);
+    @RequestMapping("updateHome")
+    public void updateHome(@RequestBody HomeBean homeBean);
+    @RequestMapping("selectHomeById")
+    public HomeBean selectHomeById(@RequestParam Integer id);
+
+    //员工离职表 t_leave wkp
+    @RequestMapping("findLeaveList")
+    public PageResult findLeaveList(@RequestParam(value = "currPage",defaultValue = "1")Integer currPage, @RequestParam(value="pageSize",defaultValue="10") Integer pageSize, @RequestBody LeaveBean leave);
+    @RequestMapping("deleteLeave")
+    public void  deleteLeave(@RequestParam Integer id);
+    @RequestMapping("addLeave")
+    public void addLeave(@RequestBody LeaveBean leave);
+    @RequestMapping("updateLeave")
+    public void updateLeave(@RequestBody LeaveBean leave);
+    @RequestMapping("selectLeaveById")
+    public LeaveBean selectLeaveById(@RequestParam Integer id);
+
+    //订单表 t_order wkp
+    @RequestMapping("findOrderList")
+    public PageResult findOrderList(@RequestParam(value = "currPage",defaultValue = "1")Integer currPage, @RequestParam(value="pageSize",defaultValue="10") Integer pageSize, @RequestBody OrderBean order);
+    @RequestMapping("deleteOrder")
+    public void  deleteOrder(@RequestParam Integer id);
+    @RequestMapping("addOrder")
+    public void addOrder(@RequestBody OrderBean order);
+    @RequestMapping("updateOrder")
+    public void updateOrder(@RequestBody OrderBean order);
+    @RequestMapping("selectOrderById")
+    public OrderBean selectOrderById(@RequestParam Integer id);
+
+    //老人退房登记表 t_outhome wkp
+    @RequestMapping("findOutHomeList")
+    public PageResult findOutHomeList(@RequestParam(value = "currPage",defaultValue = "1")Integer currPage, @RequestParam(value="pageSize",defaultValue="10") Integer pageSize, @RequestBody OutHomeBean outHomeBean);
+    @RequestMapping("deleteOutHome")
+    public void  deleteOutHome(@RequestParam Integer id);
+    @RequestMapping("addOutHome")
+    public void addOutHome(@RequestBody OutHomeBean outHomeBean);
+    @RequestMapping("updateOutHome")
+    public void updateOutHome(@RequestBody OutHomeBean outHomeBean);
+    @RequestMapping("selectOutHomeById")
+    public OutHomeBean selectOutHomeById(@RequestParam Integer id);
+
+    }
+>>>>>>> 4fb2eab26575eadac0c951813ebd649c0ea94ea5

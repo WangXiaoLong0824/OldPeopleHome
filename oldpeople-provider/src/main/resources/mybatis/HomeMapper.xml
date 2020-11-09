@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.HomeMapper">
+    <select id="findHomeList" parameterType="com.jk.entity.HomeBean" resultType="java.lang.Long">
+        select count(*) from t_home h
+        LEFT JOIN t_oldpeople o on h.old_id=o.old_id
+    </select>
+    <select id="findHomeListPage" resultType="com.jk.entity.HomeBean">
+        <bind name="key_off" value="(currPage - 1)*pageSize"/>
+        select h.*,o.old_name from t_home h
+        LEFT JOIN t_oldpeople o on h.old_id=o.old_id
+        <include refid="mysql"></include>
+         limit ${key_off},${pageSize}
+    </select>
+    <delete id="deleteHome" parameterType="int">
+    delete  from t_home where home_id=#{id}
+    </delete>
+    <insert id="addHome" parameterType="com.jk.entity.HomeBean">
+        insert into t_home values(#{homeId},#{oldName},#{createtime},#{homeAddress},1,1,#{homeOut},2)
+    </insert>
+    <update id="updateHome" parameterType="com.jk.entity.HomeBean">
+        update t_home set old_name=#{oldName},createtime=#{createtime},home_address=#{homeAddress},home_out=#{homeOut} where home_id=#{homeId}
+    </update>
+    <select id="selectHomeById" resultType="com.jk.entity.HomeBean" parameterType="int">
+        select * from t_home where home_id=#{id}
+    </select>
+    <sql id="mysql">
+        <where>
+        <if test="homeBean.homeAddress!=null and homeBean.homeAddress!='' ">
+            and h.home_address like '%${homeBean.homeAddress}%'
+        </if>
+        </where>
+    </sql>
+</mapper>

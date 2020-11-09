@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7/dist/css/bootstrap.css}">
+    <script th:src="@{/webjars/jquery/3.5.1/dist/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/3.3.7/dist/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" src="../web/js/vue.min.js"></script>
+    <script type="text/javascript" src="../bootstrap/bootstrap-paginator.js"></script>
+</head>
+<body style=" background:url(images/login_home_02.jpg)">
+<div id="app" class="container">
+    <button type="button" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal" onclick="update(0);"><i class="fa fa-file-o"></i> 新建</button>
+    <h1>老人退房信息</h1>
+
+
+
+    <div class="form-group">
+        <label for="exitTime" class="col-sm-1 control-label">退房时间：</label>
+        <div class="col-sm-2">
+            <input class="form-control" type="date" id="exitTime"  v-model="exitTime" >
+        </div>
+    </div>
+    <button type="button" v-on:click="searchArticleList()">搜索</button></td>
+
+
+
+
+    <table class="table table-bordered">
+        <tr>
+            <th>退房id</th>
+            <th>退房时间</th>
+            <th>退房原因</th>
+            <th>老人id</th>
+            <th>负责人id</th>
+            <th>操作</th>
+        </tr>
+        <tr v-for="home in outHomeList">
+            <td>{{home.exitId}}</td>
+            <td>{{home.exitTime}}</td>
+            <td>{{home.exitBecause}}</td>
+            <td>{{home.oldId}}</td>
+            <td>{{home.powerId}}</td>
+            <td><button type="button" class="RoleOfdelete btn btn-primary  btn-sm" style="margin-right:15px;" v-on:click="del(home.exitId)">删除</button>
+                <button type="button" class="RoleOfdelete btn btn-primary  btn-sm" style="margin-right:15px;" data-toggle="modal" data-target="#editModal" v-on:click="update(home.exitId)">修改</button></td>
+        </tr>
+    </table>
+    <div id="example" style="text-align:center"><ul id="pageLimit"></ul></div>
+</div>
+
+
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" id="ppa">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">留言信息</h3>
+            </div>
+            <form id="forms" method="post">
+                <div class="modal-body">
+                    <table class="table table-bordered table-striped"  width="800px">
+                        <input class="form-control" name="exitId" style="display:none" readonly="readonly" v-model="home.exitId">
+                        <tr>
+                            <td>退房时间</td>
+                            <td><input class="form-control" type="date" name="exitTime" placeholder="" v-model="home.exitTime"></td>
+                        </tr>
+                        <tr>
+                            <td>退房原因</td>
+                            <td><input class="form-control" type="text" name="exitBecause" placeholder="" v-model="home.exitBecause"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" onclick="insert()">保存</button>
+                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            outHomeList: "",
+            totalPage:"",
+            total:"",
+            currPage:"",
+            pageSize:"",
+            exitTime:""
+        }
+    })
+
+    $(function() {
+        searchArticleList();
+    })
+
+    function searchArticleList(){
+        $.ajax({
+            type:"get",
+            url:"../outHome/findOutHomeList",
+            data:{"currPage":vm.currPage,"pageSize":vm.pageSize,"exitTime":vm.exitTime},
+            dataType:"json",
+            success: function(result) {
+                vm.outHomeList = result.rows;
+                vm.totalPage = result.totalPage;
+                vm.total = result.total;
+                vm.currPage = result.currPage;
+                vm.pageSize = result.pageSize;
+                setPage(result.currPage,result.totalPage,result.pageSize,searchArticleList);
+            },
+            error : function() {
+                alert("系统错误，请联系管理员！");
+            }
+        })
+    }
+
+    function setPage(pageCurrent,pageSum,pageSize,callback){
+        $('#pageLimit').bootstrapPaginator({
+            currentPage:pageCurrent,
+            totalPages:pageSum,
+            size:"normal",
+            bootstrapMajorVersion:3,
+            alignment:"right",
+            numberOfPages:pageSize,
+            itemTexts:function(type,page,current){
+                switch(type){
+                    case "first" : return "首页";
+                    case "prev" : return "上一页";
+                    case "next" : return "下一页";
+                    case "last" : return "末页";
+                    case "page" : return page;
+                }
+            },
+            onPageClicked: function(event,originalEvent,type,page){
+                vm.currPage = page;
+                callback && callback()
+            }
+        });
+    }
+
+    function del(id){
+        $.ajax({
+            url:'../outHome/deleteOutHome',
+            type:'post',
+            data:{"id":id},
+            dataType:"json",
+            success:function(){
+
+            }
+        })
+        alert("删除成功");
+        searchArticleList();
+    }
+
+    var vs = new Vue({
+        el: '#ppa',
+        data: {
+            home:''
+        }
+    })
+
+    function insert(){
+        $.ajax({
+            url:'../outHome/addOutHome',
+            type:'post',
+            data:$('#forms').serialize(),
+            success:function(){
+                searchArticleList();
+            }
+        })
+    }
+
+    function update(id){
+        $.ajax({
+            url:"../outHome/selectOutHomeById",
+            type:"post",
+            data:{"id":id},
+            success:function(data){
+                vs.home=data;
+            },
+        });
+    }
+</script>
+</body>
+</html>

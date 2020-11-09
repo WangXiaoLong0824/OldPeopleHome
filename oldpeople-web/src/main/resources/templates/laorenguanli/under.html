@@ -44,7 +44,7 @@
         </div>
     </div>
     <div id="app" class="container">
-       <!-- <form action="" id="list_form">
+        <form action="" id="list_form">
             <div class="form-group">
                 <label for="name" class="col-sm-1 control-label">名称：</label>
                 <div class="col-sm-2">
@@ -52,7 +52,7 @@
                 </div>
             </div>
             <button type="button" class="btn btn-default" onclick="searchStoreCategoryList()">搜索</button>
-        </form>-->
+        </form>
         <br>
         <table class="table table-bordered">
             <tr>
@@ -119,11 +119,11 @@
                                 </tr>
                                 <tr>
                                     <td>老人姓名</td>
-                                    <td><input id="oldHobby" name="oldName" class="form-control" placeholder="老人姓名" v-model="storeCategory.oldName"></td>
+                                    <td><input id="oldHobby" name="oldId" class="form-control" placeholder="老人姓名" v-model="storeCategory.oldId"></td>
                                 </tr>
                                 <tr>
                                     <td>房间</td>
-                                    <td><input id="oldCard" name="roomName" class="form-control"  placeholder="房间" v-model="storeCategory.roomName" ></td>
+                                    <td><input id="oldCard" name="roomId" class="form-control"  placeholder="房间" v-model="storeCategory.roomId" ></td>
                                 </tr>
                                 <tr>
                                     <td>与老人的关系</td>
@@ -131,9 +131,9 @@
                                 </tr>
                                 <tr>
                                     <td>信息状态</td>
-                                    <td><input type="radio" name="oldSex" v-model="storeCategory.underStatus" value="1">已受理
-                                        <input type="radio" name="oldSex" v-model="storeCategory.underStatus" value="2">未受理
-                                        <input type="radio" name="oldSex" v-model="storeCategory.underStatus" value="3">待受理</td>
+                                    <td><input type="radio" name="underStatus" v-model="storeCategory.underStatus" value="1">已受理
+                                        <input type="radio" name="underStatus" v-model="storeCategory.underStatus" value="2">未受理
+                                        <input type="radio" name="underStatus" v-model="storeCategory.underStatus" value="3">待受理</td>
                                 </tr>
                             </table>
                         </div>
@@ -292,6 +292,7 @@
     }
     //保存
     function saveStoreCategory() {
+        console.log($("#userForm").serialize())
         $.ajax({
             type:'post',
             url:'../under/addUnder',

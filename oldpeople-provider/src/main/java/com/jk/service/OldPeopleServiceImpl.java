@@ -56,4 +56,9 @@ public class OldPeopleServiceImpl implements OldPeopleService{
     public List<SysUser> findChildren(Integer userid) {
         return oldPeopleMapper.findChildren(userid);
     }
+
+    @Override
+    public List<SysUser> findChildrenAll() {
+        return oldPeopleMapper.findChildrenAll();
+    }
 }

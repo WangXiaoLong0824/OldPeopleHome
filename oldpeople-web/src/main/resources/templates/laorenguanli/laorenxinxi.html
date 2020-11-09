@@ -43,7 +43,7 @@
         </div>
     </div>
     <div id="app" class="container">
-       <!-- <form action="" id="list_form">
+        <form action="" id="list_form">
             <div class="form-group">
                 <label for="name" class="col-sm-1 control-label">名称：</label>
                 <div class="col-sm-2">
@@ -51,7 +51,7 @@
                 </div>
             </div>
             <button type="button" class="btn btn-default" onclick="searchStoreCategoryList()">搜索</button>
-        </form>-->
+        </form>
         <br>
         <table class="table table-bordered">
             <tr>
@@ -261,6 +261,7 @@ function  changeProduct(){
     $(function() {
         searchStoreCategoryList();
         getSheng();
+        getOld();
     })
     function getSheng () {
         $.ajax({
@@ -372,6 +373,23 @@ function  changeProduct(){
             }
         })
     }
+    function getOld(){
+        $.ajax({
+            type:'post',
+            url:'../oldPeople/findChildrenAll',
+            data:"",
+            dataType: 'json',
+            success: function (result) {
+                console.log(result)
+                vm.childrenlist=result;
+
+
+            },
+            error: function () {
+                alert("系统错误，请联系管理员！");
+            }
+        })
+    }
     //修改回显
     function findOne(id,childrenId) {
         $.ajax({
@@ -381,7 +399,6 @@ function  changeProduct(){
             dataType: 'json',
             success: function (result) {
                 console.log(result)
-                vm.childrenlist=result;
                 vm.childrenId=result.userid;
 
             },

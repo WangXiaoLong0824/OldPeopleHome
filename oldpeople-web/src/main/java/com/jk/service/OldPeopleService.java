@@ -32,6 +32,8 @@ public interface OldPeopleService {
     //子女 WXL
     @RequestMapping("findChildren")
     public List<SysUser> findChildren(@RequestParam Integer userid);
+    @RequestMapping("findChildrenAll")
+    public List<SysUser> findChildrenAll();
     //员工绩效 WXL
     @RequestMapping("findPagePerformance")
     public PageResult findPagePerformance(@RequestParam(value = "currPage", defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize, @RequestBody  Performance performance);
@@ -57,7 +59,6 @@ public interface OldPeopleService {
     public void deleteUnder(@RequestParam Integer underId);
     @RequestMapping("findUnderById")
     public Under findUnderById(@RequestParam Integer underId);
-<<<<<<< HEAD
    //地区 WXl
     @RequestMapping("getSheng")
     public List<TbProvinces> getSheng();
@@ -99,8 +100,7 @@ public interface OldPeopleService {
     public String deleteByRoomId(@RequestParam Integer roomId);
     @RequestMapping("findRoomById")
     public Room findRoomById(@RequestParam Integer roomId);
-}
-=======
+
 
     //老人入住信息表 t_hoom wkp
     @RequestMapping("findHomeList")
@@ -150,5 +150,5 @@ public interface OldPeopleService {
     @RequestMapping("selectOutHomeById")
     public OutHomeBean selectOutHomeById(@RequestParam Integer id);
 
-    }
->>>>>>> 4fb2eab26575eadac0c951813ebd649c0ea94ea5
+
+}

@@ -20,4 +20,6 @@ public interface OldPeopleService {
     List<TbAreas> findXian(String cityid);
 
     List<SysUser> findChildren(Integer userid);
+
+    List<SysUser> findChildrenAll();
 }

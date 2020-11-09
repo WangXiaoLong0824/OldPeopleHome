@@ -47,4 +47,9 @@ public class OldPeopleController {
         return oldPeopleService.findChildren(userid);
     }
 
+    @RequestMapping("findChildrenAll")
+    public List<SysUser> findChildrenAll(){
+        return oldPeopleService.findChildrenAll();
+    }
+
 }

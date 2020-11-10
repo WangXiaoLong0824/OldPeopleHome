@@ -17,14 +17,12 @@
         <tr>
             <th>Id</th>
             <th>宿舍楼名</th>
-            <th>宿舍楼层</th>
             <th>管理人</th>
             <th>操作</th>
         </tr>
         <tr v-for="dorm in dormList">
             <td>{{dorm.dormId}}</td>
             <td>{{dorm.dormName}}</td>
-            <td>{{dorm.storeyName}}</td>
             <td>{{dorm.personName}}</td>
             <td><button type="button" class="RoleOfdelete btn btn-primary  btn-sm" style="margin-right:15px;" v-on:click="del(dorm.dormId)">删除</button>
                 <button type="button" class="RoleOfdelete btn btn-primary  btn-sm" style="margin-right:15px;" data-toggle="modal" data-target="#editModal" v-on:click="update(dorm.dormId)">修改</button></td>
@@ -48,10 +46,6 @@
                         <tr>
                             <td>楼名</td>
                             <td><input class="form-control" type="text" name="dormName" placeholder="楼名" v-model="dorm.dormName"></td>
-                        </tr>
-                        <tr>
-                            <td>选择楼层</td>
-                            <td><input class="form-control" type="text" name="storeyId" placeholder="楼层" v-model="dorm.storeyId"></td>
                         </tr>
                         <tr>
                             <td>负责人</td>

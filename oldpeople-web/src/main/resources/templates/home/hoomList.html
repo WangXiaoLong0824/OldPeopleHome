@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7/dist/css/bootstrap.css}">
-    <script th:src="@{/webjars/jquery/3.5.1/dist/jquery.min.js}"></script>
-    <script th:src="@{/webjars/bootstrap/3.3.7/dist/js/bootstrap.min.js}"></script>
-    <script type="text/javascript" src="../web/js/vue.min.js"></script>
-    <script type="text/javascript" src="../bootstrap/bootstrap-paginator.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.2/vue.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue-router/3.0.1/vue-router.min.js"></script>
+    <script src="https://cdn.bootcss.com/vuex/3.0.1/vuex.min.js"></script>
+    <script src="../../bootstrap-paginator.js"></script>
     <style type="text/css">
         .top{
             /* 设置宽度高度背景颜色 */
@@ -40,7 +42,7 @@
         .top li a{
             /* 设置链接内容显示的格式*/
             display: block; /* 把链接显示为块元素可使整个链接区域可点击 */
-            color:black;
+            color: #000000;
             text-align: center;
             padding: 3px;
             overflow: hidden;

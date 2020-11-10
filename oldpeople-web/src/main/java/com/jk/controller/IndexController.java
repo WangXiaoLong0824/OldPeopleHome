@@ -52,6 +52,10 @@ public class IndexController {
     public String toLeave() {
         return "leave/leaveList";
     }
+    @RequestMapping("leave")
+    public String leave() {
+        return "leave/leave";
+    }
     //t_order
     @RequestMapping("toOrder")
     public String toOrder() {

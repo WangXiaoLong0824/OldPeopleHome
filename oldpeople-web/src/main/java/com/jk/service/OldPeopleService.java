@@ -145,17 +145,6 @@ public interface OldPeopleService {
     @RequestMapping("selectOutHomeById")
     public OutHomeBean selectOutHomeById(@RequestParam Integer id);
 
-    //房间表 t_room wkp
-    @RequestMapping("findRoomList")
-    public PageResult findRoomList(@RequestParam(value = "currPage",defaultValue = "1")Integer currPage, @RequestParam(value="pageSize",defaultValue="10") Integer pageSize, @RequestBody RoomBean room);
-    @RequestMapping("deleteRoom")
-    public void  deleteRoom(@RequestParam Integer id);
-    @RequestMapping("addRoom")
-    public void addRoom(@RequestBody RoomBean room);
-    @RequestMapping("updateRoom")
-    public void updateRoom(@RequestBody RoomBean room);
-    @RequestMapping("selectRoomById")
-    public RoomBean selectRoomById(@RequestParam Integer id);
 
     //床位信息 lmq
     @RequestMapping("findBed")
@@ -209,13 +198,13 @@ public interface OldPeopleService {
     public Careful findCarefulById(@RequestParam Integer carefulId);
 
     //房间 ww
-    @RequestMapping("findRoomPage")
+    @RequestMapping("/findRoomPage")
     public PageResult findRoomPage(@RequestParam(value="currPage",defaultValue = "1") Integer currPage, @RequestParam(value="pageSize",defaultValue = "10") Integer pageSize,@RequestBody Room room);
-    @RequestMapping("addRoom")
+    @RequestMapping("/addRoom")
     public String addRoom(@RequestBody Room room);
-    @RequestMapping("deleteByRoomId")
+    @RequestMapping("/deleteByRoomId")
     public String deleteByRoomId(@RequestParam Integer roomId);
-    @RequestMapping("findRoomById")
+    @RequestMapping("/findRoomById")
     public Room findRoomById(@RequestParam Integer roomId);
 
 }

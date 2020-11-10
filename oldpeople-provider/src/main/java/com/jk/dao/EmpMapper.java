@@ -13,7 +13,7 @@ public interface EmpMapper {
     List<Emp> findPageEmp(Integer currPage, Integer pageSize, Emp emp);
     @Insert("insert into t_emp values (#{empId},#{empName},#{empSex},#{empAge},#{empTell},now(),#{empleId},#{empThing},#{empLeave},#{empPosition},#{shengId},#{shiId},#{xianId})")
     void addEmp(Emp emp);
-    @Update("update t_emp set emp_name=#{empName},emp_sex=#{empSex},emp_age=#{empAge},emp_tell=#{empTell},emp_time=#{empTime},emple_id=#{empleId},emp_thing=#{empThing},emp_leave=#{empLeave},emp_position=#{empPosition},sheng_id=#{shengId},shi_id=#{shiId},xian_id=#{xianId} where emp_id=#{empId}")
+    @Update("update t_emp set emp_name=#{empName},emp_sex=#{empSex},emp_age=#{empAge},emp_tell=#{empTell},emple_id=#{empleId},emp_thing=#{empThing},emp_leave=#{empLeave},emp_position=#{empPosition},sheng_id=#{shengId},shi_id=#{shiId},xian_id=#{xianId} where emp_id=#{empId}")
     void updateEmp(Emp emp);
     @Delete("delete from t_emp where emp_id=#{empId}")
     void deleteEmp(Integer empId);

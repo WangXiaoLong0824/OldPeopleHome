@@ -37,8 +37,8 @@
         <div class="form-group form-inline">
             <div class="btn-group">
                 <button type="button"  class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal" v-on:click="storeCategory = {}"><i class="fa fa-file-o"></i> 新建</button>
-                <!--<button type="button" class="btn btn-default" title="删除" onclick="deleteStoreCategory()"><i class="fa fa-trash-o"></i> 删除</button>-->
-                <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
+
+r                <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
             </div>
         </div>
     </div>
@@ -74,7 +74,7 @@
             </tr>
             <tr v-for="storeCategory in storeCategoryList">
                 <td>
-                    <input  type="checkbox" v-on:click="updateSelection($event, storeCategory.userId)">
+                    <input  type="checkbox" v-on:click="updateSelection($event, storeCategory.oldAge)">
                 </td>
                 <td>{{storeCategory.oldId}}</td>
                 <td>{{storeCategory.oldName}}</td>
@@ -327,16 +327,20 @@ function  changeProduct(){
             }
         });
     }
-    vm.selectIds = [];
+    vm.selectIds = 0;
+    vm.selectIds1 = [];
     //复选框选中
-    function updateSelection($event, id) {
+    function updateSelection($event, oldAge) {
+        var i=0;
         if ($event.target.checked) {
-            vm.selectIds.push(id);
+            vm.selectIds1.push(oldAge)
+            vm.selectIds+=oldAge;
         } else {
-            var idx = vm.selectIds.indexOf(id);
-            vm.selectIds.splice(idx, 1);//删除
+            var idx = vm.selectIds1.indexOf(oldAge);
+            vm.selectIds1.splice(idx, 1);//删除
+            vm.selectIds-=oldAge;
         }
-
+        alert(vm.selectIds)
         console.info(vm.selectIds.toString());
     }
 

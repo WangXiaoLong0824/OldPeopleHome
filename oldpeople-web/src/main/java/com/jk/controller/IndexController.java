@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/index")
 public class IndexController {
     //老人会员页面跳转
     @RequestMapping("/people")
@@ -11,10 +12,10 @@ public class IndexController {
         return "People/vip";
     }
     //老人外出登记页面跳转
-    @RequestMapping("/out")
-    public String out(){
+  /*  @RequestMapping("/out")
+    public String out(){//已删
         return "Out/OutList";
-    }
+    }*/
     //员工请假详细信息表
     @RequestMapping("/thing")
     public String thing(){
@@ -36,61 +37,61 @@ public class IndexController {
         return "TurnHome/TurnHomeList";
     }
     //t_home
-    @RequestMapping("toHome")
+    @RequestMapping("/toHome")
     public String tohome() {
         return "home/hoomList";
     }
 
     //t_outhomt
-    @RequestMapping("toOuthome")
+    @RequestMapping("/toOuthome")
     public String toOuthome() {
         return "outHome/outHomeLIst";
     }
 
     //t_leave
-    @RequestMapping("toLeave")
+    @RequestMapping("/toLeave")
     public String toLeave() {
         return "leave/leaveList";
     }
     //t_order
-    @RequestMapping("toOrder")
+    @RequestMapping("/toOrder")
     public String toOrder() {
         return "order/orderList";
     }
 
 
-    @RequestMapping("toBed")
+    @RequestMapping("/toBed")
     public  String toBed(){
 
         return "bed/bed";
     }
-    @RequestMapping("toLaoRenXinXi")
+    @RequestMapping("/toLaoRenXinXi")
     public String toLaoRenXinXi(){
         return "laorenguanli/laorenxinxi";
     }
-    @RequestMapping("toEmp")
+    @RequestMapping("/toEmp")
     public String toEmp(){
         return "laorenguanli/emp";
     }
-    @RequestMapping("toPerformance")
+    @RequestMapping("/toPerformance")
     public String toPerformance(){
         return "laorenguanli/performance";
     }
-    @RequestMapping("toUnder")
+    @RequestMapping("/toUnder")
     public String toUnder(){
         return "laorenguanli/under";
     }
 
-    @RequestMapping("toDormList")
+    @RequestMapping("/toDormList")
     public String toDormList(){
         return "dorm/DormList";
     }
 
-    @RequestMapping("toCarefulList")
+    @RequestMapping("/toCarefulList")
     public String toCarefulList(){
         return "careful/CarefulList";
     }
 
-    @RequestMapping("toRoomList")
+    @RequestMapping("/toRoomList")
     public String toRoomList(){ return "room/RoomList"; }
 }

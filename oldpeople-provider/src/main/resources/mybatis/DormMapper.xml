@@ -8,15 +8,14 @@
 
     <select id="findDormPage" resultType="Dorm" >
         <bind name="key_off" value="(currPage - 1)*pageSize"/>
-        select d.*,s.storey_name storeyName,p.person_name personName from t_dorm d
-            LEFT JOIN t_storey s on d.storey_id=s.storey_id
+        select d.*,p.person_name personName from t_dorm d
             LEFT JOIN t_person p on d.person_id=p.person_id
             order by d.dorm_id
             limit ${key_off},${pageSize}
     </select>
 
     <insert id="addDorm" parameterType="Dorm">
-        insert into t_dorm(dorm_name,person_id,storey_id) values(#{dormName},#{personId},#{storeyId})
+        insert into t_dorm(dorm_name,person_id) values(#{dormName},#{personId})
     </insert>
 
     <delete id="deleteDormById" parameterType="int">

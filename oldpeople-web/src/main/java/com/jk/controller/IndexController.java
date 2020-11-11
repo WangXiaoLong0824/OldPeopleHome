@@ -94,4 +94,9 @@ public class IndexController {
 
     @RequestMapping("/toRoomList")
     public String toRoomList(){ return "room/RoomList"; }
+    //系统日志跳转页面
+    @RequestMapping("/queryLog")
+    public String log(){
+        return "Log/LogList";
+    }
 }

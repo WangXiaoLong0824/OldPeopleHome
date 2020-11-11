@@ -3,6 +3,8 @@ package com.jk.service;
 import com.jk.dao.HomeMapper;
 import com.jk.entity.HomeBean;
 import com.jk.entity.PageResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -10,6 +12,8 @@ import java.util.List;
 
 @Service
 public class HomeServiceImpl implements HomeService {
+    private static final Logger logger = LoggerFactory.getLogger(HomeServiceImpl.class);
+
     @Resource
     private HomeMapper homeMapper;
 

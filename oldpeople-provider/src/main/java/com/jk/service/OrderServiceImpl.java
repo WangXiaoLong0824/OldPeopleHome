@@ -4,6 +4,8 @@ import com.jk.dao.OrderMapper;
 import com.jk.entity.OrderBean;
 import com.jk.entity.OutHomeBean;
 import com.jk.entity.PageResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -11,6 +13,8 @@ import java.util.List;
 
 @Service
 public class OrderServiceImpl implements  OrderService{
+    private static final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
+
     @Resource
     private OrderMapper orderMapper;
 

@@ -3,6 +3,8 @@ package com.jk.controller;
 import com.jk.entity.PageResult;
 import com.jk.entity.Thing;
 import com.jk.service.ThingService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,7 +14,9 @@ import javax.annotation.Resource;
 
 @RestController
 public class ThingController {
-        @Resource
+    private static final Logger logger = LoggerFactory.getLogger(ThingController.class);
+
+    @Resource
     private ThingService thingService;
 
     /*

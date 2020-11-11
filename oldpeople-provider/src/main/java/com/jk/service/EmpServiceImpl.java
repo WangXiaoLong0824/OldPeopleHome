@@ -5,6 +5,8 @@ import com.jk.entity.Emp;
 import com.jk.entity.Emple;
 import com.jk.entity.PageResult;
 import com.jk.entity.Position;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -12,6 +14,8 @@ import java.util.List;
 
 @Service
 public class EmpServiceImpl implements EmpService {
+    private static final Logger logger = LoggerFactory.getLogger(EmpServiceImpl.class);
+
     @Resource
     private EmpMapper empMapper;
     @Override

@@ -4,6 +4,8 @@ import com.jk.dao.DormMapper;
 import com.jk.entity.Careful;
 import com.jk.entity.Dorm;
 import com.jk.entity.PageResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -11,6 +13,7 @@ import java.util.List;
 
 @Service
 public class DormServiceImpl implements DormService{
+    private static final Logger logger = LoggerFactory.getLogger(DormServiceImpl.class);
 
     @Resource
     private DormMapper dormMapper;

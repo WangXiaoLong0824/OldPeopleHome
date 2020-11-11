@@ -4,6 +4,8 @@ import com.jk.dao.LeaveMapper;
 import com.jk.entity.HomeBean;
 import com.jk.entity.LeaveBean;
 import com.jk.entity.PageResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -11,6 +13,8 @@ import java.util.List;
 
 @Service
 public class LeaveServiceImpl implements  LeaveService{
+    private static final Logger logger = LoggerFactory.getLogger(LeaveServiceImpl.class);
+
     @Resource
     private LeaveMapper leaveMapper;
 

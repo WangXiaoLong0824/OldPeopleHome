@@ -3,6 +3,8 @@ package com.jk.service;
 import com.jk.dao.PerformanceMapper;
 import com.jk.entity.PageResult;
 import com.jk.entity.Performance;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -10,6 +12,8 @@ import java.util.List;
 
 @Service
 public class PerfromanceServiceImpl implements PerformanceService{
+    private static final Logger logger = LoggerFactory.getLogger(PerfromanceServiceImpl.class);
+
     @Resource
     private PerformanceMapper performanceMapper;
     @Override

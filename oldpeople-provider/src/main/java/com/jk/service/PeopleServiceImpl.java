@@ -3,6 +3,8 @@ package com.jk.service;
 import com.jk.dao.PeopleMapper;
 import com.jk.entity.PageResult;
 import com.jk.entity.People;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -10,7 +12,9 @@ import java.util.List;
 
 @Service
 public class PeopleServiceImpl implements PeopleService{
-     @Resource
+    private static final Logger logger = LoggerFactory.getLogger(PeopleServiceImpl.class);
+
+    @Resource
     private PeopleMapper peopleMapper;
     /*
      *   老人会员信息表分页

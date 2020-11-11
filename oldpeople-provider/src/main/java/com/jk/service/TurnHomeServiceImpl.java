@@ -3,6 +3,8 @@ package com.jk.service;
 import com.jk.entity.PageResult;
 import com.jk.entity.TurnHome;
 import com.jk.dao.TurnHomeMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +12,8 @@ import java.util.List;
 
 @Service
 public class TurnHomeServiceImpl implements TurnHomeService{
+    private static final Logger logger = LoggerFactory.getLogger(TurnHomeServiceImpl.class);
+
 
     @Autowired
     private TurnHomeMapper turnHomeMapper;

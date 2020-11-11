@@ -3,13 +3,17 @@ package com.jk.controller;
 import com.jk.entity.PageResult;
 import com.jk.entity.People;
 import com.jk.service.PeopleService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
 @RestController
 public class PeopleController {
-        @Resource
+    private static final Logger logger = LoggerFactory.getLogger(PeopleController.class);
+
+    @Resource
     private PeopleService peopleService;
 
     /*

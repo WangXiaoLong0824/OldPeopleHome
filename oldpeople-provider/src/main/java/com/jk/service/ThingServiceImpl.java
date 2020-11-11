@@ -3,6 +3,8 @@ package com.jk.service;
 import com.jk.dao.ThingMapper;
 import com.jk.entity.PageResult;
 import com.jk.entity.Thing;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -10,6 +12,8 @@ import java.util.List;
 
 @Service
 public class ThingServiceImpl implements ThingService{
+    private static final Logger logger = LoggerFactory.getLogger(ThingServiceImpl.class);
+
     @Resource
     private ThingMapper thingMapper;
     /*

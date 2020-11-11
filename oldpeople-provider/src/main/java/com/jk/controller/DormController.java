@@ -3,6 +3,8 @@ package com.jk.controller;
 import com.jk.entity.Dorm;
 import com.jk.entity.PageResult;
 import com.jk.service.DormService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,6 +15,7 @@ import java.util.List;
 
 @RestController
 public class DormController {
+    private static final Logger logger = LoggerFactory.getLogger(DormController.class);
 
     @Resource
     private DormService dormService;

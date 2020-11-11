@@ -2,6 +2,8 @@ package com.jk.controller;
 
 import com.jk.entity.*;
 import com.jk.service.OldPeopleService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,6 +14,8 @@ import java.util.List;
 
 @RestController
 public class OldPeopleController {
+    private static final Logger logger = LoggerFactory.getLogger(OldPeopleController.class);
+
     @Resource
     private OldPeopleService oldPeopleService;
     @RequestMapping("findPageOldPeople")

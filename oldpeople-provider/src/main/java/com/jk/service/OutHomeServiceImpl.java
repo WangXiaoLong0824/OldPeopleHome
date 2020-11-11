@@ -4,12 +4,16 @@ import com.jk.dao.OutHomeMapper;
 import com.jk.entity.HomeBean;
 import com.jk.entity.OutHomeBean;
 import com.jk.entity.PageResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 @Service
 public class OutHomeServiceImpl implements  OutHomeService {
+    private static final Logger logger = LoggerFactory.getLogger(OutHomeServiceImpl.class);
+
     @Resource
     private OutHomeMapper outHomeMapper;
     @Override

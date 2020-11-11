@@ -3,6 +3,8 @@ package com.jk.controller;
 import com.jk.entity.HomeBean;
 import com.jk.entity.PageResult;
 import com.jk.service.HomeService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,6 +14,8 @@ import javax.annotation.Resource;
 
 @RestController
 public class HomeController {
+    private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+
     @Resource
     private HomeService homeService;
     //查询 t_home

@@ -3,6 +3,8 @@ package com.jk.service;
 import com.jk.dao.CarefulMapper;
 import com.jk.entity.Careful;
 import com.jk.entity.PageResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -10,6 +12,7 @@ import java.util.List;
 
 @Service
 public class CarefulServiceImpl implements CarefulService{
+    private static final Logger logger = LoggerFactory.getLogger(CarefulServiceImpl.class);
 
     @Resource
     private CarefulMapper carefulMapper;

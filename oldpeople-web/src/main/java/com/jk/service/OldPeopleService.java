@@ -207,5 +207,9 @@ public interface OldPeopleService {
     @RequestMapping("/findRoomById")
     public Room findRoomById(@RequestParam Integer roomId);
 
+    //系统日志分页查询
+    @RequestMapping("/findLog")
+    public PageResult findLog(@RequestParam Integer currPage,@RequestParam Integer pageSize);
+
 }
 

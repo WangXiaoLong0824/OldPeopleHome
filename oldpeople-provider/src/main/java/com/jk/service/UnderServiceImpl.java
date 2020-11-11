@@ -4,6 +4,8 @@ import com.jk.dao.UnderMapper;
 import com.jk.entity.Emp;
 import com.jk.entity.PageResult;
 import com.jk.entity.Under;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -11,6 +13,8 @@ import java.util.List;
 
 @Service
 public class UnderServiceImpl implements UnderService{
+    private static final Logger logger = LoggerFactory.getLogger(UnderServiceImpl.class);
+
     @Resource
     private UnderMapper underMapper;
 

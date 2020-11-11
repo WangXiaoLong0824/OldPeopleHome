@@ -3,14 +3,18 @@ package com.jk.service;
 import com.jk.dao.TopMapper;
 import com.jk.entity.PageResult;
 import com.jk.entity.Top;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 @Service
-public class TopServiceImp implements TopService{
-        @Resource
+public class TopServiceImpl implements TopService{
+    private static final Logger logger = LoggerFactory.getLogger(TopServiceImpl.class);
+
+    @Resource
     private TopMapper topMapper;
     /*
      *   预约线上表分页 查询

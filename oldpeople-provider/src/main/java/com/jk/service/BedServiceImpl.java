@@ -1,15 +1,21 @@
 package com.jk.service;
 
+import com.jk.controller.UnderController;
 import com.jk.dao.BedMapper;
 import com.jk.entity.Bed;
 import com.jk.entity.PageResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service
 public class BedServiceImpl implements BedService{
+    private static final Logger logger = LoggerFactory.getLogger(BedServiceImpl.class);
+
 
     @Autowired
     private BedMapper bedMapper;

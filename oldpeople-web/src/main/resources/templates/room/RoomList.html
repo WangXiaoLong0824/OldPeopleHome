@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7/dist/css/bootstrap.css}">
-    <script th:src="@{/webjars/jquery/3.5.1/dist/jquery.min.js}"></script>
-    <script th:src="@{/webjars/bootstrap/3.3.7/dist/js/bootstrap.min.js}"></script>
-    <script type="text/javascript" src="../js/vue/vue.min.js"></script>
-    <script type="text/javascript" src="../bootstrap/bootstrap-paginator.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.2/vue.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue-router/3.0.1/vue-router.min.js"></script>
+    <script src="https://cdn.bootcss.com/vuex/3.0.1/vuex.min.js"></script>
+    <script src="../../bootstrap-paginator.js"></script>
 </head>
 
 <style>
@@ -30,7 +32,7 @@
         margin:10px auto;
     }
 </style>
-<body style=" background:url(../images/login_bg_0.jpg)">
+<body>
 
 <div id="picBox">
     <img src="../images/login_bg_04.jpg" id="pic">
@@ -198,7 +200,7 @@
     function searchRoomList(){
         $.ajax({
             type:"get",
-            url:"../room/findRoomPage",
+            url:"/findRoomPage",
             data:{"currPage":vm.currPage,"pageSize":vm.pageSize,"roomName":$("#roomName1").val()},
             dataType:"json",
             success: function(result) {
@@ -242,7 +244,7 @@
 
     function del(roomId){
         $.ajax({
-            url:'../room/deleteByRoomId',
+            url:'/deleteByRoomId',
             type:'post',
             data:{"roomId":roomId},
             dataType:"json",
@@ -263,7 +265,7 @@
 
     function insert(){
         $.ajax({
-            url:'../room/addRoom',
+            url:'/addRoom',
             type:'post',
             data:$('#forms').serialize(),
             success:function(){
@@ -274,7 +276,7 @@
 
     function update(roomId){
         $.ajax({
-            url:"../room/findRoomById",
+            url:"/findRoomById",
             type:"post",
             data:{"roomId":roomId},
             success:function(data){

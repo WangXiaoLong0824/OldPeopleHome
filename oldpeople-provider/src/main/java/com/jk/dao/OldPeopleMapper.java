@@ -24,6 +24,8 @@ public interface OldPeopleMapper {
     void updateOldPeople(OldPeople oldPeople);
     @Select("select * from tb_provinces")
     List<TbProvinces> getSheng();
+    @Select("select * from tb_provinces where provinceid=#{provinceid}")
+    List<TbProvinces> getSheng1(String provinceid);
     @Select("select * from tb_cities where provinceid=#{provinceid}")
     List<TbCities> findShi(String provinceid);
     @Select("select * from tb_areas where cityid=#{cityid}")

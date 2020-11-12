@@ -15,6 +15,8 @@ public interface OldPeopleService {
 
     List<TbProvinces> getSheng();
 
+    List<TbProvinces> getSheng1(String provinceid);
+
     List<TbCities> findShi(String provinceid);
 
     List<TbAreas> findXian(String cityid);

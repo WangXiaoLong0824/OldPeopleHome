@@ -11,28 +11,27 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 @RestController
-@RequestMapping("room")
 public class RoomController {
 
     @Resource
     private OldPeopleService oldPeopleService;
 
-    @RequestMapping("findRoomPage")
+    @RequestMapping("/findRoomPage")
     public PageResult findRoomPage(@RequestParam(value="currPage",defaultValue = "1") Integer currPage, @RequestParam(value="pageSize",defaultValue = "10") Integer pageSize, Room room){
         return oldPeopleService.findRoomPage(currPage,pageSize,room);
     }
 
-    @RequestMapping("addRoom")
+    @RequestMapping("/addRoom")
     public void addRoom(Room room){
         oldPeopleService.addRoom(room);
     }
 
-    @RequestMapping("deleteByRoomId")
+    @RequestMapping("/deleteByRoomId")
     public void deleteByRoomId(Integer roomId){
         oldPeopleService.deleteByRoomId(roomId);
     }
 
-    @RequestMapping("findRoomById")
+    @RequestMapping("/findRoomById")
     public Room findRoomById(Integer roomId){
         return oldPeopleService.findRoomById(roomId);
     }

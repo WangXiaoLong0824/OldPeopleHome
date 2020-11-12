@@ -59,7 +59,6 @@ public interface OldPeopleService {
     public void deleteUnder(@RequestParam Integer underId);
     @RequestMapping("findUnderById")
     public Under findUnderById(@RequestParam Integer underId);
-
     @RequestMapping("getOld")
     public List<OldPeople> getOld();
     @RequestMapping("getRoom")
@@ -67,6 +66,8 @@ public interface OldPeopleService {
    //地区 WXl
     @RequestMapping("getSheng")
     public List<TbProvinces> getSheng();
+    @RequestMapping("getSheng1")
+    public List<TbProvinces> getSheng1(@RequestParam String provinceid);
     @RequestMapping("findShi")
     public List<TbCities> findShi(@RequestParam String provinceid);
     @RequestMapping("findXian")
@@ -106,6 +107,44 @@ public interface OldPeopleService {
     @RequestMapping("findRoomById")
     public Room findRoomById(@RequestParam Integer roomId);
 
+
+    //老人会员信息表 Changk
+    @RequestMapping("/findPeople")
+    public PageResult findPeople(@RequestParam Integer currPage, @RequestParam Integer pageSize, @RequestBody People people);
+    @RequestMapping("/addPeople")
+    public void addPeople(@RequestBody People people);
+    @RequestMapping("/onePeople")
+    public People onePeople(@RequestParam Integer ids);
+    @RequestMapping("/delOne")
+    public void delOne(@RequestParam Integer ids);
+
+    //老人外出登记表 Changk
+    @RequestMapping("/findOut")
+    public PageResult findOut(@RequestParam(value = "currPage",defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize",defaultValue = "10") Integer pageSize, @RequestBody Out out);
+    @RequestMapping("/addOut")
+    public void addOut(@RequestBody Out out);
+    @RequestMapping("/oneOut")
+    public Out oneOut(@RequestParam Integer ids);
+    @RequestMapping("/delOut")
+    public void delOut(@RequestParam Integer ids);
+
+    //员工请假详细信息表 Changk
+    @RequestMapping("/findThing")
+    public PageResult findThing(@RequestParam(value = "currPage",defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize",defaultValue = "10") Integer pageSize, @RequestBody Thing thing);
+    @RequestMapping("/addThing")
+    public void addThing(@RequestBody Thing thing);
+    @RequestMapping("/delThing")
+    public void delThing(@RequestParam Integer ids);
+    @RequestMapping("/oneThing")
+    public Thing oneThing(@RequestParam Integer ids);
+
+    //预约线上信息表 Changk
+    @RequestMapping("/findTop")
+    public PageResult findTop(@RequestParam Integer currPage, @RequestParam Integer pageSize, @RequestBody Top top);
+    @RequestMapping("/addTop")
+    public void addTop(@RequestBody Top top);
+    @RequestMapping("/delTop")
+    public void delTop(@RequestParam Integer ids);
 
     //老人入住信息表 t_hoom wkp
     @RequestMapping("findHomeList")
@@ -156,4 +195,68 @@ public interface OldPeopleService {
     public OutHomeBean selectOutHomeById(@RequestParam Integer id);
 
 
+
+
+    //床位信息 lmq
+    @RequestMapping("findBed")
+    public PageResult findBed(@RequestParam(value="currPage",defaultValue="1") Integer currPage, @RequestParam(value="pageSize",defaultValue="10") Integer pageSize,@RequestBody Bed bed);
+    @RequestMapping("addBed")
+    public String addBed(@RequestBody  Bed bed);
+    @RequestMapping("deleteBedById")
+    public String deleteBedById(@RequestParam Integer bedId);
+    @RequestMapping("findBedById")
+    public Bed findBedById(@RequestParam Integer bedId);
+
+    //转房记录 lmq
+    @RequestMapping("findOutHome")
+    public PageResult findTurnHome(@RequestParam(value="currPage",defaultValue="1") Integer currPage, @RequestParam(value="pageSize",defaultValue="10") Integer pageSize);
+    @RequestMapping("addTurnHome")
+    public String addOutHome(@RequestBody TurnHome turnHome);
+    @RequestMapping("deleteOutHomeById")
+    public String deleteOutHomeById(@RequestParam Integer oId);
+    @RequestMapping("findOutHomeById")
+    public TurnHome findOutHomeById(@RequestParam Integer oId);
+   /*//地区 WXl
+    @RequestMapping("getSheng")
+    public List<TbProvinces> getSheng();
+    @RequestMapping("findShi")
+    public List<TbCities> findShi(@RequestParam String provinceid);
+    @RequestMapping("findXian")
+    public List<TbAreas> findXian(@RequestParam String cityid);
+
+
+
+
+    //住宿楼 ww
+    @RequestMapping("findDormPage")
+    public PageResult findDormPage(@RequestParam(value="currPage",defaultValue = "1") Integer currPage,@RequestParam(value="pageSize",defaultValue = "10") Integer pageSize,@RequestBody Dorm dorm);
+    @RequestMapping("addDorm")
+    public String addDorm(@RequestBody Dorm dorm);
+    @RequestMapping("deleteDormById")
+    public String deleteDormById(@RequestParam Integer dormId);
+    @RequestMapping("findDormById")
+    public Dorm findDormById(@RequestParam Integer dormId);
+
+
+    //老人缴费信息 ww
+    @RequestMapping("findCarefulPage")
+    public PageResult findCarefulPage(@RequestParam(value="currPage",defaultValue = "1") Integer currPage,@RequestParam(value="pageSize",defaultValue = "10") Integer pageSize,@RequestBody Careful careFul);
+    @RequestMapping("addCareful")
+    public String addCareful(@RequestBody Careful careful);
+    @RequestMapping("deleteCarefulById")
+    public String deleteCarefulById(@RequestParam Integer carefulId);
+    @RequestMapping("findCarefulById")
+    public Careful findCarefulById(@RequestParam Integer carefulId);
+
+    //房间 ww
+    @RequestMapping("/findRoomPage")
+    public PageResult findRoomPage(@RequestParam(value="currPage",defaultValue = "1") Integer currPage, @RequestParam(value="pageSize",defaultValue = "10") Integer pageSize,@RequestBody Room room);
+    @RequestMapping("/addRoom")
+    public String addRoom(@RequestBody Room room);
+    @RequestMapping("/deleteByRoomId")
+    public String deleteByRoomId(@RequestParam Integer roomId);
+    @RequestMapping("/findRoomById")
+    public Room findRoomById(@RequestParam Integer roomId);*/
+
 }
+

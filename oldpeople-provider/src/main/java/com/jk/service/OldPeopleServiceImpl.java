@@ -41,6 +41,10 @@ public class OldPeopleServiceImpl implements OldPeopleService{
     public List<TbProvinces> getSheng() {
         return oldPeopleMapper.getSheng();
     }
+    @Override
+    public List<TbProvinces> getSheng1(String provinceid) {
+        return oldPeopleMapper.getSheng1(provinceid);
+    }
 
     @Override
     public List<TbCities> findShi(String provinceid) {

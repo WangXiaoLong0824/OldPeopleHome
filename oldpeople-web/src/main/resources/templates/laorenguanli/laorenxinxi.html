@@ -38,19 +38,20 @@
             <div class="btn-group">
                 <button type="button"  class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal" v-on:click="storeCategory = {}"><i class="fa fa-file-o"></i> 新建</button>
 
-r                <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
+                <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
             </div>
         </div>
     </div>
     <div id="app" class="container">
+        <h1>基本信息</h1>
         <form action="" id="list_form">
-            <div class="form-group">
+           <!-- <div class="form-group">
                 <label for="name" class="col-sm-1 control-label">名称：</label>
                 <div class="col-sm-2">
                     <input type="text" class="form-control" id="name" v-model="userName1" placeholder="请输入名字">
                 </div>
             </div>
-            <button type="button" class="btn btn-default" onclick="searchStoreCategoryList()">搜索</button>
+            <button type="button" class="btn btn-default" onclick="searchStoreCategoryList()">搜索</button>-->
         </form>
         <br>
         <table class="table table-bordered">
@@ -156,6 +157,10 @@ r                <button type="button" class="btn btn-default" title="刷新" on
                                             <option value="" disabled selected>请选择</option>
                                             <option  v-for="diqu in diqulist" :value="diqu.provinceid">{{diqu.province}}</option>
                                         </select>
+                                        <select class="form-control con1" name="shengId" v-model="shengId1"  ><!--@change="changeProduct"-->
+                                            <option value="" disabled selected>请选择</option>
+                                            <option  v-for="diqu1 in diqulist1" :value="diqu1.province">{{diqu1.province}}</option>
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>
@@ -194,8 +199,10 @@ r                <button type="button" class="btn btn-default" title="刷新" on
     <input type="hidden" id="orderDirection" name="orderDirection" value="">
 </form>
 
-
-
+<!--底部内容-->
+<div class="jumbotron text-center" style="margin-bottom:0px">
+    <p>©2020 Baidu&nbsp;&nbsp;(京)-经营性-2017-0020&nbsp;&nbsp;京公网安备11000002000001号&nbsp;&nbsp;京ICP证030173号</p>
+</div>
 </body>
 <script type="text/javascript">
     var vm = new Vue({
@@ -208,6 +215,7 @@ r                <button type="button" class="btn btn-default" title="刷新" on
             pageSize:"",
             userName1:"",
             shengId:"",
+            shengId1:"",
             shiId:"",
             xianId:"",
             diqulist:"",
@@ -217,7 +225,8 @@ r                <button type="button" class="btn btn-default" title="刷新" on
             shilist:"",
             xianlist:"",
             childrenId:"",
-            childrenlist:""
+            childrenlist:"",
+            diqulist1:""
         },
         methods: {
 
@@ -226,6 +235,20 @@ r                <button type="button" class="btn btn-default" title="刷新" on
         computed :{
         },
         watch : {
+            shengId1:function(val){
+                $.ajax({
+                    type:"post",
+                    url:"../oldPeople/getSheng1",
+                    data:{"provinceid":val},
+                    dataType:"json",
+                    async:false,
+                    success: function(data) {
+                        console.log(data)
+                        vm.shengId1=data.shengId
+                    },
+
+                })
+            },
             shengId:function(val){
                 $.ajax({
                     type:"post",

@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7/dist/css/bootstrap.css}">
-    <script th:src="@{/webjars/jquery/3.5.1/dist/jquery.min.js}"></script>
-    <script th:src="@{/webjars/bootstrap/3.3.7/dist/js/bootstrap.min.js}"></script>
-    <script type="text/javascript" src="../js/vue/vue.min.js"></script>
-    <script type="text/javascript" src="../bootstrap/bootstrap-paginator.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.2/vue.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue-router/3.0.1/vue-router.min.js"></script>
+    <script src="https://cdn.bootcss.com/vuex/3.0.1/vuex.min.js"></script>
+    <script src="../../bootstrap-paginator.js"></script>
 </head>
-<body style=" background:url(../images/login_bg_0.jpg)">
+<body>
 <div id="app" class="container">
     <button type="button" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal" onclick="update(0);"><i class="fa fa-file-o"></i> 新建</button>
     <h1>宿舍楼管理</h1>
@@ -17,14 +19,12 @@
         <tr>
             <th>Id</th>
             <th>宿舍楼名</th>
-            <th>宿舍楼层</th>
             <th>管理人</th>
             <th>操作</th>
         </tr>
         <tr v-for="dorm in dormList">
             <td>{{dorm.dormId}}</td>
             <td>{{dorm.dormName}}</td>
-            <td>{{dorm.storeyName}}</td>
             <td>{{dorm.personName}}</td>
             <td><button type="button" class="RoleOfdelete btn btn-primary  btn-sm" style="margin-right:15px;" v-on:click="del(dorm.dormId)">删除</button>
                 <button type="button" class="RoleOfdelete btn btn-primary  btn-sm" style="margin-right:15px;" data-toggle="modal" data-target="#editModal" v-on:click="update(dorm.dormId)">修改</button></td>
@@ -48,10 +48,6 @@
                         <tr>
                             <td>楼名</td>
                             <td><input class="form-control" type="text" name="dormName" placeholder="楼名" v-model="dorm.dormName"></td>
-                        </tr>
-                        <tr>
-                            <td>选择楼层</td>
-                            <td><input class="form-control" type="text" name="storeyId" placeholder="楼层" v-model="dorm.storeyId"></td>
                         </tr>
                         <tr>
                             <td>负责人</td>
@@ -173,5 +169,9 @@
         });
     }
 </script>
+<!--底部内容-->
+<div class="jumbotron text-center" style="margin-bottom:0px">
+    <p>©2020 Baidu&nbsp;&nbsp;(京)-经营性-2017-0020&nbsp;&nbsp;京公网安备11000002000001号&nbsp;&nbsp;京ICP证030173号</p>
+</div>
 </body>
 </html>

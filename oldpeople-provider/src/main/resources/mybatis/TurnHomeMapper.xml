@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.TurnHomeMapper">
+
+    <select id="findTurnHomeCount" parameterType="com.jk.entity.TurnHome" resultType="java.lang.Long">
+        select count(*) from t_turnhome a, t_oldpeople b,t_home c,t_person d
+          where a.old_id = b.old_id and
+          a.home_id = c.home_id and
+          a.person_id = d.person_id
+    </select>
+
+    <select id="findTurnHome" resultType="com.jk.entity.TurnHome">
+        <bind name="key_off" value="(currPage - 1)*pageSize"/>
+        select a.*,b.old_name oldName,c.home_address homeAddress,d.person_name personName from t_turnhome a, t_oldpeople b,t_home c,t_person d
+        where a.old_id = b.old_id and
+        a.home_id = c.home_id and
+        a.person_id = d.person_id
+        limit #{key_off},#{pageSize}
+    </select>
+
+   <insert id="addOutHome" >
+        insert into t_turnhome(createtime,because,old_id,home_id,person_id) values(#{createTime},#{because},#{oldId},#{homeId},#{personId})
+    </insert>
+
+    <delete id="deleteOutHomeById" parameterType="int">
+        delete from t_turnhome where o_id = #{oId}
+    </delete>
+
+    <select id="findOutHomeById" parameterType="int" resultType="com.jk.entity.TurnHome">
+        select * from t_turnhome where o_id = #{oId}
+    </select>
+
+    <update id="updateOutHome" parameterType="com.jk.entity.TurnHome">
+        update t_turnhome set createtime=#{createTime},because=#{because},old_id=#{oldId},home_id=#{homeId},person_id=#{personId} where o_id = #{oId}
+    </update>
+</mapper>

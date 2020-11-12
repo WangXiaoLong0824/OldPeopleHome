@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.BedMapper">
+
+
+    <select id="findBedCount" parameterType="com.jk.entity.Bed" resultType="java.lang.Long">
+        select count(*) from t_bed b,t_oldpeople o,t_storey s,t_room r,t_person p,t_dorm d
+        where b.old_id=o.old_id and b.storey_id=s.storey_id and
+        b.room_id=r.room_id and b.person_id=p.person_id  and b.dorm_id=d.dorm_id
+    </select>
+
+    <select id="findBed" resultType="com.jk.entity.Bed">
+        <bind name="key_off" value="(currPage - 1)*pageSize"/>
+        select b.*,o.old_name oldName,s.storey_name storeyName,
+        r.room_name roomName ,p.person_name personName,d.dorm_name  dormName
+        from t_bed b,t_oldpeople o,t_storey s,t_room r,t_person p,t_dorm d
+        where b.old_id=o.old_id and b.storey_id=s.storey_id and
+        b.room_id=r.room_id and b.person_id=p.person_id  and b.dorm_id=d.dorm_id
+        limit #{key_off},#{pageSize}
+    </select>
+
+
+    <insert id="addBed">
+        insert into t_bed(old_id,bed_status,storey_id,room_id,person_id) values(#{oldId},#{bedStatus},#{storeyId},#{roomId},#{personId})
+    </insert>
+
+    <delete id="deleteBedById">
+        delete from t_bed where bed_id = #{bedId}
+    </delete>
+
+    <select id="findBedById" parameterType="int" resultType="com.jk.entity.Bed">
+        select * from t_bed where bed_id = #{bedId}
+    </select>
+
+    <update id="updateBed">
+        update t_bed set old_id=#{oldId},bed_status=#{bedStatus},storey_id=#{storeyId},room_id=#{roomId},person_id=#{personId} where bed_id = #{bedId}
+    </update>
+
+</mapper>

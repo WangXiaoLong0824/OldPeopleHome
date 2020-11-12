@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Top</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.2/vue.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue-router/3.0.1/vue-router.min.js"></script>
+    <script src="https://cdn.bootcss.com/vuex/3.0.1/vuex.min.js"></script>
+    <script src="../../bootstrap-paginator.js"></script>
+
+
+</head>
+<body>
+<div id="app" class="container">
+    <div class="page-header">
+        <h1>预约登记表
+            <small>(线上预约详细信息)</small>
+        </h1>
+    </div>
+    <div class="form-group">
+        <label for="topName" class="col-sm-1 control-label">名称:</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control" id="topName" v-model="topName" placeholder="请输入名字">
+        </div>
+    </div>
+    <button type="button" class="btn-info" v-on:click="searchArticleList()">搜索</button></td>
+
+
+    <table class="table table-hover">
+        <tr class = 'tab_tit'>
+            <th class="active">ID</th>
+            <th class="active">姓名</th>
+            <th class="active">联系电话</th>
+            <th class="active">预约时间</th>
+            <th class="active">预估到来时间</th>
+            <th class="active">预约状态</th>
+            <th class="active">
+                <span class="glyphicon glyphicon-cog" style="color: rgb(255, 140, 60);">操作</span>
+            </th>
+        </tr>
+        <tr v-for="top in topList" id = 'ifrTab1' data-row-style="rowStyle" >
+            <td>{{top.topId}}</td>
+            <td>{{top.topName}}</td>
+            <td>{{top.topTell}}</td>
+            <td>{{top.createTime}}</td>
+            <td>{{top.storeyTime}}</td>
+            <td>{{top.topStatus==1?"已受理":top.topStatus==2?"未受理":top.topStatus==3?"待受理":""}}</td>
+            <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal" style="margin-right:15px;" v-on:click="del(top.topId)">删除</button>
+            </td>
+        </tr>
+    </table>
+    <div id="example" style="text-align:center"><ul id="pageLimit"></ul></div>
+</div>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            topList: "",
+            totalPage:"",
+            total:"",
+            currPage:"",
+            pageSize:"",
+            topName:""
+        }
+    })
+
+    $(function() {
+        searchArticleList();
+    })
+    //分页查询数据
+    function searchArticleList(){
+        $.ajax({
+            type:"get",
+            url:"/findTop",
+            data:{"currPage":vm.currPage,"pageSize":vm.pageSize,"topName":vm.topName},
+            dataType:"json",
+            success: function(result) {
+                vm.topList = result.rows;
+                vm.totalPage = result.totalPage;
+                vm.total = result.total;
+                vm.currPage = result.currPage;
+                vm.pageSize = result.pageSize;
+                setPage(result.currPage,result.totalPage,result.pageSize,searchArticleList);
+            },
+            error : function() {
+                alert("系统错误，请联系管理员！");
+            }
+        })
+    }
+
+    function setPage(pageCurrent,pageSum,pageSize,callback){
+        $('#pageLimit').bootstrapPaginator({
+            currentPage:pageCurrent,
+            totalPages:pageSum,
+            size:"normal",
+            bootstrapMajorVersion:3,
+            alignment:"right",
+            numberOfPages:pageSize,
+            itemTexts:function(type,page,current){
+                switch(type){
+                    case "first" : return "首页";
+                    case "prev" : return "上一页";
+                    case "next" : return "下一页";
+                    case "last" : return "末页";
+                    case "page" : return page;
+                }
+            },
+            onPageClicked: function(event,originalEvent,type,page){
+                vm.currPage = page;
+                callback && callback()
+            }
+        });
+    }
+    //单删
+    function del(ids){
+        var abc=confirm("您确定删除这条信息吗");
+        if (abc){
+            $.ajax({
+                url:'/delTop',
+                type:'post',
+                data:{"ids":ids},
+                dataType:"json",
+                success:function(result){
+
+                }
+            })
+            alert("删除成功");
+            searchArticleList();
+        }
+    }
+
+</script>
+<!--底部内容-->
+<div class="jumbotron text-center" style="margin-bottom:0px">
+    <p>©2020 Baidu&nbsp;&nbsp;(京)-经营性-2017-0020&nbsp;&nbsp;京公网安备11000002000001号&nbsp;&nbsp;京ICP证030173号</p>
+</div>
+</body>
+</html>

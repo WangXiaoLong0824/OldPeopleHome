@@ -34,6 +34,10 @@ public class OldPeopleController {
     public List<TbProvinces> getSheng(){
         return oldPeopleService.getSheng();
     }
+    @RequestMapping("getSheng1")
+    public List<TbProvinces> getSheng1(@RequestParam String provinceid){
+        return oldPeopleService.getSheng1(provinceid);
+    }
     @RequestMapping("findShi")
     public List<TbCities> findShi(@RequestParam String provinceid){
         return oldPeopleService.findShi(provinceid);

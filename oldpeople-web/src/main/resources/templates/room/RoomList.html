@@ -122,7 +122,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h3 id="myModalLabel">楼房信息</h3>
+                <h3 id="myModalLabel">添加房间信息</h3>
             </div>
             <form id="forms" method="post">
                 <div class="modal-body">
@@ -130,11 +130,26 @@
                         <input class="form-control" name="roomId" style="display:none" readonly="readonly" v-model="room.roomId">
                         <tr>
                             <td>楼名</td>
-                            <td><input class="form-control" type="text" name="dormId" placeholder="楼名" v-model="room.dormId"></td>
+                            <td>
+                                <select name="dormId" class="form-control" v-model="room.dormId">
+                                    <option value="-1">请选择</option>
+                                    <option value="1">福楼</option>
+                                    <option value="2">寿楼</option>
+                                </select>
+                                <!--<input class="form-control" type="text" name="dormId" placeholder="楼名" v-model="room.dormId">--></td>
                         </tr>
                         <tr>
                             <td>楼层</td>
-                            <td><input class="form-control" type="text" name="storeyId" placeholder="楼层" v-model="room.storeyId"></td>
+                            <td>
+                                <select name="storeyId" class="form-control" v-model="room.storeyId">
+                                    <option value="-1">请选择</option>
+                                    <option value="1">一楼</option>
+                                    <option value="2">二楼</option>
+                                    <option value="3">三楼</option>
+                                    <option value="4">四楼</option>
+                                    <option value="5">五楼</option>
+                                </select>
+                                <!--<input class="form-control" type="text" name="storeyId" placeholder="楼层" v-model="room.storeyId">--></td>
                         </tr>
                         <tr>
                             <td>房间名</td>
@@ -142,11 +157,25 @@
                         </tr>
                         <tr>
                             <td>房间风格</td>
-                            <td><input class="form-control" type="text" name="typeId" placeholder="房间风格" v-model="room.typeId"></td>
+                            <td>
+                                <select name="typeId" class="form-control" v-model="room.typeId">
+                                    <option value="-1">请选择</option>
+                                    <option value="1">埃及风</option>
+                                    <option value="2">北欧风</option>
+                                    <option value="3">古风</option>
+                                </select>
+                                <!--<input class="form-control" type="text" name="typeId" placeholder="房间风格" v-model="room.typeId">--></td>
                         </tr>
                         <tr>
                             <td>清洁人员</td>
-                            <td><input class="form-control" type="text" name="cleanerId" placeholder="清洁人员" v-model="room.cleanerId"></td>
+                            <td>
+                                <select name="cleanerId" class="form-control" v-model="room.cleanerId">
+                                    <option value="-1">请选择</option>
+                                    <option value="1">老张</option>
+                                    <option value="2">老王</option>
+                                    <option value="3">老常</option>
+                                </select>
+                                <!--<input class="form-control" type="text" name="cleanerId" placeholder="清洁人员" v-model="room.cleanerId">--></td>
                         </tr>
                     </table>
                 </div>

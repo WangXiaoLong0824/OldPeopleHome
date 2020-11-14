@@ -46,13 +46,16 @@
     <div id="example" style="text-align:center"><ul id="pageLimit"></ul></div>
 </div>
 
+<<<<<<< HEAD
 <!--新增弹出框-->
+=======
+>>>>>>> d0d08b78ab34f9554b3dcbf36f6ec251586bfce3
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" id="ppa">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h3 id="myModalLabel">请假登记表</h3>
+                <h3 id="myModalLabel">床位登记表</h3>
             </div>
             <form id="forms" method="post">
                 <div class="modal-body">
@@ -60,7 +63,10 @@
                         <input class="form-control" name="bedId" style="display:none" readonly="bedId" v-model="thing.thingId">
                         <tr>
                             <td>请假原因</td>
-                            <td><input class="form-control" type="text" name="thingBecause" placeholder="请输入" v-model="thing.thingBecause"></td>
+                            <select class="form-control con1" name="xianId" v-model="oldId"  ><!--@change="changeProduct"-->
+                                <option value="" disabled selected>请选择</option>
+                                <option  v-for="old in oldlist" :value="old.oldId">{{old.oldName}}</option>
+                            </select>
                         </tr>
                         <tr>
                             <td>请假时间</td>
@@ -94,14 +100,35 @@
             totalPage:"",
             total:"",
             currPage:"",
-            pageSize:""
+            pageSize:"",
+            oldlist:"",
+            oldId:""
 
         }
     })
 
     $(function() {
         searchArticleList();
+        getOld();
     })
+
+    function  getOld(){
+        $.ajax({
+            type:"post",
+            url:"../under/getOld",
+            data:"",
+            dataType:"json",
+            success: function(data) {
+                console.log(data)
+
+
+                vm.oldlist=data
+            },
+            error : function() {
+                alert("系统错误，请联系管理员！");
+            }
+        })
+    }
     //分页查询数据
     function searchArticleList(){
         $.ajax({

@@ -65,7 +65,8 @@ public class IndexController {
 
         return "bed/bed";
     }
-    @RequestMapping("/toLaoRenXinXi")
+
+    @RequestMapping("toLaoRenXinXi")
     public String toLaoRenXinXi(){
         return "laorenguanli/laorenxinxi";
     }

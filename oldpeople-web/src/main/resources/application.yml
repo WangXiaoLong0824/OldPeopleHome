@@ -3,6 +3,10 @@ server:
 spring:
   application:
     name: oldpeople-web
+  cloud:
+    alibaba:
+      seata:
+        tx-service-group: my_test_tx_group
   main:
     allow-bean-definition-overriding: true
 

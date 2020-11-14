@@ -43,7 +43,8 @@
             <td>{{careful.carefulType}}</td>
             <td>{{careful.oldManName}}</td>
             <td><button type="button" class="RoleOfdelete btn btn-primary  btn-sm" style="margin-right:15px;" v-on:click="del(careful.carefulId)">删除</button>
-                <button type="button" class="RoleOfdelete btn btn-primary  btn-sm" style="margin-right:15px;" data-toggle="modal" data-target="#editModal" v-on:click="update(careful.carefulId)">修改</button></td>
+                <button type="button" class="RoleOfdelete btn btn-primary  btn-sm" style="margin-right:15px;" data-toggle="modal" data-target="#editModal" v-on:click="update(careful.carefulId)">修改</button>
+                <button type="button" class="RoleOfdelete btn btn-primary  btn-sm" style="margin-right:15px;" v-on:click="pay(careful.carefulId)">缴费</button></td>
         </tr>
     </table>
     <div id="example" style="text-align:center"><ul id="pageLimit"></ul></div>
@@ -200,6 +201,10 @@
                 vs.careful=data;
             },
         });
+    }
+
+    function pay(carefulId){
+        location.href="";
     }
 </script>
 <!--底部内容-->

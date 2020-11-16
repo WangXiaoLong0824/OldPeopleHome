@@ -3,6 +3,8 @@ package com.jk.dao;
 import com.jk.entity.TurnHome;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,12 +17,8 @@ public interface TurnHomeMapper {
 
     Long findTurnHomeCount();
 
-    void addOutHome(TurnHome turnHome);
-
-    void updateOutHome(TurnHome turnHome);
-
-    void deleteOutHomeById(Integer oId);
-
-    TurnHome findOutHomeById(Integer oId);
-
+@Update("update t_turnhome set because=#{because},person_id=#{personId},dorm_id=#{dormId},storey_id=#{storeyId},room_id=#{roomId} where turn_id=#{turnId}")
+    void updateTurnHome(TurnHome turnHome);
+@Select("select * from t_turnhome t where t.turn_id=#{oId}")
+    TurnHome findTurnHomeById(Integer oId);
 }

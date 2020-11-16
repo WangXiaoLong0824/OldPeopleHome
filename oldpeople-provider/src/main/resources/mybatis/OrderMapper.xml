@@ -5,13 +5,15 @@
     <select id="findOrderList" parameterType="com.jk.entity.OrderBean" resultType="java.lang.Long">
         select count(*) from t_order  o
         LEFT JOIN t_orderthing oo on o.orderthing_id=oo.orderthing_id
-
+        <include refid="mysql"></include>
     </select>
 
     <select id="findOrderListPage" resultType="com.jk.entity.OrderBean">
         <bind name="key_off" value="(currPage - 1)*pageSize"/>
         SELECT o.*,oo.order_name orderthingname from t_order o
-        LEFT JOIN t_orderthing oo on o.orderthing_id=oo.orderthing_id limit ${key_off},${pageSize}
+        LEFT JOIN t_orderthing oo on o.orderthing_id=oo.orderthing_id
+         <include refid="mysql"></include>
+         limit ${key_off},${pageSize}
     </select>
 
     <delete id="deleteOrder" parameterType="int">
@@ -29,4 +31,13 @@
     <select id="selectOrderById" resultType="com.jk.entity.OrderBean" parameterType="int">
         select * from t_order where order_id=#{id}
     </select>
+    
+    <sql id="mysql">
+            <where>
+                <if test="order.orderName!=null and order.orderName!=''">
+                    and o.order_name like '%${order.orderName}%'
+                </if>
+            </where>
+        
+    </sql>
 </mapper>

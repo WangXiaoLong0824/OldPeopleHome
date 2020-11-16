@@ -13,6 +13,17 @@
 <div id="app" class="container">
     <button type="button" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal" onclick="update(0);"><i class="fa fa-file-o"></i> 新建</button>
     <h1>订单详情</h1>
+
+
+    <div class="form-group">
+        <label for="orderName" class="col-sm-1 control-label">订单名称：</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control" id="orderName" v-model="orderName" placeholder="请输入">
+        </div>
+    </div>
+    <button type="button" v-on:click="searchArticleList()">搜索</button></td>
+
+
     <table class="table table-bordered">
         <tr>
             <th>订单id</th>
@@ -83,7 +94,8 @@
             totalPage:"",
             total:"",
             currPage:"",
-            pageSize:""
+            pageSize:"",
+            orderName:""
         }
     })
 
@@ -95,7 +107,7 @@
         $.ajax({
             type:"get",
             url:"../order/findOrderList",
-            data:{"currPage":vm.currPage,"pageSize":vm.pageSize},
+            data:{"currPage":vm.currPage,"pageSize":vm.pageSize,"orderName":vm.orderName},
             dataType:"json",
             success: function(result) {
                 vm.orderList = result.rows;

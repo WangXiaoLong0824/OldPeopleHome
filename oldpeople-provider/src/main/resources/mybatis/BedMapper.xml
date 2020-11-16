@@ -11,29 +11,31 @@
 
     <select id="findBed" resultType="com.jk.entity.Bed">
         <bind name="key_off" value="(currPage - 1)*pageSize"/>
-        select b.*,o.old_name oldName,s.storey_name storeyName,
-        r.room_name roomName ,p.person_name personName,d.dorm_name  dormName
-        from t_bed b,t_oldpeople o,t_storey s,t_room r,t_person p,t_dorm d
-        where b.old_id=o.old_id and b.storey_id=s.storey_id and
-        b.room_id=r.room_id and b.person_id=p.person_id  and b.dorm_id=d.dorm_id
+        select b.` bed_id` bedId,b.bed_status,o.old_name oldName,s.storey_name storeyName,r.room_name roomName,
+        p.person_name personName,d.dorm_name dormName from t_bed b
+        LEFT JOIN t_oldpeople o on b.old_id=o.old_id
+        LEFT JOIN t_storey s on b.storey_id=s.storey_id
+        LEFT JOIN t_room r on b.room_id=r.room_id
+        LEFT JOIN t_person p on b.person_id=p.person_id
+        LEFT JOIN t_dorm d on b.dorm_id=d.dorm_id
         limit #{key_off},#{pageSize}
     </select>
 
 
     <insert id="addBed">
-        insert into t_bed(old_id,bed_status,storey_id,room_id,person_id) values(#{oldId},#{bedStatus},#{storeyId},#{roomId},#{personId})
+        insert into t_bed(old_id,bed_status,storey_id,room_id,person_id,dorm_id) values(#{oldId},#{bedStatus},#{storeyId},#{roomId},#{personId},#{dormId})
     </insert>
 
     <delete id="deleteBedById">
-        delete from t_bed where bed_id = #{bedId}
+        delete from t_bed where ` bed_id` = #{bedId}
     </delete>
 
     <select id="findBedById" parameterType="int" resultType="com.jk.entity.Bed">
-        select * from t_bed where bed_id = #{bedId}
+        select b.` bed_id` bedId,b.bed_status,b.old_id,b.dorm_id,b.person_id,b.room_id,b.storey_id from t_bed b where ` bed_id`  = #{bedId}
     </select>
 
     <update id="updateBed">
-        update t_bed set old_id=#{oldId},bed_status=#{bedStatus},storey_id=#{storeyId},room_id=#{roomId},person_id=#{personId} where bed_id = #{bedId}
+        update t_bed set old_id=#{oldId},bed_status=#{bedStatus},storey_id=#{storeyId},room_id=#{roomId},person_id=#{personId} where ` bed_id`= #{bedId}
     </update>
 
 </mapper>

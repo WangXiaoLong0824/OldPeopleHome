@@ -7,9 +7,7 @@ public interface TurnHomeService {
 
     PageResult findTurnHome(Integer currPage, Integer pageSize);
 
-    void addOutHome(TurnHome turnHome);
+    void updateTurnHome(TurnHome turnHome);
 
-    void deleteOutHomeById(Integer oId);
-
-    TurnHome findOutHomeById(Integer oId);
+    TurnHome findTurnHomeById(Integer oId);
 }

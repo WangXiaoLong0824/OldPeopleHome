@@ -15,7 +15,7 @@ public class PerformanceController {
     @Resource
     private PerformanceService performanceService;
     @RequestMapping("findPagePerformance")
-    public PageResult findPagePerformance(@RequestParam(value = "currPage", defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize", defaultValue = "2") Integer pageSize, @RequestBody Performance performance){
+    public PageResult findPagePerformance(@RequestParam(value = "currPage", defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize, @RequestBody Performance performance){
         return performanceService.findPagePerformance(currPage,pageSize,performance);
     }
     @RequestMapping("addPerformance")

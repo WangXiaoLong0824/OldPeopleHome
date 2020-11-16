@@ -12,7 +12,7 @@ import java.util.List;
 public interface OldPeopleService {
     //老人基本信息  WXL
     @RequestMapping("findPageOldPeople")
-    public PageResult findPageOldPeople(@RequestParam(value = "currPage", defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize", defaultValue = "2") Integer pageSize, @RequestBody OldPeople oldPeople);
+    public PageResult findPageOldPeople(@RequestParam(value = "currPage", defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize, @RequestBody OldPeople oldPeople);
     @RequestMapping("addOldPeople")
     public void addOldPeople(@RequestBody OldPeople oldPeople);
     @RequestMapping("deleteOldPeople")
@@ -22,7 +22,7 @@ public interface OldPeopleService {
 
     //员工基本信息  WXL
     @RequestMapping("findPageEmp")
-    public PageResult findPageEmp(@RequestParam(value = "currPage", defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize", defaultValue = "2") Integer pageSize, @RequestBody  Emp emp);
+    public PageResult findPageEmp(@RequestParam(value = "currPage", defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize, @RequestBody  Emp emp);
     @RequestMapping("addEmp")
     public void addEmp(@RequestBody Emp emp);
     @RequestMapping("deleteEmp")
@@ -32,9 +32,11 @@ public interface OldPeopleService {
     //子女 WXL
     @RequestMapping("findChildren")
     public List<SysUser> findChildren(@RequestParam Integer userid);
+    @RequestMapping("findChildrenAll")
+    public List<SysUser> findChildrenAll();
     //员工绩效 WXL
     @RequestMapping("findPagePerformance")
-    public PageResult findPagePerformance(@RequestParam(value = "currPage", defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize", defaultValue = "2") Integer pageSize, @RequestBody  Performance performance);
+    public PageResult findPagePerformance(@RequestParam(value = "currPage", defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize, @RequestBody  Performance performance);
     @RequestMapping("addPerformance")
     public void addPerformance(@RequestBody Performance performance);
     @RequestMapping("deletePerformance")
@@ -50,15 +52,17 @@ public interface OldPeopleService {
 
     //线下访客登记 WXL
     @RequestMapping("findPageUnder")
-    public PageResult findPageUnder(@RequestParam(value = "currPage", defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize", defaultValue = "2") Integer pageSize, @RequestBody  Under under);
+    public PageResult findPageUnder(@RequestParam(value = "currPage", defaultValue = "1") Integer currPage, @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize, @RequestBody  Under under);
     @RequestMapping("addUnder")
     public void addUnder(@RequestBody Under under);
     @RequestMapping("deleteUnder")
     public void deleteUnder(@RequestParam Integer underId);
     @RequestMapping("findUnderById")
     public Under findUnderById(@RequestParam Integer underId);
-
-
+    @RequestMapping("getOld")
+    public List<OldPeople> getOld();
+    @RequestMapping("getRoom")
+    public List<Room> getRoom();
     //床位信息 lmq
 
     @RequestMapping("findBed")
@@ -69,17 +73,22 @@ public interface OldPeopleService {
     public String deleteBedById(@RequestParam Integer bedId);
     @RequestMapping("findBedById")
     public Bed findBedById(@RequestParam Integer bedId);
+    @RequestMapping("/getDorm")
+    public List<Dorm> getDorm();
+    @RequestMapping("/getPerson")
+    public List<Person> getPerson();
+    @RequestMapping("/getStorey")
+    public List<Storey> getStorey();
 
     //转房记录 lmq
     @RequestMapping("findOutHome")
     public PageResult findTurnHome(@RequestParam(value="currPage",defaultValue="1") Integer currPage, @RequestParam(value="pageSize",defaultValue="10") Integer pageSize);
-    @RequestMapping("addOutHome")
-    public String addOutHome(@RequestBody TurnHome turnHome);
-    @RequestMapping("deleteOutHomeById")
-    public String deleteOutHomeById(@RequestParam Integer oId);
-    @RequestMapping("findOutHomeById")
-    public TurnHome findOutHomeById(@RequestParam Integer oId);
-   //地区 WXl
+    @RequestMapping("/updateTurnHome")
+    public void updateTurnHome(@RequestBody TurnHome turnHome);
+    @RequestMapping("/findTurnHomeById")
+    public TurnHome findTurnHomeById(@RequestParam Integer oId);
+
+    //地区 WXl
     @RequestMapping("getSheng")
     public List<TbProvinces> getSheng();
     @RequestMapping("findShi")
@@ -207,18 +216,7 @@ public interface OldPeopleService {
     @RequestMapping("selectOutHomeById")
     public OutHomeBean selectOutHomeById(@RequestParam Integer id);
 
-    //房间表 t_room wkp
-    @RequestMapping("findRoomList")
-    public PageResult findRoomList(@RequestParam(value = "currPage",defaultValue = "1")Integer currPage, @RequestParam(value="pageSize",defaultValue="10") Integer pageSize, @RequestBody RoomBean room);
-    @RequestMapping("deleteRoom")
-    public void  deleteRoom(@RequestParam Integer id);
-    @RequestMapping("addRoom")
-    public void addRoom(@RequestBody RoomBean room);
-    @RequestMapping("updateRoom")
-    public void updateRoom(@RequestBody RoomBean room);
-    @RequestMapping("selectRoomById")
-    public RoomBean selectRoomById(@RequestParam Integer id);
-
 
 }
+
 

@@ -1,42 +1,35 @@
 package com.jk.controller;
 
 import com.jk.entity.PageResult;
+import com.jk.entity.Top;
 import com.jk.entity.TurnHome;
+import com.jk.entity.Under;
 import com.jk.service.OldPeopleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 
-@Controller
+@RestController
 public class TurnHomeController {
 
     @Autowired
     private OldPeopleService turnHomeService;
 
-    @RequestMapping("/findOutHome")
+    @RequestMapping("/findTurnHome")
     public PageResult findTurnHome(@RequestParam(value="currPage",defaultValue="1") Integer currPage, @RequestParam(value="pageSize",defaultValue="10") Integer pageSize){
         return turnHomeService.findTurnHome(currPage,pageSize);
     }
-
-
-    @RequestMapping("/addTurnHome")
-    public String addOutHome(TurnHome turnHome){
-        turnHomeService.addOutHome(turnHome);
-        return "success";
+    @RequestMapping("/updateTurnHome")
+    public void updateTurnHome(TurnHome turnHome){
+        turnHomeService.updateTurnHome(turnHome);
     }
-
-    @RequestMapping("/deleteOutHomeById")
-    public String deleteOutHomeById(Integer oId){
-        turnHomeService.deleteOutHomeById(oId);
-        return "success";
-    }
-
-    @RequestMapping("/findOutHomeById")
-    public TurnHome findOutHomeById(Integer oId){
-        return turnHomeService.findOutHomeById(oId);
+    @RequestMapping("/findTurnHomeById")
+    public TurnHome findTurnHomeById(Integer oId){
+        return turnHomeService.findTurnHomeById(oId);
     }
 
 }

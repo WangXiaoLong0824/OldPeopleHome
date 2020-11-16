@@ -28,9 +28,9 @@
 
 
 </head>
-<body>
+<body style="background: url(../images/1234.png) no-repeat center center fixed; background-size: 100%;">
 <div class="breadcrumb">
-    <a href="http://localhost:8080/shopxxb2b2c/admin/common/index">首页</a> » 会员等级
+    <a href="http://localhost:8080/shopxxb2b2c/admin/common/index">首页</a>
 </div>
 <form id="listForm" action="http://localhost:8080/shopxxb2b2c/admin/store_rank/list" method="get">
     <div class="pull-left">
@@ -43,7 +43,6 @@
         </div>
     </div>
     <div id="app" class="container">
-        <h1>会员等级</h1>
         <form action="" id="list_form">
             <div class="form-group">
                 <label for="name" class="col-sm-1 control-label">名称：</label>
@@ -115,7 +114,7 @@
                                 </tr>
                                 <tr>
                                     <td>名称</td>
-                                    <td><input id="oldName" name="oldName" class="form-control" placeholder="名称" v-model="storeCategory.oldName">  </td>
+                                    <td><input id="oldName" name="oldName" class="form-control" placeholder="名称" v-model="c.oldName">  </td>
                                 </tr>
                                 <tr>
                                     <td>性别</td>
@@ -262,6 +261,7 @@ function  changeProduct(){
     $(function() {
         searchStoreCategoryList();
         getSheng();
+        getOld();
     })
     function getSheng () {
         $.ajax({
@@ -373,6 +373,23 @@ function  changeProduct(){
             }
         })
     }
+    function getOld(){
+        $.ajax({
+            type:'post',
+            url:'../oldPeople/findChildrenAll',
+            data:"",
+            dataType: 'json',
+            success: function (result) {
+                console.log(result)
+                vm.childrenlist=result;
+
+
+            },
+            error: function () {
+                alert("系统错误，请联系管理员！");
+            }
+        })
+    }
     //修改回显
     function findOne(id,childrenId) {
         $.ajax({
@@ -382,7 +399,6 @@ function  changeProduct(){
             dataType: 'json',
             success: function (result) {
                 console.log(result)
-                vm.childrenlist=result;
                 vm.childrenId=result.userid;
 
             },

@@ -1,7 +1,6 @@
 package com.jk.controller;
 
-import com.jk.entity.Bed;
-import com.jk.entity.PageResult;
+import com.jk.entity.*;
 import com.jk.service.OldPeopleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 public class BedController {
@@ -35,6 +36,19 @@ public class BedController {
     @RequestMapping("/findBedById")
     public Bed findBedById(Integer bedId){
         return bedService.findBedById(bedId);
+    }
+
+    @RequestMapping("/getDorm")
+    public List<Dorm> getDorm(){
+        return bedService.getDorm();
+    }
+    @RequestMapping("/getPerson")
+    public List<Person> getPerson(){
+        return bedService.getPerson();
+    }
+    @RequestMapping("/getStorey")
+    public List<Storey> getStorey(){
+        return bedService.getStorey();
     }
 
 }

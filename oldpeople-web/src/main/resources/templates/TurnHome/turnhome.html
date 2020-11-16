@@ -14,15 +14,15 @@
 <body>
 <div id="app" class="container">
     <div class="page-header">
-        <h1>床位登记表
-            <small>(床位详细信息)</small>
+        <h1>转房登记表
+            <small>(转房详细信息)</small>
         </h1>
     </div>
     <form id="listForm" action="http://localhost:8080/shopxxb2b2c/admin/store_rank/list" method="get">
         <div class="pull-left">
             <div class="form-group form-inline">
                 <div class="btn-group">
-                 <!--   <button type="button"  class="btn btn-default" title="新建" data-toggle="modal" data-target="#exampleModal" v-on:click="storeCategory = {}"><i class="fa fa-file-o"></i> 新建</button>-->
+                    <!--   <button type="button"  class="btn btn-default" title="新建" data-toggle="modal" data-target="#exampleModal" v-on:click="storeCategory = {}"><i class="fa fa-file-o"></i> 新建</button>-->
                     <!--<button type="button" class="btn btn-default" title="删除" onclick="deleteStoreCategory()"><i class="fa fa-trash-o"></i> 删除</button>-->
                     <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
                 </div>
@@ -33,102 +33,96 @@
         <tr class = 'tab_tit'>
             <th class="active">ID</th>
             <th class="active">老人姓名</th>
-            <th class="active">所属公寓楼</th>
-            <th class="active">楼层</th>
-            <th class="active">房间号</th>
-            <th class="active">是否打扫</th>
+            <th class="active">转房时间</th>
+            <th class="active">转房原因</th>
+            <th class="active">房间</th>
             <th class="active">负责人</th>
             <th class="active">
                 <span class="glyphicon glyphicon-cog" style="color: rgb(255, 140, 60);">操作</span>
             </th>
         </tr>
         <tr v-for="bed in bedList" id = 'ifrTab1' data-row-style="rowStyle" >
-            <td>{{bed.bedId}}</td>
+            <td>{{bed.turnId}}</td>
             <td>{{bed.oldName}}</td>
-            <td>{{bed.dormName}}</td>
-            <td>{{bed.storeyName}}</td>
-            <td>{{bed.roomName}}</td>
-            <td>{{bed.bedStatus==1?"已打扫":"未打扫"}}</td>
+            <td>{{bed.createTime}}</td>
+            <td>{{bed.because}}</td>
+            <td>{{bed.dormName}}{{bed.storeyName}}{{bed.roomName}}</td>
             <td>{{bed.personName}}</td>
             <td>
-     <button type="button" class="btn btn-info" style="margin-right:15px;" v-on:click="del(bed.bedId)">删除</button>
-                <button type="button" class="btn btn-info" style="margin-right:15px;" data-toggle="modal" data-target="#exampleModal" v-on:click="update(bed.bedId)">修改</button>
+                <button type="button" class="btn btn-info" style="margin-right:15px;" data-toggle="modal" data-target="#exampleModal" v-on:click="update(bed.turnId)">转房</button>
                 <!--<button type="button" class="btn btn-info" title="新建" data-toggle="modal" data-target="#editModal" onclick="update(0);"><i class="fa fa-file-o"></i> 新建</button>-->
             </td>
         </tr>
     </table>
-
-
     <div id="example" style="text-align:center"><ul id="pageLimit"></ul></div>
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" id="ppa">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h3 id="myModalLabel">床位登记表</h3>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" id="ppa">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 id="myModalLabel">床位登记表</h3>
+                </div>
+                <form id="forms" method="post">
+                    <div class="modal-body">
+                        <table class="table table-bordered table-striped"  width="800px">
+
+                            <input name="turnId" style="display: none"  v-model="home.turnId" readonly="readonly">
+                            <tr>
+                                <td>老人姓名</td>
+                                <td>
+                                    <select class="form-control con1" name="oldId" v-model="oldId" disabled ><!--@change="changeProduct"-->
+                                        <option value="" >请选择</option>
+                                        <option  v-for="old in oldlist" :value="old.oldId">{{old.oldName}}</option>
+                                    </select></td>
+                            </tr>
+                            <tr>
+                                <td>转房原因</td>
+                                <td>
+                                    <input  class="form-control con1" name="because"  v-model="home.because"  value="2"></td>
+                            </tr>
+
+                            <tr>
+                                <td>楼层</td>
+                                <td>
+                                    <select class="form-control con1" name="storeyId" v-model="storeyId"  ><!--@change="changeProduct"-->
+                                        <option value="" >请选择</option>
+                                        <option  v-for="storey in storeylist" :value="storey.storeyId" >{{storey.storeyName}}</option>
+                                    </select></td>
+                            </tr>
+                            <tr>
+                                <td>房间</td>
+                                <td>
+                                    <select class="form-control con1" name="roomId" v-model="roomId"  ><!--@change="changeProduct"-->
+                                        <option value="" disabled selected>请选择</option>
+                                        <option  v-for="room in roomlist" :value="room.roomId">{{room.roomName}}</option>
+                                    </select></td>
+                            </tr>
+                            <tr>
+                                <td>公寓编号</td>
+                                <td>
+                                    <select class="form-control con1" name="dormId" v-model="dormId"  ><!--@change="changeProduct"-->
+                                        <option value="" disabled selected>请选择</option>
+                                        <option  v-for="dorm in dormlist" :value="dorm.dormId">{{dorm.dormName}}</option>
+                                    </select></td>
+                            </tr>
+                            <tr>
+                                <td>负责人</td>
+                                <td>
+                                    <select class="form-control con1" name="personId" v-model="personId"  ><!--@change="changeProduct"-->
+                                        <option value="" disabled selected>请选择</option>
+                                        <option  v-for="person in personlist" :value="person.personId">{{person.personName}}</option>
+                                    </select></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default" onclick="insert()">保存</button>
+                        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+                    </div>
+                </form>
             </div>
-            <form id="forms" method="post">
-                <div class="modal-body">
-                    <table class="table table-bordered table-striped"  width="800px">
-
-                        <input name="bedId" style="display: none"  v-model="home.bedId" readonly="readonly">
-                        <tr>
-                            <td>老人姓名</td>
-                            <td>
-                                <select class="form-control con1" name="oldId" v-model="oldId"  ><!--@change="changeProduct"-->
-                                    <option value="">请选择</option>
-                                    <option  v-for="old in oldlist" :value="old.oldId">{{old.oldName}}</option>
-                                </select></td>
-                        </tr>
-                        <tr>
-                            <td>是否打扫</td>
-                            <td><input type="radio" name="bedStatus"  v-model="home.bedStatus"  value="1">已打扫
-                                <input type="radio" name="bedStatus"  v-model="home.bedStatus"  value="2">未打扫</td>
-                        </tr>
-                        <tr>
-                            <td>楼层</td>
-                            <td>
-                            <select class="form-control con1" name="storeyId" v-model="storeyId"  ><!--@change="changeProduct"-->
-                                <option value="" disabled selected>请选择</option>
-                                <option  v-for="storey in storeylist" :value="storey.storeyId">{{storey.storeyName}}</option>
-                            </select></td>
-                        </tr>
-                        <tr>
-                            <td>房间</td>
-                            <td>
-                                <select class="form-control con1" name="roomId" v-model="roomId"  ><!--@change="changeProduct"-->
-                                    <option value="" disabled selected>请选择</option>
-                                    <option  v-for="room in roomlist" :value="room.roomId">{{room.roomName}}</option>
-                                </select></td>
-                        </tr>
-
-                        <tr>
-                            <td>负责人</td>
-                            <td>
-                                <select class="form-control con1" name="personId" v-model="personId"  ><!--@change="changeProduct"-->
-                                    <option value="" disabled selected>请选择</option>
-                                    <option  v-for="person in personlist" :value="person.personId">{{person.personName}}</option>
-                                </select></td>
-                        </tr>
-
-                        <tr>
-                            <td>公寓编号</td>
-                            <td>
-                                <select class="form-control con1" name="dormId" v-model="dormId"  ><!--@change="changeProduct"-->
-                                    <option value="" disabled selected>请选择</option>
-                                    <option  v-for="dorm in dormlist" :value="dorm.dormId">{{dorm.dormName}}</option>
-                                </select></td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-default" onclick="insert()">保存</button>
-                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
-                </div>
-            </form>
         </div>
     </div>
-</div>
 </div>
 <script type="text/javascript">
 
@@ -158,16 +152,51 @@
 
     $(function() {
         searchArticleList();
-        getOld();
-        getStorey();
-        getPerson();
+       getStorey();
         getDorm();
         getRoom();
+        getPerson();
+        getOld();
     })
 
+    function  getOld(){
+        $.ajax({
+            type:"post",
+            url:"../under/getOld",
+            data:"",
+            dataType:"json",
+            success: function(data) {
+                alert(data);
+                console.log(data)
 
 
-    function  getRoom(){
+                vm.oldlist=data
+            },
+            error : function() {
+                alert("系统错误，请联系管理员！");
+            }
+        })
+    }
+
+    function  getPerson(){
+        $.ajax({
+            type:"post",
+            url:"../getPerson",
+            data:"",
+            dataType:"json",
+            success: function(data) {
+                console.log(data)
+
+
+                vm.personlist=data
+            },
+            error : function() {
+                alert("系统错误，请联系管理员！");
+            }
+        })
+    }
+
+ function  getRoom(){
         $.ajax({
             type:"post",
             url:"../under/getRoom",
@@ -180,6 +209,7 @@
                 vm.roomlist=data
             },
             error : function() {
+                alert("系统错误，请联系管理员！");
             }
         })
     }
@@ -199,26 +229,11 @@
                 vm.dormlist=data
             },
             error : function() {
+                alert("系统错误，请联系管理员！");
             }
         })
     }
 
-    function  getPerson(){
-        $.ajax({
-            type:"post",
-            url:"../getPerson",
-            data:"",
-            dataType:"json",
-            success: function(data) {
-                console.log(data)
-
-
-                vm.personlist=data
-            },
-            error : function() {
-            }
-        })
-    }
     function  getStorey(){
 
         $.ajax({
@@ -233,31 +248,16 @@
                 vm.storeylist=data
             },
             error : function() {
+                alert("系统错误，请联系管理员！");
             }
         })
     }
 
-    function  getOld(){
-        $.ajax({
-            type:"post",
-            url:"../under/getOld",
-            data:"",
-            dataType:"json",
-            success: function(data) {
-                console.log(data)
-
-
-                vm.oldlist=data
-            },
-            error : function() {
-            }
-        })
-    }
     //分页查询数据
     function searchArticleList(){
         $.ajax({
             type:"get",
-            url:"/findBed",
+            url:"/findTurnHome",
             data:{"currPage":vm.currPage,"pageSize":vm.pageSize},
             dataType:"json",
             success: function(result) {
@@ -270,6 +270,7 @@
                 setPage(result.currPage,result.totalPage,result.pageSize,searchArticleList);
             },
             error : function() {
+                alert("系统错误，请联系管理员！");
             }
         })
     }
@@ -297,29 +298,10 @@
             }
         });
     }
-    //单删
-    function del(bedId){
-        var abc=confirm("您确定删除这条信息吗");
-        if (abc){
-            $.ajax({
-                url:'/deleteBedById',
-                type:'post',
-                data:{"bedId":bedId},
-                dataType:"json",
-                success:function(result){
-
-                }
-            })
-            alert("删除成功");
-            searchArticleList();
-        }
-    }
-
-
 
     function insert(){//新增数据
         $.ajax({
-            url:'/addBed',
+            url:'/updateTurnHome',
             type:'post',
             data:$('#forms').serialize(),
             success:function(){
@@ -328,11 +310,11 @@
         })
     }
 
-    function update(bedId){//回显数据
+    function update(turnId){//回显数据
         $.ajax({
-            url:"/findBedById",
+            url:"/findTurnHomeById",
             type:"post",
-            data:{"bedId":bedId},
+            data:{"oId":turnId},
             success:function(data){
                 console.log(data)
                 vm.home=data;
@@ -344,6 +326,7 @@
             },
         });
     }
+
 </script>
 <!--底部内容-->
 <div class="jumbotron text-center" style="margin-bottom:0px">

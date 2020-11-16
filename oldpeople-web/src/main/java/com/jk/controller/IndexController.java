@@ -25,6 +25,11 @@ public class IndexController {
     public String bed(){
         return "Bed/BedList";
     }
+    //转房记录表
+    @RequestMapping("/turnhome")
+    public String turnhome(){
+        return "Turnhome/turnhome";
+    }
     //线上预约表跳转
     @RequestMapping("/top")
     public String top(){
@@ -35,7 +40,6 @@ public class IndexController {
     public String tohome() {
         return "home/hoomList";
     }
-
     //t_outhomt
     @RequestMapping("toOuthome")
     public String toOuthome() {
@@ -55,6 +59,11 @@ public class IndexController {
 
 
 
+    @RequestMapping("toBed")
+    public  String toBed(){
+
+        return "bed/bed";
+    }
     @RequestMapping("toLaoRenXinXi")
     public String toLaoRenXinXi(){
         return "laorenguanli/laorenxinxi";

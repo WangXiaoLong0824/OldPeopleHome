@@ -23,23 +23,14 @@ public class TurnHomeServiceImpl implements TurnHomeService{
     }
 
     @Override
-    public void addOutHome(TurnHome turnHome) {
-        if (turnHome.getOId()==null){
-            turnHomeMapper.addOutHome(turnHome);
-        }else {
-            turnHomeMapper.updateOutHome(turnHome);
-        }
-
+    public void updateTurnHome(TurnHome turnHome) {
+        turnHomeMapper.updateTurnHome(turnHome);
     }
 
     @Override
-    public void deleteOutHomeById(Integer oId) {
-        turnHomeMapper.deleteOutHomeById(oId);
+    public TurnHome findTurnHomeById(Integer oId) {
+        return turnHomeMapper.findTurnHomeById(oId);
     }
 
-    @Override
-    public TurnHome findOutHomeById(Integer oId) {
-        return turnHomeMapper.findOutHomeById(oId);
-    }
 
 }

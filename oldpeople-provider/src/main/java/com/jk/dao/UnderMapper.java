@@ -1,5 +1,7 @@
 package com.jk.dao;
 
+import com.jk.entity.OldPeople;
+import com.jk.entity.Room;
 import com.jk.entity.Under;
 import org.apache.ibatis.annotations.*;
 
@@ -20,4 +22,8 @@ public interface UnderMapper {
             " where a.old_id = b.old_id and \n" +
             "       a.room_id = c.room_id and under_id=#{underId}")
     Under findUnderById(Integer underId);
+     @Select("select * from t_oldpeople")
+    List<OldPeople> getOld();
+    @Select("select * from t_room")
+    List<Room> getRoom();
 }

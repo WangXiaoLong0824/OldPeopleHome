@@ -1,8 +1,7 @@
 package com.jk.service;
 
 import com.jk.dao.BedMapper;
-import com.jk.entity.Bed;
-import com.jk.entity.PageResult;
+import com.jk.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,5 +39,20 @@ public class BedServiceImpl implements BedService{
     @Override
     public Bed findBedById(Integer bedId) {
         return bedMapper.findBedById(bedId);
+    }
+
+    @Override
+    public List<Dorm> getDorm() {
+        return bedMapper.getDorm();
+    }
+
+    @Override
+    public List<Person> getPerson() {
+        return bedMapper.getPerson();
+    }
+
+    @Override
+    public List<Storey> getStorey() {
+        return bedMapper.getStorey();
     }
 }

@@ -31,7 +31,7 @@
 </head>
 <body>
 <div class="breadcrumb">
-    <a href="http://localhost:8080/shopxxb2b2c/admin/common/index">首页</a> » 会员等级
+    <a href="http://localhost:8080/shopxxb2b2c/admin/common/index">首页</a>
 </div>
 <form id="listForm" action="http://localhost:8080/shopxxb2b2c/admin/store_rank/list" method="get">
     <div class="pull-left">
@@ -44,7 +44,6 @@
         </div>
     </div>
     <div id="app" class="container">
-        <h1>会员等级</h1>
         <form action="" id="list_form">
             <div class="form-group">
                 <label for="name" class="col-sm-1 control-label">名称：</label>
@@ -93,7 +92,7 @@
 
         <!-- 编辑窗口 -->
         <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog" id="ppa" style="margin-right: 2000px">
+            <div class="modal-dialog" id="ppa">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -120,11 +119,19 @@
                                 </tr>
                                 <tr>
                                     <td>老人姓名</td>
-                                    <td><input id="oldHobby" name="oldName" class="form-control" placeholder="老人姓名" v-model="storeCategory.oldName"></td>
+                                    <td>
+                                        <select class="form-control con1" name="oldId" v-model="oldId"  ><!--@change="changeProduct"-->
+                                            <option value="" disabled selected>请选择</option>
+                                            <option  v-for="old in oldlist" :value="old.oldId">{{old.oldName}}</option>
+                                        </select></td>
                                 </tr>
                                 <tr>
                                     <td>房间</td>
-                                    <td><input id="oldCard" name="roomName" class="form-control"  placeholder="房间" v-model="storeCategory.roomName" ></td>
+                                    <td>
+                                        <select class="form-control con1" name="roomId" v-model="roomId"  ><!--@change="changeProduct"-->
+                                            <option value="" disabled selected>请选择</option>
+                                            <option  v-for="room in roomlist" :value="room.roomId">{{room.roomName}}</option>
+                                        </select></td>
                                 </tr>
                                 <tr>
                                     <td>与老人的关系</td>
@@ -132,9 +139,9 @@
                                 </tr>
                                 <tr>
                                     <td>信息状态</td>
-                                    <td><input type="radio" name="oldSex" v-model="storeCategory.underStatus" value="1">已受理
-                                        <input type="radio" name="oldSex" v-model="storeCategory.underStatus" value="2">未受理
-                                        <input type="radio" name="oldSex" v-model="storeCategory.underStatus" value="3">待受理</td>
+                                    <td><input type="radio" name="underStatus" v-model="storeCategory.underStatus" value="1">已受理
+                                        <input type="radio" name="underStatus" v-model="storeCategory.underStatus" value="2">未受理
+                                        <input type="radio" name="underStatus" v-model="storeCategory.underStatus" value="3">待受理</td>
                                 </tr>
                             </table>
                         </div>
@@ -173,7 +180,11 @@
             diqulist:"",
             diquname:"",
             diquid:"",
-            storeCategory:""
+            storeCategory:"",
+            oldId:"",
+            oldlist:"",
+            roomId:"",
+            roomlist:""
         },
         methods: {
 
@@ -186,12 +197,47 @@
         }
 
     })
+    function  getOld(){
+        $.ajax({
+            type:"post",
+            url:"../under/getOld",
+            data:"",
+            dataType:"json",
+            success: function(data) {
+                console.log(data)
+
+
+                vm.oldlist=data
+            },
+            error : function() {
+                alert("系统错误，请联系管理员！");
+            }
+        })
+    }
+    function  getRoom(){
+        $.ajax({
+            type:"post",
+            url:"../under/getRoom",
+            data:"",
+            dataType:"json",
+            success: function(data) {
+                console.log(data)
+
+
+                vm.roomlist=data
+            },
+            error : function() {
+                alert("系统错误，请联系管理员！");
+            }
+        })
+    }
     function  changeProduct(){
 
     }
     $(function() {
         searchStoreCategoryList();
-
+        getOld();
+        getRoom();
     })
     function getSheng () {
         $.ajax({
@@ -293,6 +339,7 @@
     }
     //保存
     function saveStoreCategory() {
+        console.log($("#userForm").serialize())
         $.ajax({
             type:'post',
             url:'../under/addUnder',

@@ -1,8 +1,8 @@
 package com.jk.service;
 
-import com.jk.entity.Bed;
-import com.jk.entity.PageResult;
-import com.jk.entity.TurnHome;
+import com.jk.entity.*;
+
+import java.util.List;
 
 public interface BedService {
 
@@ -14,4 +14,10 @@ public interface BedService {
     void deleteBedById(Integer bedId);
 
     Bed findBedById(Integer bedId);
+
+    List<Dorm> getDorm();
+
+    List<Person> getPerson();
+
+    List<Storey> getStorey();
 }

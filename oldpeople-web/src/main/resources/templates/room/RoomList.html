@@ -9,9 +9,63 @@
     <script type="text/javascript" src="../js/vue/vue.min.js"></script>
     <script type="text/javascript" src="../bootstrap/bootstrap-paginator.js"></script>
 </head>
-<body style=" background:url(images/login_bg_0.jpg)">
-<br><br>
-<center><h4>
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+    }
+    #picBox{
+        margin:100px auto;
+        width:600px;
+        height:400px;
+    }
+    #pic{
+        width:600px;
+        height:400px;
+
+    }
+    #buttonBox{
+        width:150px;
+        margin:10px auto;
+    }
+</style>
+<body style=" background:url(../images/login_bg_0.jpg)">
+
+<div id="picBox">
+    <img src="../images/login_bg_04.jpg" id="pic">
+    <div id="buttonBox">
+        <input type="button" value="上一张" onclick="pre();">
+        <input type="button" value="下一张" onclick="next();">
+    </div>
+</div>
+<button type="button" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editimg" onclick=""><i class="fa fa-file-o"></i> 欧洲风格</button>
+<div class="modal fade" id="editimg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="acc_pass">
+        <div class="acc_index_t">
+            <h3 class="acc_t">
+                <strong>修改密码</strong>
+            </h3>
+        </div>
+
+        <div class="acc_pass_con">
+            <ul class="acc_pass_list">
+                <li>
+                    <label>输入新密码:</label>
+                    <input type="password" name="password" id="password" placeholder="11-20位数字和字母组合" autocomplete="off" validate="true">
+                </li>
+                <li>
+                    <label>确认新密码：</label>
+                    <input type="password" id="confirmPwd" placeholder="确认新密码" autocomplete="off" validate="true">
+                </li>
+                <li>
+                    <button disabled="disabled" class="confirm_btn confirm_disable">确认</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--<center><h4>
     <button type="button" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editimg" onclick=""><i class="fa fa-file-o"></i> 欧洲风格</button>
     <button type="button" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editimg2" onclick=""><i class="fa fa-file-o"></i> 埃及风格</button>
     <button type="button" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editimg3" onclick=""><i class="fa fa-file-o"></i> 古风</button>
@@ -25,10 +79,8 @@
     <img src="images/login_oz_01.jpg">
 </div>
 <div class="modal fade" id="editimg3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <img src="images/login_oz_04.jpg">
-</div>
-
-
+    <img src="images/login_bg_04.jpg">
+</div>-->
     <div class="form-group">
         <label for="roomName1" class="col-sm-1 control-label"></label>
         <div class="col-sm-2">
@@ -62,6 +114,7 @@
     </table>
     <div id="example" style="text-align:center"><ul id="pageLimit"></ul></div>
 </div>
+
 
 
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -108,6 +161,24 @@
 
 
 <script type="text/javascript">
+    var picArr=new Array("../images/login_oz_03.jpg","../images/login_oz_01.jpg","../images/login_oz_02.jpg");
+    var index=0;
+    function next(){
+        index++;
+        if(index==picArr.length){
+            index=0;
+        }
+        document.getElementById("pic").src=picArr[index];
+    }
+    function pre(){
+        index--;
+        if(index<0){
+            index=picArr.length-1;
+        }
+        document.getElementById("pic").src=picArr[index];
+    }
+
+
     var vm = new Vue({
         el: '#app',
         data: {

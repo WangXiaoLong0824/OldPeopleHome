@@ -28,6 +28,8 @@ public interface OldPeopleMapper {
     List<TbCities> findShi(String provinceid);
     @Select("select * from tb_areas where cityid=#{cityid}")
     List<TbAreas> findXian(String cityid);
-    @Select("select * from t_user")
+    @Select("select * from t_user where user_id=#{usedId}")
     List<SysUser> findChildren(Integer userid);
+    @Select("select * from t_user")
+    List<SysUser> findChildrenAll();
 }

@@ -24,7 +24,8 @@
 
         });
     </script>
-    <script src="../bootstrap/bootstrap-paginator.js"></script>
+
+    <script src="../bootstrap-paginator.js"></script>
 
 
 </head>
@@ -76,7 +77,7 @@
 
         <!-- 编辑窗口 -->
         <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog" id="ppa" style="margin-right: 2000px">
+            <div class="modal-dialog" id="ppa" >
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -180,6 +181,7 @@
             }
         })
     }
+
     function searchStoreCategoryList() {
         $.ajax({
             type:"post",
@@ -187,7 +189,6 @@
             data:{"currPage":vm.currPage,"pageSize":vm.pageSize,"userName":vm.userName1},
             dataType:"json",
             success: function(result) {
-                console.log(result.rows)
                 vm.storeCategoryList = result.rows;
                 vm.totalPage = result.totalPage;
                 vm.total = result.total;

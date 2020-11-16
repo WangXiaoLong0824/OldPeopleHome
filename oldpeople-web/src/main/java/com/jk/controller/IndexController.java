@@ -76,7 +76,7 @@ public class IndexController {
     }
     @RequestMapping("/toPerformance")
     public String toPerformance(){
-        return "laorenguanli/performance";
+        return "laorenguanli/performance2";
     }
     @RequestMapping("/toUnder")
     public String toUnder(){

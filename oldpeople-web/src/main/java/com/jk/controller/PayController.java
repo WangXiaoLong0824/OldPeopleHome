@@ -107,6 +107,7 @@ public class PayController {
 
             //支付成功，修复支付状态
 //            payService.updateById(Integer.valueOf(out_trade_no));
+            System.out.println("NICE");
             return "ok";//跳转付款成功页面
         }else{
             return "no";//跳转付款失败页面

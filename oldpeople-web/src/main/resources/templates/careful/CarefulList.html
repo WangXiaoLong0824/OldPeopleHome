@@ -38,7 +38,7 @@
             <td>{{careful.carefulCare}}</td>
             <td>{{careful.carefulRoom}}</td>
             <td>{{careful.carefulLeft}}</td>
-            <td>{{careful.carefulType}}</td>
+            <td>{{careful.carefulType==1?"已缴费":"未缴费"}}</td>
             <td>{{careful.oldManName}}</td>
             <td><button type="button" class="RoleOfdelete btn btn-primary  btn-sm" style="margin-right:15px;" v-on:click="del(careful.carefulId)">删除</button>
                 <button type="button" class="RoleOfdelete btn btn-primary  btn-sm" style="margin-right:15px;" data-toggle="modal" data-target="#editModal" v-on:click="update(careful.carefulId)">修改</button>
